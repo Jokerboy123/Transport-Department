@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8Wx2mIh39GM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ларина\\source\\repos\\ТРАНСПОРТ\\ТРАНСПОРТ.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ларина\\.nuget\\packages\\litedb\\5.0.21\\litedb.5.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}
