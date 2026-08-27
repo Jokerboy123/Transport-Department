@@ -1,13 +1,284 @@
-﻿<Window x:Class="ТРАНСПОРТ.AccountGeorgievsk"
+﻿<Window x:Class="Transport_Department.AccountGeorgievsk"
+        x:Name="MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ТРАНСПОРТ"
+        xmlns:local="clr-namespace:Transport_Department"
         mc:Ignorable="d"
-        Title="AccountGeorgievsk" Height="450" Width="800">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="387,132,0,0" TextWrapping="Wrap" Text="Георгиевск" VerticalAlignment="Top" Width="120"/>
+        Title="AccountGeorgievsk"
+        Height="450"
+        Width="599"
+        Background="#F5F7FA"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <!-- Палитра цветов -->
+        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+
+        <!-- Цвета, точно соответствующие визуалу вашей кнопки -->
+        <SolidColorBrush x:Key="ButtonBaseColor" Color="#3B8ED0"/>
+        <SolidColorBrush x:Key="ButtonHoverColor" Color="#2E7ACF"/>
+        <SolidColorBrush x:Key="ButtonPressedColor" Color="#256BB8"/>
+
+        <!-- Стиль ModernButtonStyle, полностью инкапсулирующий логику кнопки -->
+            <!-- Цвета: спокойные, не кричащие, но заметные -->
+            <!-- Почти белый, но не стерильный -->
+            <!-- Мягкий серый для рамки -->
+            <!-- Деловой синий (не кислотный) -->
+  
+            <!-- Тёмно-графитовый, а не чёрный -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonBaseColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <!-- Border содержит скругление и тень -->
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Состояние: Наведение мыши -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ButtonHoverColor}"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#000000" 
+                                                          Opacity="0.4" 
+                                                          BlurRadius="15" 
+                                                          ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <!-- Состояние: Нажатие -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ButtonPressedColor}"/>
+                            </Trigger>
+
+                            <!-- Состояние: По умолчанию (без наведения) -->
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#000000" 
+                                                          Opacity="0.2" 
+                                                          BlurRadius="10" 
+                                                          ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FriendlyStrictButton" TargetType="Button">
+                <Setter Property="Background" Value="#F5F6F7"/>
+                <Setter Property="Foreground" Value="#1E293B"/>
+                <Setter Property="BorderBrush" Value="#D1D5DB"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="14,8"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                    
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6" 
+                            SnapsToDevicePixels="True">
+                              
+                            <TextBlock x:Name="textBlock"
+                               TextWrapping="Wrap"
+                               TextAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                               Foreground="{TemplateBinding Foreground}"
+                               Padding="{TemplateBinding Padding}"
+                               Text="{TemplateBinding Content}"/>
+                        </Border>
+
+                            <ControlTemplate.Triggers>
+                                <!-- Наведение: кнопка становится активной, но не «кричащей» -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#EFF6FF"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#2563EB"/>
+                                    <Setter TargetName="border" Property="TextElement.Foreground" Value="#2563EB"/>
+                                </Trigger>
+
+                                <!-- Нажатие: чёткое ощущение нажатия без «взрыва» цвета -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#DBEAFF"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#1E40AF"/>
+                                </Trigger>
+
+                                <!-- Фокус с клавиатуры: видно, что кнопка выбрана -->
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#2563EB"/>
+                                    <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                                </Trigger>
+
+                                <!-- Отключённое состояние: спокойно, без агрессии -->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="#F8FAFC"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#E2E8F0"/>
+                                    <Setter TargetName="border" Property="TextElement.Foreground" Value="#94A3B8"/>
+                                    <Setter Property="Cursor" Value="No"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Георгиевское отделение ГУП СК «КРАЙТЕПЛОЭНЕРГО»"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource PrimaryColor}"
+                   TextAlignment="Center"
+                   Margin="0,10,0,0"/>
+
+        <!-- Пустая область для центрирования пространства -->
+        <Border RenderTransformOrigin="0.5,0.5" Height="340" VerticalAlignment="Bottom" Grid.RowSpan="2">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <!-- Можно задать высоту, если нужно, например Height="Auto" или "*" -->
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!-- Первый ряд -->
+            <Button Grid.Row="0" Grid.Column="0" Content="ГАЗ-2705 М 322 ОХ (192)" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="1" Content="ГАЗ-2705 (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="2" Content="ГАЗ-3110 А 408 КА" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="3" Content="RENAULT DUSTER B 044 TO" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="4" Content="ВАЗ-21101 Х 608 ТС (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="5" Content="LADA Granta E 010 EP" Style="{StaticResource FriendlyStrictButton}" />
+            
+            <!-- Второй ряд -->
+            <Button Grid.Row="1" Grid.Column="0" Content="УАЗ-39625 Х 512 ОН" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="1" Content="Газель ГАЗ 27055 (проч) В 476 ТН" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="2" Content="ГАЗ-27055 В 215 ХР" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="3" Content="ГАЗ-31105 Х 720 ОО" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="4" Content="ВАЗ-21074 Х 790 ОС" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="5" Content="ВАЗ-21213 Х 253 НО" Style="{StaticResource FriendlyStrictButton}" />
+
+            <!-- Третий ряд  -->
+            <Button Grid.Row="2" Grid.Column="0" Content="Lada LARGUS M 818 BA" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="1" Content="УАЗ 390995 М 274 ВА" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="2" Content="ГАЗ-2705 Н 153 ОМ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="3" Content="ГАЗ-3307 Х 221 ОУ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="4" Content="ГАЗ-3307 Х 227 ОУ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="5" Content="ГАЗ-3307 Х 224 ОУ" Style="{StaticResource FriendlyStrictButton}" />
+
+            <!-- Четвертый ряд -->
+            <Button Grid.Row="3" Grid.Column="0" Content="Автобус ПАЗ Х 776 СЕ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="1" Content="КАМАЗ автокран Х 541 УВ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="2" Content="ДТ КАМАЗ 53605 К 992 ТУ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="3" Content="ГАЗ-3307 ВЫШКА Х 571 ХН" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="4" Content="ДТ МТ3-80 60-41 УВ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="5" Content="ДТ ЭКСКАВАТОР МТЗ-82 85-51 УВ" Style="{StaticResource FriendlyStrictButton}" />
+            
+            <!-- Пятый ряд -->
+            <Button Grid.Row="4" Grid.Column="0" Content="МТЗ-80 ТРАКТОР 37-95 СС" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="1" Content="ЭО-2101 ЭКСКАВАТОР 37-97 СС" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="2" Content="КОМПРЕССОР 3иФ55В" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="3" Content="" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="4" Content="ГАЗ СОБОЛЬ М 646 УВ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="5" Content="САМОСВАЛ ГАЗ-САЗ Н 967 ЕА" Style="{StaticResource FriendlyStrictButton}" />
+
+            <!-- Шестой ряд -->
+            <Button Grid.Row="5" Grid.Column="0" Content="LADA NIVA LEGEND Н 580 ВУ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="1" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГЕНЕРАТОР БЕНЗИНОВЫЙ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="2" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГАЗОНОКОСИЛКА" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="3" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ БЕНЗОТРИММЕР" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+
+            <!-- Седьмой ряд  -->
+            <Button Grid.Row="6" Grid.Column="0" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="1" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="2" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+
+            <!-- Восьмой ряд -->
+            <Button Grid.Row="7" Grid.Column="0" Content="СПРАВОЧНИК" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="1" Content="НАКОПИТЕЛЬНАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="2" Content="ИТОГОВАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="3" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="4" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="5" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
+
+
+
+
+
+
+            <!-- Добавьте остальные кнопки по аналогии, указывая нужные Grid.Row и Grid.Column -->
+            <!-- <Button Grid.Row="..." Grid.Column="..." Content="..." /> -->
+        </Grid>
+
+
+        <!-- Кнопка теперь максимально чистая: только имя, контент и ссылка на стиль -->
+        <Button x:Name="onMainWindow" 
+                Grid.Row="2"
+                Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
+                Style="{StaticResource ModernButtonStyle}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" 
+                Margin="10" Click="onMainWindow_Click" />
     </Grid>
 </Window>

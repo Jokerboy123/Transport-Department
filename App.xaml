@@ -1,7 +1,7 @@
-﻿<Application x:Class="ТРАНСПОРТ.App"
+﻿<Application x:Class="Transport_Department.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ТРАНСПОРТ"
+             xmlns:local="clr-namespace:Transport_Department"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
