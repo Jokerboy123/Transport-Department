@@ -7,9 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TransportDepartment;
 
 
 namespace Transport_Department
@@ -23,8 +25,21 @@ namespace Transport_Department
         {
             InitializeComponent();
             HideCloseButton();
-
         }
+
+        // Обработчик события Loaded
+        private void AccountKirovskDistrict_Loaded(object sender, RoutedEventArgs e)
+        {
+            HideCloseButton();
+        }
+
+        public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            var newWindow = new AccountingCard();
+            newWindow.Show();
+        }
+
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
@@ -33,12 +48,16 @@ namespace Transport_Department
 
         private void HideCloseButton()
         {
-            var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            // Теперь Handle гарантированно существует
+            var hwnd = new WindowInteropHelper(this).Handle;
 
-            // GWL_STYLE = -16
-            // WS_SYSMENU = 0x80000
-            int currentStyle = GetWindowLong(hwnd, -16);
-            SetWindowLong(hwnd, -16, currentStyle & ~0x80000);
+            const int GWL_STYLE = -16;
+            const int WS_SYSMENU = 0x80000;
+
+            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+
+            // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
+            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
         }
 
         private void onMainWindow_Click(object sender, RoutedEventArgs e)

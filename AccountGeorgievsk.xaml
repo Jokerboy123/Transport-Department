@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="AccountGeorgievsk"
         Height="450"
+        Loaded="AccountGeorgievsk_Loaded"
         Width="599"
         Background="#F5F7FA"
         WindowState="Maximized"
@@ -199,68 +200,68 @@
             </Grid.ColumnDefinitions>
 
             <!-- Первый ряд -->
-            <Button Grid.Row="0" Grid.Column="0" Content="ГАЗ-2705 М 322 ОХ (192)" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="0" Grid.Column="1" Content="ГАЗ-2705 (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="0" Grid.Column="2" Content="ГАЗ-3110 А 408 КА" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="0" Grid.Column="3" Content="RENAULT DUSTER B 044 TO" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="0" Grid.Column="4" Content="ВАЗ-21101 Х 608 ТС (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="0" Grid.Column="5" Content="LADA Granta E 010 EP" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="0" Grid.Column="0" Content="ГАЗ-2705 М 322 ОХ (192)" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="ГАЗ-2705 (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="ГАЗ-3110 А 408 КА" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="0" Grid.Column="3" Content="RENAULT DUSTER B 044 TO" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="0" Grid.Column="4" Content="ВАЗ-21101 Х 608 ТС (проч) М246 ЕМ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="0" Grid.Column="5" Content="LADA Granta E 010 EP" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
             
             <!-- Второй ряд -->
-            <Button Grid.Row="1" Grid.Column="0" Content="УАЗ-39625 Х 512 ОН" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="1" Grid.Column="1" Content="Газель ГАЗ 27055 (проч) В 476 ТН" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="1" Grid.Column="2" Content="ГАЗ-27055 В 215 ХР" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="1" Grid.Column="3" Content="ГАЗ-31105 Х 720 ОО" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="1" Grid.Column="4" Content="ВАЗ-21074 Х 790 ОС" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="1" Grid.Column="5" Content="ВАЗ-21213 Х 253 НО" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="1" Grid.Column="0" Content="УАЗ-39625 Х 512 ОН" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="Газель ГАЗ 27055 (проч) В 476 ТН" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="1" Grid.Column="2" Content="ГАЗ-27055 В 215 ХР" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="1" Grid.Column="3" Content="ГАЗ-31105 Х 720 ОО" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="1" Grid.Column="4" Content="ВАЗ-21074 Х 790 ОС" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="1" Grid.Column="5" Content="ВАЗ-21213 Х 253 НО" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
             <!-- Третий ряд  -->
-            <Button Grid.Row="2" Grid.Column="0" Content="Lada LARGUS M 818 BA" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="2" Grid.Column="1" Content="УАЗ 390995 М 274 ВА" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="2" Grid.Column="2" Content="ГАЗ-2705 Н 153 ОМ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="2" Grid.Column="3" Content="ГАЗ-3307 Х 221 ОУ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="2" Grid.Column="4" Content="ГАЗ-3307 Х 227 ОУ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="2" Grid.Column="5" Content="ГАЗ-3307 Х 224 ОУ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="2" Grid.Column="0" Content="Lada LARGUS M 818 BA" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="УАЗ 390995 М 274 ВА" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="2" Grid.Column="2" Content="ГАЗ-2705 Н 153 ОМ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="2" Grid.Column="3" Content="ГАЗ-3307 Х 221 ОУ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="2" Grid.Column="4" Content="ГАЗ-3307 Х 227 ОУ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="2" Grid.Column="5" Content="ГАЗ-3307 Х 224 ОУ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
             <!-- Четвертый ряд -->
-            <Button Grid.Row="3" Grid.Column="0" Content="Автобус ПАЗ Х 776 СЕ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="3" Grid.Column="1" Content="КАМАЗ автокран Х 541 УВ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="3" Grid.Column="2" Content="ДТ КАМАЗ 53605 К 992 ТУ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="3" Grid.Column="3" Content="ГАЗ-3307 ВЫШКА Х 571 ХН" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="3" Grid.Column="4" Content="ДТ МТ3-80 60-41 УВ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="3" Grid.Column="5" Content="ДТ ЭКСКАВАТОР МТЗ-82 85-51 УВ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="3" Grid.Column="0" Content="Автобус ПАЗ Х 776 СЕ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="КАМАЗ автокран Х 541 УВ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="3" Grid.Column="2" Content="ДТ КАМАЗ 53605 К 992 ТУ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="3" Grid.Column="3" Content="ГАЗ-3307 ВЫШКА Х 571 ХН" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="3" Grid.Column="4" Content="ДТ МТ3-80 60-41 УВ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="3" Grid.Column="5" Content="ДТ ЭКСКАВАТОР МТЗ-82 85-51 УВ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
             
             <!-- Пятый ряд -->
-            <Button Grid.Row="4" Grid.Column="0" Content="МТЗ-80 ТРАКТОР 37-95 СС" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="1" Content="ЭО-2101 ЭКСКАВАТОР 37-97 СС" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="2" Content="КОМПРЕССОР 3иФ55В" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="4" Content="ГАЗ СОБОЛЬ М 646 УВ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="5" Content="САМОСВАЛ ГАЗ-САЗ Н 967 ЕА" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="0" Content="МТЗ-80 ТРАКТОР 37-95 СС" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="4" Grid.Column="1" Content="ЭО-2101 ЭКСКАВАТОР 37-97 СС" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="4" Grid.Column="2" Content="КОМПРЕССОР 3иФ55В" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="4" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="4" Grid.Column="4" Content="ГАЗ СОБОЛЬ М 646 УВ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="4" Grid.Column="5" Content="САМОСВАЛ ГАЗ-САЗ Н 967 ЕА" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
             <!-- Шестой ряд -->
-            <Button Grid.Row="5" Grid.Column="0" Content="LADA NIVA LEGEND Н 580 ВУ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="5" Grid.Column="1" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГЕНЕРАТОР БЕНЗИНОВЫЙ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="5" Grid.Column="2" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГАЗОНОКОСИЛКА" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="5" Grid.Column="3" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ БЕНЗОТРИММЕР" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="5" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="5" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="5" Grid.Column="0" Content="LADA NIVA LEGEND Н 580 ВУ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="5" Grid.Column="1" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГЕНЕРАТОР БЕНЗИНОВЫЙ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="5" Grid.Column="2" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ ГАЗОНОКОСИЛКА" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="5" Grid.Column="3" Content="СПЕЦИАЛЬНОЕ ОБОРУДОВАНИЕ БЕНЗОТРИММЕР" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="5" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="5" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
             <!-- Седьмой ряд  -->
-            <Button Grid.Row="6" Grid.Column="0" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="6" Grid.Column="1" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="6" Grid.Column="2" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="6" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="6" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="6" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="6" Grid.Column="0" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="6" Grid.Column="1" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="6" Grid.Column="2" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="6" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="6" Grid.Column="4" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="6" Grid.Column="5" Content="0" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
             <!-- Восьмой ряд -->
-            <Button Grid.Row="7" Grid.Column="0" Content="СПРАВОЧНИК" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="7" Grid.Column="1" Content="НАКОПИТЕЛЬНАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="7" Grid.Column="2" Content="ИТОГОВАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="7" Grid.Column="3" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="7" Grid.Column="4" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="7" Grid.Column="5" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="7" Grid.Column="0" Content="СПРАВОЧНИК" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="7" Grid.Column="1" Content="НАКОПИТЕЛЬНАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="7" Grid.Column="2" Content="ИТОГОВАЯ ВЕДОМОСТЬ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="7" Grid.Column="3" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="7" Grid.Column="4" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
+            <Button Grid.Row="7" Grid.Column="5" Content="СЛУЖЕБНАЯ" Style="{StaticResource FriendlyStrictButton}" Click="OpenAccountingCard"/>
 
 
 

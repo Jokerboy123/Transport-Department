@@ -13,121 +13,78 @@ namespace TransportDepartment
         {
             GeorgievskTransport = new ObservableCollection<TransportProperties>
             {
-                new TransportProperties(1, "1")
+                new TransportProperties()
                 {
-                    RouteName = "ул. Ермолова — Мясокомбинат",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Акопян Г.З.",
-                    StartPoint = "ул. Ермолова",
-                    EndPoint = "Мясокомбинат",
-                    StopsCount = 14,
-                    FirstDeparture = "6:00",
-                    LastDeparture = "19:00",
-                    WeekendSchedule = false,
-                    Fare = 30,
-                    IntervalMinutes = 30,
-                    Comment = "через ж.д. вокзал, автовокзал"
+                    TransportBrand = "УАЗ-3909",
+                    ID = "М 671 ЕМ",
+                    GasConsumptionStandard = 26.0,
+                    PetrolConsumptionStandart = 19.7,
+                    MonthBeginningOdometerValue = 339214,
+                    MonthEndingOdometerValue = 339214,
+                    MonthBeginningGasState = 3.25,
+                    MonthBeginningPetrolState = 0,
+                    MonthBeginningDieselState = 0,
+                    MonthEndingGasState = 3.25,
+                    MonthEndingPetrolState = 0,
+                    MonthEndingDieselState = 0,
+                    DriverFullName = "Арушанян А.Э.",
+                    Additions = "CAK"
                 },
-                new TransportProperties(2, "2")
+                new TransportProperties()
                 {
-                    RouteName = "Кожзавод — Мелькомбинат",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Акопян Г.З.",
-                    StartPoint = "Кожзавод",
-                    EndPoint = "Мелькомбинат",
-                    StopsCount = 13,
-                    FirstDeparture = "5:49",
-                    LastDeparture = "19:41",
-                    WeekendSchedule = true,
-                    Fare = 30,
-                    IntervalMinutes = 30,
-                    Comment = "через Площадь Победы, Университет"
+                    TransportBrand = "УАЗ-3909",
+                    ID = "М 092 ЕМ",
+                    GasConsumptionStandard = 26.0,
+                    PetrolConsumptionStandart = 19.7,
+                    MonthBeginningOdometerValue = 56678,
+                    MonthEndingOdometerValue = 56678,
+                    MonthBeginningGasState = 4.1,
+                    MonthBeginningPetrolState = 0,
+                    MonthBeginningDieselState = 0,
+                    MonthEndingGasState = 4.1,
+                    MonthEndingPetrolState = 0,
+                    MonthEndingDieselState = 0,
+                    DriverFullName = "Арушанян Г.А.",
+                    Additions = "Компрессор"
                 },
-                new TransportProperties(3, "6")
+                new TransportProperties()
                 {
-                    RouteName = "пер. Юго-Западный — Спиртзавод",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Акопян Г.З.",
-                    StartPoint = "пер. Юго-Западный",
-                    EndPoint = "Спиртзавод",
-                    StopsCount = 20,
-                    FirstDeparture = "5:45",
-                    LastDeparture = "19:00",
-                    WeekendSchedule = false,
-                    Fare = 30,
-                    IntervalMinutes = 40,
-                    Comment = "через автовокзал, АрЗиЛ"
-                },
-                new TransportProperties(4, "7")
-                {
-                    RouteName = "Объездная дорога — в/ч 41477",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Акопян Г.З.",
-                    StartPoint = "Объездная дорога",
-                    EndPoint = "в/ч 41477",
-                    StopsCount = 25,
-                    FirstDeparture = "6:00",
-                    LastDeparture = "18:30",
-                    WeekendSchedule = false,
-                    Fare = 30,
-                    IntervalMinutes = 60,
-                    Comment = "кольцевой, через Винзавод, Пятигорскую"
-                },
-                new TransportProperties(5, "8")
-                {
-                    RouteName = "Больница — Заготзерно",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Акопян Г.З.",
-                    StartPoint = "Больница",
-                    EndPoint = "Заготзерно",
-                    StopsCount = 18,
-                    FirstDeparture = "4:49",
-                    LastDeparture = "18:04",
-                    WeekendSchedule = true,
-                    Fare = 30,
-                    IntervalMinutes = 30,
-                    Comment = "через ж.д. вокзал, Молокозавод"
-                },
-                new TransportProperties(6, "10")
-                {
-                    RouteName = "Госпиталь — Водолечебница",
-                    TransportType = "Автобус",
-                    Carrier = "ИП Восканян М.Б.",
-                    StartPoint = "Госпиталь",
-                    EndPoint = "Водолечебница",
-                    StopsCount = 11,
-                    FirstDeparture = "5:51",
-                    LastDeparture = "19:00",
-                    WeekendSchedule = false,
-                    Fare = 30,
-                    IntervalMinutes = 40,
-                    Comment = "через Площадь Победы, Озеро"
+                    TransportBrand = "ГАЗ-3110",
+                    ID = "М 093 ЕМ",
+                    GasConsumptionStandard = 18.7,
+                    PetrolConsumptionStandart = 14.20,
+                    MonthBeginningOdometerValue = 562552,
+                    MonthEndingOdometerValue = 562552,
+                    MonthBeginningGasState = 9.0,
+                    MonthBeginningPetrolState = 0,
+                    MonthBeginningDieselState = 0,
+                    MonthEndingGasState = 9,
+                    MonthEndingPetrolState = 0,
+                    MonthEndingDieselState = 0,
+                    DriverFullName = "Аршинов В.Н.",
+                    Additions = "Газонокосилка"
                 }
             };
-            _nextId = 7;
         }
 
-        // === ДОБАВИТЬ ===
+        //// === ДОБАВИТЬ ===
 
-        public TransportProperties AddRoute(string routeNumber)
-        {
-            var route = new TransportProperties(_nextId++, routeNumber);
-            GeorgievskTransport.Add(route);
-            return route;
-        }
+        //public TransportProperties AddRoute(string routeNumber)
+        //{
+        //    var route = new TransportProperties(_nextId++, routeNumber);
+        //    GeorgievskTransport.Add(route);
+        //    return route;
+        //}
 
-        // === УДАЛИТЬ ===
+        //// === УДАЛИТЬ ===
 
-        public bool DeleteRoute(TransportProperties route)
-        {
-            return GeorgievskTransport.Remove(route);
-        }
+        //public bool DeleteRoute(TransportProperties route)
+        //{
+        //    return GeorgievskTransport.Remove(route);
+        //}
 
         // === ПОИСК ===
 
-        public TransportProperties GetById(int id)
-        {
-            return GeorgievskTransport.FirstOrDefault(x => x.Id == id);
-        }
+       
     }
 }

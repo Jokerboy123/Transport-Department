@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using TransportDepartment;
 
 namespace Transport_Department
 {
@@ -27,6 +28,13 @@ namespace Transport_Department
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            var newWindow = new AccountingCard();
+            newWindow.Show();
+        }
+
         private void HideCloseButton()
         {
             // Теперь Handle гарантированно существует
@@ -47,5 +55,7 @@ namespace Transport_Department
             var newWindow = new MainWindow();
             newWindow.Show();
         }
+
+      
     }
 }

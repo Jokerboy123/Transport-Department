@@ -8,6 +8,9 @@
     <Compile Update="AccountGeorgievsk.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="AccountingCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="AccountKirovskDistrict.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

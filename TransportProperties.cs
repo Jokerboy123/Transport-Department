@@ -26,7 +26,7 @@ namespace TransportDepartment
         public string ID
         {
             get => _id;
-            private set { _id = value; OnPropertyChanged(); }
+            set { _id = value; OnPropertyChanged(); }
         }
         public string TransportBrand
         {
@@ -36,17 +36,17 @@ namespace TransportDepartment
         public double GasConsumptionStandard
         {
             get => _gasConsumptionStandard;
-            private set {  _gasConsumptionStandard = value; OnPropertyChanged(); }
+            set {  _gasConsumptionStandard = value; OnPropertyChanged(); }
         }
         public double PetrolConsumptionStandart
         {
             get => _petrolConsumptionStandart;
-            private set { _petrolConsumptionStandart = value; OnPropertyChanged(); }
+             set { _petrolConsumptionStandart = value; OnPropertyChanged(); }
         }
         public double DieselConsumptionStandart
         {
             get => _dieselConsumptionStandart;
-            private set { _dieselConsumptionStandart = value; OnPropertyChanged(); }
+             set { _dieselConsumptionStandart = value; OnPropertyChanged(); }
         }
         public double MonthBeginningOdometerValue
         {
@@ -56,7 +56,7 @@ namespace TransportDepartment
         public double MonthEndingOdometerValue
         {
             get => _monthEndingOdometerValue;
-            private set { _monthEndingOdometerValue = value;OnPropertyChanged(); }
+             set { _monthEndingOdometerValue = value;OnPropertyChanged(); }
         }
         public double MonthBeginningGasState
         {
@@ -66,7 +66,7 @@ namespace TransportDepartment
         public double MonthEndingGasState
         {
             get => _monthEndingGasState;
-            private set { _monthEndingGasState = value; OnPropertyChanged(); }
+             set { _monthEndingGasState = value; OnPropertyChanged(); }
         }
         public double MonthBeginningPetrolState
         {
@@ -76,7 +76,7 @@ namespace TransportDepartment
         public double MonthEndingPetrolState
         {
             get => _monthEndingPetrolState;
-            private set { _monthEndingPetrolState = value; OnPropertyChanged(); }
+             set { _monthEndingPetrolState = value; OnPropertyChanged(); }
         }
         public double MonthBeginningDieselState
         {
@@ -86,7 +86,7 @@ namespace TransportDepartment
         public double MonthEndingDieselState
         {
             get => _monthEndingDieselState;
-            private set { _monthEndingDieselState = value; OnPropertyChanged(); }
+             set { _monthEndingDieselState = value; OnPropertyChanged(); }
         }
         public string DriverFullName
         {

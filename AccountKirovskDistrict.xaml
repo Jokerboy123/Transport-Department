@@ -10,6 +10,7 @@ Height="450"
 Width="599"
 Background="#F5F7FA"
 WindowState="Maximized"
+        Loaded="AccountKirovskDistrict_Loaded"
 WindowStartupLocation="CenterScreen"
                         >
     
