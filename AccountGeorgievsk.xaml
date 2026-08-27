@@ -234,7 +234,7 @@
             <Button Grid.Row="4" Grid.Column="0" Content="МТЗ-80 ТРАКТОР 37-95 СС" Style="{StaticResource FriendlyStrictButton}" />
             <Button Grid.Row="4" Grid.Column="1" Content="ЭО-2101 ЭКСКАВАТОР 37-97 СС" Style="{StaticResource FriendlyStrictButton}" />
             <Button Grid.Row="4" Grid.Column="2" Content="КОМПРЕССОР 3иФ55В" Style="{StaticResource FriendlyStrictButton}" />
-            <Button Grid.Row="4" Grid.Column="3" Content="" Style="{StaticResource FriendlyStrictButton}" />
+            <Button Grid.Row="4" Grid.Column="3" Content="0" Style="{StaticResource FriendlyStrictButton}" />
             <Button Grid.Row="4" Grid.Column="4" Content="ГАЗ СОБОЛЬ М 646 УВ" Style="{StaticResource FriendlyStrictButton}" />
             <Button Grid.Row="4" Grid.Column="5" Content="САМОСВАЛ ГАЗ-САЗ Н 967 ЕА" Style="{StaticResource FriendlyStrictButton}" />
 

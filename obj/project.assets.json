@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ларина\\source\\repos\\ТРАНСПОРТ\\ТРАНСПОРТ.csproj",
+      "projectUniqueName": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\ТРАНСПОРТ.csproj",
       "projectName": "ТРАНСПОРТ",
-      "projectPath": "C:\\Users\\Ларина\\source\\repos\\ТРАНСПОРТ\\ТРАНСПОРТ.csproj",
+      "projectPath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\ТРАНСПОРТ.csproj",
       "packagesPath": "C:\\Users\\Ларина\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ларина\\source\\repos\\ТРАНСПОРТ\\obj\\",
+      "outputPath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ларина\\AppData\\Roaming\\NuGet\\NuGet.Config",

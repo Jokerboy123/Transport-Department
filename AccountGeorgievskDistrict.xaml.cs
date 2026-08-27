@@ -18,6 +18,8 @@ namespace Transport_Department
         {
             HideCloseButton();
         }
+        
+      
 
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
