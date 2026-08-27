@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u4TXeeFeNYc=",
+  "dgSpecHash": "CVWWH9qCpXY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\ТРАНСПОРТ.csproj",
+  "projectFilePath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\TransportDepartment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ларина\\.nuget\\packages\\litedb\\5.0.21\\litedb.5.0.21.nupkg.sha512"
   ],

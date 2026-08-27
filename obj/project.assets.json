@@ -50,9 +50,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\ТРАНСПОРТ.csproj",
-      "projectName": "ТРАНСПОРТ",
-      "projectPath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\ТРАНСПОРТ.csproj",
+      "projectUniqueName": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\TransportDepartment.csproj",
+      "projectName": "TransportDepartment",
+      "projectPath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\TransportDepartment.csproj",
       "packagesPath": "C:\\Users\\Ларина\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\obj\\",
       "projectStyle": "PackageReference",

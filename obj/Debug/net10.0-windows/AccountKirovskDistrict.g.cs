@@ -69,7 +69,7 @@ namespace Transport_Department {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ТРАНСПОРТ;component/accountkirovskdistrict.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TransportDepartment;component/accountkirovskdistrict.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AccountKirovskDistrict.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

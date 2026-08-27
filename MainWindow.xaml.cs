@@ -42,8 +42,8 @@ namespace Transport_Department
 
         private void CloseProgram_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown() ;
-          
+            Application.Current.Shutdown();
+
         }
     }
 }

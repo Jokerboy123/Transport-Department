@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Transport_Department"
         mc:Ignorable="d"
-        Title="Учет Transport_Departmentа ГУП СК КРАЙТЕПЛОЭНЕРГО" 
+        Title="Учет Tранспорта ГУП СК КРАЙТЕПЛОЭНЕРГО" 
         Height="450" 
         Width="599"
         Background="#F5F7FA"
