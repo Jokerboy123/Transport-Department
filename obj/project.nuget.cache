@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "CVWWH9qCpXY=",
+  "dgSpecHash": "0xqas6yZvFU=",
   "success": true,
   "projectFilePath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\TransportDepartment.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ларина\\.nuget\\packages\\litedb\\5.0.21\\litedb.5.0.21.nupkg.sha512"
+    "C:\\Users\\Ларина\\.nuget\\packages\\microsoft.data.sqlite\\10.0.11\\microsoft.data.sqlite.10.0.11.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.11\\microsoft.data.sqlite.core.10.0.11.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.12\\sqlitepclraw.bundle_e_sqlite3.2.1.12.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\sqlitepclraw.core\\2.1.12\\sqlitepclraw.core.2.1.12.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.12\\sqlitepclraw.lib.e_sqlite3.2.1.12.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.12\\sqlitepclraw.provider.e_sqlite3.2.1.12.nupkg.sha512"
   ],
   "logs": []
 }

@@ -68,20 +68,19 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-
-            </Style.Triggers>
+           
         </Style>
 
     </Window.Resources>
 
     <Grid>
+       
         <Button x:Name="onMainWindow"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
                 Style="{StaticResource ModernButtonStyle}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="10"
-                Click="onMainWindow_Click"/>
+                Margin="10" Click="onMainWindow_Click"
+                />
     </Grid>
 </Window>

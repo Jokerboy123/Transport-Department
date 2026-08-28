@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using TransportDepartment;
 
 
-namespace Transport_Department
+namespace TransportDepartment
 {
     /// <summary>
     /// Логика взаимодействия для AccountKirovskDistrict.xaml

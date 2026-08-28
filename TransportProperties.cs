@@ -5,101 +5,113 @@ namespace TransportDepartment
 {
     public class TransportProperties : INotifyPropertyChanged
     {
-        // === НЕИЗМЕНЯЕМЫЕ ПОЛЯ  ОБОЗНАЧАЮТСЯ private set ===
-        // === ИЗМЕНЯЕМЫЕ ПОЛЯ ОБОЗНАЧАЮТСЯ public set ===
-        private string _id { get; set; } // Госномер
-        private string _transportBrand { get; set; } // МАРКА АВТОМОБИЛЯ
-        private double _gasConsumptionStandard { get; set; } // Норматив расхода газа (неизменяемое)
-        private double _petrolConsumptionStandart { get; set; } // Норматив расхода бензина  (неизменяемое)
-        private double _dieselConsumptionStandart { get; set; } // Норматив расхода дизеля  (неизменяемое)
-        private double _monthBeginningOdometerValue { get; set; } // Показания одометра на начало месяца
-        private double _monthEndingOdometerValue { get; set; } // Показания одометра на конец месяца
-        private double _monthBeginningGasState { get; set; } // Остаток газа на начало месяца
-        private double _monthEndingGasState { get; set; } // Остаток газа на конец месяца
-        private double _monthBeginningPetrolState { get; set; } // Остаток бензина на начало месяца
-        private double _monthEndingPetrolState { get; set; } // Остаток бензина на конец месяца
-        private double _monthBeginningDieselState { get; set; } // Остаток дизеля на начало месяца
-        private double _monthEndingDieselState { get; set; } // Остаток дизеля на конец месяца
-        private string _driverFullName { get; set; } // Водитель
-        private string _additions { get; set; } // Вспомогательное оборудование
+        // Приватные поля — просто хранилище
+        private string _stateNumber;
+        private string _transportBrand;
+        private double _gasConsumptionStandard;
+        private double _petrolConsumptionStandard; 
+        private double _dieselConsumptionStandard; 
+        private double _monthBeginningOdometerValue;
+        private double _monthEndingOdometerValue;
+        private double _monthBeginningGasState;
+        private double _monthEndingGasState;
+        private double _monthBeginningPetrolState;
+        private double _monthEndingPetrolState;
+        private double _monthBeginningDieselState;
+        private double _monthEndingDieselState;
+        private string _driverFullName;
+        private string _additions;
 
+        // Публичные свойства — всё с public set для быстрой проверки
         public string ID
         {
-            get => _id;
-            set { _id = value; OnPropertyChanged(); }
+            get => _stateNumber;
+            set { _stateNumber = value; OnPropertyChanged(); }
         }
+
         public string TransportBrand
         {
             get => _transportBrand;
-             set { _transportBrand = value; OnPropertyChanged(); }
+            set { _transportBrand = value; OnPropertyChanged(); }
         }
+
         public double GasConsumptionStandard
         {
             get => _gasConsumptionStandard;
-            set {  _gasConsumptionStandard = value; OnPropertyChanged(); }
+            set { _gasConsumptionStandard = value; OnPropertyChanged(); }
         }
-        public double PetrolConsumptionStandart
+
+        public double PetrolConsumptionStandard
         {
-            get => _petrolConsumptionStandart;
-             set { _petrolConsumptionStandart = value; OnPropertyChanged(); }
+            get => _petrolConsumptionStandard;
+            set { _petrolConsumptionStandard = value; OnPropertyChanged(); }
         }
-        public double DieselConsumptionStandart
+
+        public double DieselConsumptionStandard
         {
-            get => _dieselConsumptionStandart;
-             set { _dieselConsumptionStandart = value; OnPropertyChanged(); }
+            get => _dieselConsumptionStandard;
+            set { _dieselConsumptionStandard = value; OnPropertyChanged(); }
         }
+
         public double MonthBeginningOdometerValue
         {
             get => _monthBeginningOdometerValue;
             set { _monthBeginningOdometerValue = value; OnPropertyChanged(); }
         }
+
         public double MonthEndingOdometerValue
         {
             get => _monthEndingOdometerValue;
-             set { _monthEndingOdometerValue = value;OnPropertyChanged(); }
+            set { _monthEndingOdometerValue = value; OnPropertyChanged(); }
         }
+
         public double MonthBeginningGasState
         {
             get => _monthBeginningGasState;
             set { _monthBeginningGasState = value; OnPropertyChanged(); }
         }
+
         public double MonthEndingGasState
         {
             get => _monthEndingGasState;
-             set { _monthEndingGasState = value; OnPropertyChanged(); }
+            set { _monthEndingGasState = value; OnPropertyChanged(); }
         }
+
         public double MonthBeginningPetrolState
         {
             get => _monthBeginningPetrolState;
-            set { _monthBeginningPetrolState = value; OnPropertyChanged();  }
+            set { _monthBeginningPetrolState = value; OnPropertyChanged(); }
         }
+
         public double MonthEndingPetrolState
         {
             get => _monthEndingPetrolState;
-             set { _monthEndingPetrolState = value; OnPropertyChanged(); }
+            set { _monthEndingPetrolState = value; OnPropertyChanged(); }
         }
+
         public double MonthBeginningDieselState
         {
             get => _monthBeginningDieselState;
             set { _monthBeginningDieselState = value; OnPropertyChanged(); }
         }
+
         public double MonthEndingDieselState
         {
             get => _monthEndingDieselState;
-             set { _monthEndingDieselState = value; OnPropertyChanged(); }
+            set { _monthEndingDieselState = value; OnPropertyChanged(); }
         }
+
         public string DriverFullName
         {
             get => _driverFullName;
             set { _driverFullName = value; OnPropertyChanged(); }
         }
+
         public string Additions
         {
             get => _additions;
             set { _additions = value; OnPropertyChanged(); }
         }
-
-        // === INotifyPropertyChanged ===
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -19,16 +21,24 @@ namespace TransportDepartment
     /// </summary>
     public partial class AccountingCard : Window
     {
+        private ObservableCollection<TransportProperties> _transportList = new ObservableCollection<TransportProperties>();
+
         public AccountingCard()
         {
             InitializeComponent();
             HideCloseButton();
+
+
+            // 2. Загружаем данные из БД
         }
 
         // Обработчик события Loaded
         private void AccountingCard_Loaded(object sender, RoutedEventArgs e)
         {
             HideCloseButton();
+
+
+            // Загружаем данные
         }
 
 
@@ -53,6 +63,13 @@ namespace TransportDepartment
 
             // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
             SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
+        }
+
+        private void onMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            var newWindow = new MainWindow();
+            newWindow.Show();
         }
     }
 }

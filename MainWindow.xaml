@@ -1,16 +1,16 @@
-﻿<Window x:Class="Transport_Department.MainWindow"
+﻿<Window x:Class="TransportDepartment.MainWindow"
         x:Name="InitialWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Transport_Department"
+        xmlns:local="clr-namespace:TransportDepartment"
         mc:Ignorable="d"
-        Title="Учет Tранспорта ГУП СК КРАЙТЕПЛОЭНЕРГО" 
         Height="450" 
         Width="599"
-        Background="#F5F7FA"
-        WindowStartupLocation="CenterScreen">
+        Background="White"
+        WindowStartupLocation="CenterScreen"
+        Loaded="MainWindow_Loaded">
 
     <Window.Resources>
         <!-- Палитра цветов -->

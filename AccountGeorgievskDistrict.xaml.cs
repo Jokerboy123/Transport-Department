@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Interop;
 using TransportDepartment;
 
-namespace Transport_Department
+namespace TransportDepartment
 {
     public partial class AccountGeorgievskDistrict : Window
     {
