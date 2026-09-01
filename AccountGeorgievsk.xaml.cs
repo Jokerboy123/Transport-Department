@@ -31,9 +31,56 @@ namespace TransportDepartment
         private void AccountGeorgievsk_Loaded(object sender, RoutedEventArgs e)
         {
             HideCloseButton();
+            DataBaseInitializer.InitializeDataBase();
+
+
+            string targetRegion = "Георгиевск";
+
+            try
+            {
+                var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
+
+                TransportButtonsPanel.Children.Clear();
+
+                foreach (var item in transports)
+                {
+                    var btn = new Button
+                    {
+                        Content = $"{item.Brand} \n({item.StateNumber})",
+                        Style = (Style)FindResource("ModernButtonStyle"),
+                        Padding = new Thickness(15, 8, 15, 8),
+                        Margin = new Thickness(5),
+                        Tag = item.StateNumber
+                    };
+                    btn.Click += OnTransportButtonClick;
+                    TransportButtonsPanel.Children.Add(btn);
+
+                }
+            }
+            catch (Exception ex) 
+                {
+                    MessageBox.Show($"Не удалось загрузить данные: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
         }
 
+        private void OnTransportButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is string stateNumber)
+            {
+                this.Hide();
 
+                // Создаем окно карточки. 
+                // Если в AccountingCard есть конструктор, принимающий номер, используй его:
+                // var newWindow = new AccountingCard(stateNumber); 
+
+                var newWindow = new AccountingCard();
+
+                // Если нужно передать номер внутрь окна, сделай это через публичное свойство:
+                // newWindow.CurrentTransportNumber = stateNumber; 
+
+                newWindow.Show();
+            }
+        }
 
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);

@@ -28,7 +28,8 @@ namespace TransportDepartment
                     MonthEndingPetrolState = 0,
                     MonthEndingDieselState = 0,
                     DriverFullName = "Арушанян А.Э.",
-                    Additions = "CAK"
+                    Additions = "CAK",
+                    Region = "Георгиевск"
                 },
                 new TransportProperties()
                 {
@@ -45,7 +46,9 @@ namespace TransportDepartment
                     MonthEndingPetrolState = 0,
                     MonthEndingDieselState = 0,
                     DriverFullName = "Арушанян Г.А.",
-                    Additions = "Компрессор"
+                    Additions = "Компрессор",
+                                        Region = "Георгиевск"
+
                 },
                 new TransportProperties()
                 {
@@ -62,7 +65,9 @@ namespace TransportDepartment
                     MonthEndingPetrolState = 0,
                     MonthEndingDieselState = 0,
                     DriverFullName = "Аршинов В.Н.",
-                    Additions = "Газонокосилка"
+                    Additions = "Газонокосилка",
+                                        Region = "Георгиевск"
+
                 }
             };
         }

@@ -21,6 +21,7 @@ namespace TransportDepartment
         private double _monthEndingDieselState;
         private string _driverFullName;
         private string _additions;
+        private string _region;
 
         // Публичные свойства — всё с public set для быстрой проверки
         public string ID
@@ -111,6 +112,12 @@ namespace TransportDepartment
         {
             get => _additions;
             set { _additions = value; OnPropertyChanged(); }
+        }
+
+        public string Region
+        {
+            get => _region;
+            set { _region = value; OnPropertyChanged();}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

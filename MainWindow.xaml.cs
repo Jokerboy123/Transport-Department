@@ -58,6 +58,7 @@ namespace TransportDepartment
             this.Hide();
             var newWindow = new AccountGeorgievsk();
             newWindow.Show();
+            DataBaseInitializer.GetTransportsByRegion("Георгиевск");
         }
         private void KirovskAccountPage_Click(object sender, RoutedEventArgs e)
         {

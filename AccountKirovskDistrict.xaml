@@ -1,29 +1,24 @@
-﻿<Window x:Name="AccountKirovskDistrictWindow" x:Class="TransportDepartment.AccountKirovskDistrict"
-
-xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-xmlns:local="clr-namespace:TransportDepartment"
-mc:Ignorable="d"
-Height="450"
-Width="599"
-Background="#F5F7FA"
-WindowState="Maximized"
+﻿<Window x:Name="AccountKirovskDistrictWindow"
+        x:Class="TransportDepartment.AccountKirovskDistrict"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TransportDepartment"
+        mc:Ignorable="d"
+        Height="450"
+        Width="599"
+        Background="#F5F7FA"
+        WindowState="Maximized"
         Loaded="AccountKirovskDistrict_Loaded"
-WindowStartupLocation="CenterScreen"
-                        >
-    
-    <Window.Resources>
-        <!-- Палитра цветов -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+        WindowStartupLocation="CenterScreen">
 
-        <!-- Цвета, точно соответствующие визуалу вашей кнопки -->
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
         <SolidColorBrush x:Key="ButtonBaseColor" Color="#3B8ED0"/>
         <SolidColorBrush x:Key="ButtonHoverColor" Color="#2E7ACF"/>
         <SolidColorBrush x:Key="ButtonPressedColor" Color="#256BB8"/>
 
-        <!-- Стиль ModernButtonStyle, полностью инкапсулирующий логику кнопки -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource ButtonBaseColor}"/>
             <Setter Property="Foreground" Value="White"/>
@@ -35,40 +30,33 @@ WindowStartupLocation="CenterScreen"
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <!-- Border содержит скругление и тень -->
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
                                 Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" 
+                            <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
-
                         <ControlTemplate.Triggers>
-                            <!-- Состояние: Наведение мыши -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{StaticResource ButtonHoverColor}"/>
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect Color="#000000" 
-                                                          Opacity="0.4" 
-                                                          BlurRadius="15" 
+                                        <DropShadowEffect Color="#000000"
+                                                          Opacity="0.4"
+                                                          BlurRadius="15"
                                                           ShadowDepth="4"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
-
-                            <!-- Состояние: Нажатие -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" Value="{StaticResource ButtonPressedColor}"/>
                             </Trigger>
-
-                            <!-- Состояние: По умолчанию (без наведения) -->
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect Color="#000000" 
-                                                          Opacity="0.2" 
-                                                          BlurRadius="10" 
+                                        <DropShadowEffect Color="#000000"
+                                                          Opacity="0.2"
+                                                          BlurRadius="10"
                                                           ShadowDepth="2"/>
                                     </Setter.Value>
                                 </Setter>
@@ -78,24 +66,38 @@ WindowStartupLocation="CenterScreen"
                 </Setter.Value>
             </Setter>
         </Style>
-        </Window.Resources>
+    </Window.Resources>
 
-            <Grid>
-        <TextBlock Text="Кировскoe oтделение ГУП СК «КРАЙТЕПЛОЭНЕРГО»"
-    FontSize="20"
-    FontWeight="Bold"
-    Foreground="#2C3E50"
-    TextAlignment="Center"
-    Margin="0,10,0,0"/>
-        <Button x:Name="onMainWindow" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0"
+                   Text="Кировское отделение ГУП СК «КРАЙТЕПЛОЭНЕРГО»"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   TextAlignment="Center"
+                   Margin="0,20,0,20"/>
+
+        <!-- Панель с кнопками транспорта -->
+        <WrapPanel x:Name="TransportButtonsPanel"
+                   Grid.Row="1"
+                   Margin="20"/>
+
+        <!-- Кнопка "Вернуться на главный экран" -->
+        <Button x:Name="onMainWindow"
                 Grid.Row="2"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
                 Style="{StaticResource ModernButtonStyle}"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Bottom" 
-                                Click="onMainWindow_Click"
-
-                Margin="10"/>
-
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Padding="30,12"
+                Margin="20"
+                Click="onMainWindow_Click"/>
     </Grid>
 </Window>
