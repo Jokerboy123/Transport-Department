@@ -9,7 +9,6 @@ mc:Ignorable="d"
 Height="450"
 Width="599"
 Background="#F5F7FA"
-       WindowStyle="None"
         Loaded="AccountGeorgievskDistrict_Loaded"
 WindowState="Maximized"
 WindowStartupLocation="CenterScreen">
