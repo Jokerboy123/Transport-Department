@@ -74,8 +74,16 @@
     </Window.Resources>
 
     <Grid>
-       
-        <Button x:Name="onMainWindow"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="1"></DataGrid>
+        <Button Grid.Row="2" 
+                x:Name="onMainWindow"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
                 Style="{StaticResource ModernButtonStyle}"
                 HorizontalAlignment="Left"
