@@ -8,7 +8,7 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="AccountingCard" Height="450" Width="800">
+        Height="450" Width="800">
 
     <Window.Resources>
         <!-- Палитра цветов -->
@@ -68,27 +68,33 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-           
+
         </Style>
 
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="20*"/>
 
         </Grid.RowDefinitions>
-
-        <DataGrid Grid.Row="1"></DataGrid>
+        <TextBlock Grid.Row="0"
+                   Text="Карточка учета эксплуатации автомобиля &#10; Государственный номер: {Binding Tag} Марка: . &#10; период: "
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource PrimaryColor}"
+                   TextAlignment="Center"
+                   Margin="0,-5,0,0"/>
+        <DataGrid Grid.Row="1" />
         <Button Grid.Row="2" 
                 x:Name="onMainWindow"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
                 Style="{StaticResource ModernButtonStyle}"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Margin="10" Click="onMainWindow_Click"
+                VerticalAlignment="Center"
+                Margin="10,0,0,0" Click="onMainWindow_Click" Height="45" Width="289"
                 />
     </Grid>
 </Window>

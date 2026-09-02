@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 
 namespace TransportDepartment
 {
-    class DataBaseInitializer
+    public class DataBaseInitializer
     {
         public static string GetConnectionString()
         {
@@ -34,11 +34,11 @@ namespace TransportDepartment
 
             try
             {
-                using var connection = new SqliteConnection(connStr);
+                using var connection = new SQLiteConnection(connStr);
                 connection.Open();
 
                 // Скрипт создания таблиц (без изменений)
-                var sqlScriptTransport = @"CREATE TABLE IF NOT EXISTS TransportInformation (
+                var SQLScriptTransport = @"CREATE TABLE IF NOT EXISTS TransportInformation (
             TransportBrand TEXT NOT NULL,
             TransportStateNumber TEXT PRIMARY KEY NOT NULL,
             GasConsumptionStandard REAL NOT NULL,
@@ -56,7 +56,7 @@ namespace TransportDepartment
             Region TEXT
         );";
 
-                var sqlScriptAccounting = @"CREATE TABLE IF NOT EXISTS AccountingCard (
+                var SQLScriptAccounting = @"CREATE TABLE IF NOT EXISTS AccountingCard (
             DayNumber INT NOT NULL,
             WaySheet INT NOT NULL,
             FirstDriver TEXT NOT NULL,
@@ -77,9 +77,9 @@ namespace TransportDepartment
                 cmd.CommandText = "SELECT COUNT(*) FROM TransportInformation";
                 long count = (long)cmd.ExecuteScalar();
 
-                cmd.CommandText = sqlScriptTransport;
+                cmd.CommandText = SQLScriptTransport;
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = sqlScriptAccounting;
+                cmd.CommandText = SQLScriptAccounting;
                 cmd.ExecuteNonQuery();
 
                 // УБРАЛИ MessageBox! Используем Debug для отладки
@@ -92,37 +92,34 @@ namespace TransportDepartment
             }
         }
 
-        // ИСПРАВЛЕННЫЙ метод получения транспорта по региону
-        // Сначала создай простой класс-модель (можно добавить в конец файла DataBaseInitializer.cs или в отдельный файл)
-        public class TransportItem
-        {
-            public string Brand { get; set; }
-            public string StateNumber { get; set; }
-        }
+        //public class TransportItem
+        //{
+        //    public string Brand { get; set; }
+        //    public string StateNumber { get; set; }
+        //}
 
-        // Замени свой старый метод GetTransportsByRegion на этот:
-        public static List<TransportItem> GetTransportsByRegion(string region)
+        public static List<TransportProperties> GetTransportsByRegion(string region)
         {
-            var result = new List<TransportItem>();
+            var result = new List<TransportProperties>();
             string connStr = GetConnectionString();
 
-            using var connection = new SqliteConnection(connStr);
+            using var connection = new SQLiteConnection(connStr);
             connection.Open();
 
             // ИСПРАВЛЕНО: Выбираем и марку, и госномер, и фильтруем по колонке Region
-            string sql = @"SELECT TransportBrand, TransportStateNumber 
+            string SQL = @"SELECT TransportBrand, TransportStateNumber 
                    FROM TransportInformation 
                    WHERE Region = @region";
 
-            using var cmd = new SqliteCommand(sql, connection);
+            using var cmd = new SQLiteCommand(SQL, connection);
             cmd.Parameters.AddWithValue("@region", region);
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                result.Add(new TransportItem
+                result.Add(new TransportProperties
                 {
-                    Brand = reader.GetString(reader.GetOrdinal("TransportBrand")),
+                    TransportBrand = reader.GetString(reader.GetOrdinal("TransportBrand")),
                     StateNumber = reader.GetString(reader.GetOrdinal("TransportStateNumber"))
                 });
             }
@@ -134,14 +131,14 @@ namespace TransportDepartment
         {
             string connStr = DataBaseInitializer.GetConnectionString();
 
-            using var connection = new SqliteConnection(connStr);
+            using var connection = new SQLiteConnection(connStr);
             connection.Open();
 
-            string sql = @"SELECT TransportBrand 
+            string SQL = @"SELECT TransportBrand 
                     FROM TransportInformation 
                     WHERE TransportStateNumber = @stateNumber";
 
-            using var cmd = new SqliteCommand(sql, connection);
+            using var cmd = new SQLiteCommand(SQL, connection);
             cmd.Parameters.AddWithValue("@stateNumber", stateNumber);
 
             using var reader = cmd.ExecuteReader();

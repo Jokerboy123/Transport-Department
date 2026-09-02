@@ -1,27 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-
 		<OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+		<TargetFramework>net462</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<LangVersion>8.0</LangVersion>
+		<Platforms>x86</Platforms>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="TransportInformation.db" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="TransportInformation.db" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="TransportInformation.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="TransportInformation.db">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.11" />
-  </ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="SourceGear.sqlite3" Version="3.53.4" />
+	  <PackageReference Include="System.Data.SQLite" Version="2.0.4" />
+
+		
+	</ItemGroup>
 
 </Project>

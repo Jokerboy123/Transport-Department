@@ -24,7 +24,7 @@ namespace TransportDepartment
         private string _region;
 
         // Публичные свойства — всё с public set для быстрой проверки
-        public string ID
+        public string StateNumber
         {
             get => _stateNumber;
             set { _stateNumber = value; OnPropertyChanged(); }

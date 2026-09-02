@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using static TransportDepartment.DataBaseInitializer;
 
 namespace TransportDepartment
 {
@@ -38,13 +39,13 @@ namespace TransportDepartment
                     var btn = new Button
                     {
                         // Красивый текст: "Марка (Госномер)"
-                        Content = $"{item.Brand} \n({item.StateNumber})",
+                        Content = $"{item.TransportBrand} \n({item.StateNumber})",
                         // Применяем твой стиль из ресурсов окна
                         Style = (Style)FindResource("ModernButtonStyle"),
                         Padding = new Thickness(15, 8, 15, 8),
                         Margin = new Thickness(5),
                         // Сохраняем госномер в Tag, чтобы знать, какую карточку открывать
-                        Tag = item.StateNumber
+                        Tag = item
                     };
 
                     // Подписываемся на клик
@@ -74,29 +75,29 @@ namespace TransportDepartment
 
         private void OnTransportButtonClick(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is string stateNumber)
+            if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
-                this.Hide();
+                this.Hide(); // скрываем главное окно
 
-                // Создаем окно карточки. 
-                // Если в AccountingCard есть конструктор, принимающий номер, используй его:
-                // var newWindow = new AccountingCard(stateNumber); 
+                var newWindow = new AccountingCard(transport);
 
-                var newWindow = new AccountingCard();
-
-                // Если нужно передать номер внутрь окна, сделай это через публичное свойство:
-                // newWindow.CurrentTransportNumber = stateNumber; 
+                // Подписываемся на событие закрытия ПЕРЕД тем, как показать окно
+                //newWindow.Closed += (s, args) =>
+                //{
+                //    this.Show(); // возвращаем главное окно
+                //                 // newWindow здесь уже закрыт, больше с ним ничего не делаем
+                //};
 
                 newWindow.Show();
             }
         }
 
-        public void OpenAccountingCard(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            var newWindow = new AccountingCard();
-            newWindow.Show();
-        }
+        //public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        //{
+        //    this.Hide();
+        //    var newWindow = new AccountingCard(TransportProperties transport);
+        //    newWindow.Show();
+        //}
 
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);

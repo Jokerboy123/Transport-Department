@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TransportDepartment;
+using static TransportDepartment.DataBaseInitializer;
 
 
 namespace TransportDepartment
@@ -46,11 +47,11 @@ namespace TransportDepartment
                 {
                     var btn = new Button
                     {
-                        Content = $"{item.Brand} \n({item.StateNumber})",
+                        Content = $"{item.TransportBrand} \n({item.StateNumber})",
                         Style = (Style)FindResource("ModernButtonStyle"),
                         Padding = new Thickness(15, 8, 15, 8),
                         Margin = new Thickness(5),
-                        Tag = item.StateNumber
+                        Tag = item,
                     };
                     btn.Click += OnTransportButtonClick;
                     TransportButtonsPanel.Children.Add(btn);
@@ -65,20 +66,19 @@ namespace TransportDepartment
 
         private void OnTransportButtonClick(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is string stateNumber)
+            if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
                 this.Hide();
 
                 // Создаем окно карточки. 
                 // Если в AccountingCard есть конструктор, принимающий номер, используй его:
-                // var newWindow = new AccountingCard(stateNumber); 
 
-                var newWindow = new AccountingCard();
+                var newWindow = new AccountingCard(transport);
 
                 // Если нужно передать номер внутрь окна, сделай это через публичное свойство:
-                // newWindow.CurrentTransportNumber = stateNumber; 
-
+                newWindow.Closed += (s, args) => this.Show();
                 newWindow.Show();
+
             }
         }
 
@@ -101,12 +101,12 @@ namespace TransportDepartment
             // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
             SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
         }
-        public void OpenAccountingCard(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            var newWindow = new AccountingCard();
-            newWindow.Show();
-        }
+        //public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        //{
+        //    this.Hide();
+        //    var newWindow = new AccountingCard(transport);
+        //    newWindow.Show();
+        //}
         private void onMainWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();

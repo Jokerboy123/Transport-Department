@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using TransportDepartment;
+using static TransportDepartment.DataBaseInitializer;
 
 namespace TransportDepartment
 {
@@ -33,11 +34,11 @@ namespace TransportDepartment
                 {
                     var btn = new Button
                     {
-                        Content = $"{item.Brand} \n({item.StateNumber})",
+                        Content = $"{item.TransportBrand} \n({item.StateNumber})",
                         Style = (Style)FindResource("ModernButtonStyle"),
                         Padding = new Thickness(15, 8, 15, 8),
                         Margin = new Thickness(5),
-                        Tag = item.StateNumber
+                        Tag = item
                     };
                     btn.Click += OnTransportButtonClick;
 
@@ -53,29 +54,28 @@ namespace TransportDepartment
 
         private void OnTransportButtonClick(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is string stateNumber)
+            if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
                 this.Hide();
 
                 // Создаем окно карточки. 
                 // Если в AccountingCard есть конструктор, принимающий номер, используй его:
-                // var newWindow = new AccountingCard(stateNumber); 
 
-                var newWindow = new AccountingCard();
+                var newWindow = new AccountingCard(transport);
 
                 // Если нужно передать номер внутрь окна, сделай это через публичное свойство:
-                // newWindow.CurrentTransportNumber = stateNumber; 
-
+               // newWindow.Closed += (s, args) => this.Show();
                 newWindow.Show();
+
             }
         }
 
-        public void OpenAccountingCard(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            var newWindow = new AccountingCard();
-            newWindow.Show();
-        }
+        //public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        //{
+        //    this.Hide();
+        //    var newWindow = new AccountingCard(transport);
+        //    newWindow.Show();
+        //}
 
 
         [DllImport("user32.dll")]

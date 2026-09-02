@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Data.SQLite;
+//using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static TransportDepartment.DataBaseInitializer;
 
 namespace TransportDepartment
 {
@@ -21,13 +23,16 @@ namespace TransportDepartment
     /// </summary>
     public partial class AccountingCard : Window
     {
-        private ObservableCollection<TransportProperties> _transportList = new ObservableCollection<TransportProperties>();
+        private readonly TransportProperties _transport; // <- что делает эта строка?
+      //  private ObservableCollection<TransportProperties> _transportList = new ObservableCollection<TransportProperties>();
 
-        public AccountingCard()
+        public AccountingCard(TransportProperties transport)
         {
             InitializeComponent();
-            HideCloseButton();
 
+            HideCloseButton();
+            _transport = transport;
+            this.DataContext =  _transport;
 
             // 2. Загружаем данные из БД
         }
@@ -36,6 +41,16 @@ namespace TransportDepartment
         private void AccountingCard_Loaded(object sender, RoutedEventArgs e)
         {
             HideCloseButton();
+
+            // Пример выборки по номеру из БД, используя уже переданный номер:
+            string stateNumber = _transport.StateNumber;
+          //  string  
+
+            // Тут делаешь запрос к БД, используя stateNumber
+            var datagridStateNumber = DataBaseInitializer.GetTransportBrandByStateNumber(stateNumber);
+            var d = DataBaseInitializer.GetTransportsByRegion(stateNumber);
+            // Дальше используешь details для заполнения полей карточки...
+            MessageBox.Show(datagridStateNumber);
 
 
             // Загружаем данные

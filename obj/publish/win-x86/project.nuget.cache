@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tJL8zAbbqCY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ларина\\source\\repos\\Transport-Department\\TransportDepartment.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ларина\\.nuget\\packages\\sourcegear.sqlite3\\3.53.4\\sourcegear.sqlite3.3.53.4.nupkg.sha512",
+    "C:\\Users\\Ларина\\.nuget\\packages\\system.data.sqlite\\2.0.4\\system.data.sqlite.2.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
