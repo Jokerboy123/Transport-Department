@@ -22,7 +22,7 @@ namespace TransportDepartment
         public double gasConsumptionStandard {  get; set; }
         public double petrolConsumptionStandard { get; set; }
         public double dieselConsumptionStandard { get; set; }
-
+      
 
         /*
 CREATE TABLE IF NOT EXISTS AccountingCard (

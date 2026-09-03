@@ -77,7 +77,7 @@ namespace TransportDepartment {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TransportDepartment;V1.0.0.0;component/accountgeorgievsk.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TransportDepartment;component/accountgeorgievsk.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AccountGeorgievsk.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

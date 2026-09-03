@@ -45,7 +45,8 @@ namespace TransportDepartment
 
             // Пример выборки по номеру из БД, используя уже переданный номер:
             string stateNumber = _transport.StateNumber;
-          //  string  
+
+            //  string  
 
             // Тут делаешь запрос к БД, используя stateNumber
             var datagridStateNumber = DataBaseInitializer.GetTransportBrandByStateNumber(stateNumber);

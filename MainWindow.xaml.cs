@@ -83,7 +83,7 @@ namespace TransportDepartment
 
         private void Parameters_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Открыть новое окно с параметрами, где задать месяц и год (пока минимально)");
         }
     }
 }

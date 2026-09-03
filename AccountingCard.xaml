@@ -97,7 +97,11 @@
     <Run FontWeight="Bold" Text="{Binding TransportBrand}"/>
     <LineBreak/>
     <Run>период: </Run>
+                <Run FontWeight="Bold" Text="{Binding Month}"/>
+
     <Run>Вставить год</Run>
+                            <Run FontWeight="Bold" Text="{Binding Year}"/>
+
         </TextBlock>
         <DataGrid Grid.Row="1" />
         <Button Grid.Row="2" 

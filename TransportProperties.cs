@@ -22,12 +22,25 @@ namespace TransportDepartment
         private string _driverFullName;
         private string _additions;
         private string _region;
+        public string _month { get; set; } // определение месяца для периода
+        public int _year { get; set; } // определение года для периода
+
 
         // Публичные свойства — всё с public set для быстрой проверки
         public string StateNumber
         {
             get => _stateNumber;
             set { _stateNumber = value; OnPropertyChanged(); }
+        }
+        public string Month
+        {
+            get => _month;
+            set { _month = value; OnPropertyChanged(); }
+        }
+        public int Year
+        {
+            get => _year;
+            set { _year = value; OnPropertyChanged(); }
         }
 
         public string TransportBrand

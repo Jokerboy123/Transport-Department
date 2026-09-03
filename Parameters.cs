@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace TransportDepartment
 {
-    public class BackgroundInformation
+    public class Parameters
     {
         // ObservableCollection — таблица WPF сама обновляется при добавлении/удалении
         public ObservableCollection<TransportProperties> GeorgievskTransport { get; set; }
         private int _nextId;
 
-        public BackgroundInformation()
+        public Parameters()
         {
-           
+            string month;
         }
 
         //// === ДОБАВИТЬ ===
