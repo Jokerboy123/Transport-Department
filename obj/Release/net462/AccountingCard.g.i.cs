@@ -61,7 +61,7 @@ namespace TransportDepartment {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TransportDepartment;component/accountingcard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TransportDepartment;V1.0.0.0;component/accountingcard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\AccountingCard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

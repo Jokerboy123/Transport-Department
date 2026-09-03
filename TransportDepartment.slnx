@@ -1,8 +1,13 @@
 <Solution>
   <Configurations>
+    <Configuration Name="Debug" />
+    <Configuration Name="Release" />
     <Platform Name="Any CPU" />
     <Platform Name="x86" />
   </Configurations>
+  <Platforms>
+    <Platform Name="x86" />
+  </Platforms>
   <Folder Name="/Элементы решения/" />
   <Project Path="TransportDepartment.csproj">
     <Platform Solution="*|x86" Project="x86" />
