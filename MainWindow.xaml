@@ -6,71 +6,112 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TransportDepartment"
         mc:Ignorable="d"
-        Height="450" 
+        Height="500" 
         Width="599"
         Background="White"
         WindowStartupLocation="CenterScreen"
         Loaded="MainWindow_Loaded">
 
-    <Window.Resources>
-        <!-- Палитра цветов -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
-        <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
-        <SolidColorBrush x:Key="AccentCloseColor" Color="#FFFF0000"/>
+<Window.Resources>
+    <!-- Палитра цветов -->
+    <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
+    <SolidColorBrush x:Key="CloseColor" Color="Red"/>       <!-- Красный для закрытия -->
+        <SolidColorBrush x:Key="ParamsColor" Color="#48bf1d"/>      <!-- Зелёный для сохранения -->
+          
+        <SolidColorBrush x:Key="TextColor" Color="#333333"/>         <!-- Теперь этот ресурс существует -->
+    <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
+        <SolidColorBrush x:Key="HoverCloseColor" Color="OrangeRed"/>
+        <SolidColorBrush x:Key="HoverParamsColos" Color="#FF29A05B"/>
 
-        <SolidColorBrush x:Key="TextColor" Color="#333333"/>
-        <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
-        <SolidColorBrush x:Key="PressedColor" Color="#1C5980"/>
+        <!-- Универсальный стиль для ВСЕХ кнопок -->
+    <Style x:Key="ModernButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="20,12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <!-- Важно: Background берётся из TemplateBinding, а не жёстко задан -->
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="8" 
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
-        <!-- Стиль для кнопок -->
-        <Style x:Key="ModernButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource HoverColor}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+        <Style x:Key="ModernButtonStyleRed" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource CloseColor}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="20,12"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
+                        <!-- Важно: Background берётся из TemplateBinding, а не жёстко задан -->
                         <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                Padding="{TemplateBinding Padding}">
+                            CornerRadius="8" 
+                            Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource HoverColor}"/>
+                    <Setter Property="Background" Value="{StaticResource HoverCloseColor}"/>
                 </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource PressedColor}"/>
-                </Trigger>
+                
             </Style.Triggers>
         </Style>
-        <Style x:Key="ModernButtonCloseStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentCloseColor}"/>
+
+        <Style x:Key="ModernButtonStyleGreen" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ParamsColor}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="20,12"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
+                        <!-- Важно: Background берётся из TemplateBinding, а не жёстко задан -->
                         <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                Padding="{TemplateBinding Padding}">
+                    CornerRadius="8" 
+                    Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
             <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverParamsColos}"/>
+                </Trigger>
                
             </Style.Triggers>
         </Style>
@@ -95,7 +136,7 @@
                    FontSize="24" 
                    FontWeight="Bold" 
                    Foreground="{StaticResource TextColor}" 
-                   Margin="0,0,0,20"
+                   Margin="0,0,0,25"
                    HorizontalAlignment="Center"/>
 
         <!-- Панель с кнопками -->
@@ -121,11 +162,18 @@
                     Name="KirovskAccountPage"
                     Style="{StaticResource ModernButtonStyle}"
                      Margin="0,0,0,15"/>
-            
+
+            <Button Content="Настройки программы"
+                    Click="Parameters_Click"
+                    Name="Parameters"
+                    Style="{StaticResource ModernButtonStyleGreen}"
+                     Margin="0,0,0,15"
+                    />
+
             <Button Content="Закрыть программу" 
                 Click="CloseProgram_Click"
                 x:Name="CloseProgram"
-                Style="{StaticResource ModernButtonCloseStyle}"/>
+                Style="{StaticResource ModernButtonStyleRed}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -82,8 +82,6 @@ namespace TransportDepartment
                 cmd.CommandText = SQLScriptAccounting;
                 cmd.ExecuteNonQuery();
 
-                // УБРАЛИ MessageBox! Используем Debug для отладки
-                System.Diagnostics.Debug.WriteLine("База данных инициализирована.");
             }
             catch (Exception ex)
             {

@@ -80,5 +80,10 @@ namespace TransportDepartment
             Application.Current.Shutdown();
 
         }
+
+        private void Parameters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

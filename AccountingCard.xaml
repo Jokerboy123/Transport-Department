@@ -18,9 +18,17 @@
 
         <SolidColorBrush x:Key="TextColor" Color="#333333"/>
         <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
-        <SolidColorBrush x:Key="PressedColor" Color="#1C5980"/>
+        <SolidColorBrush x:Key="PressedColor" Color="#1C5980"/> 
 
-        <!-- Стиль для кнопок -->
+        <!--Cтиль для текста-->
+        <Style x:Key="ModernTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value ="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+            <!-- Стиль для кнопок -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource AccentColor}"/>
             <Setter Property="Foreground" Value="White"/>
@@ -80,13 +88,17 @@
             <RowDefinition Height="20*"/>
 
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Text="Карточка учета эксплуатации автомобиля &#10; Государственный номер: {Binding Tag} Марка: . &#10; период: "
-                   FontSize="20"
-                   FontWeight="Bold"
-                   Foreground="{StaticResource PrimaryColor}"
-                   TextAlignment="Center"
-                   Margin="0,-5,0,0"/>
+        <TextBlock TextWrapping="Wrap" Style="{StaticResource ModernTextStyle}">
+    <Run>Карточка учета эксплуатации автомобиля</Run>
+    <LineBreak/>
+    <Run>Государственный номер: </Run>
+    <Run FontWeight="Bold" Text="{Binding StateNumber}"/>
+    <Run> Марка:</Run>
+    <Run FontWeight="Bold" Text="{Binding TransportBrand}"/>
+    <LineBreak/>
+    <Run>период: </Run>
+    <Run>Вставить год</Run>
+        </TextBlock>
         <DataGrid Grid.Row="1" />
         <Button Grid.Row="2" 
                 x:Name="onMainWindow"

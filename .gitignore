@@ -1,1 +1,6 @@
-﻿.vs/
+﻿bin
+obj
+.db
+.suo
+.user
+.vs
