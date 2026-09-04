@@ -126,3 +126,5 @@ C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\T
 C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\Transpor.E065C5B4.Up2Date
 C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\TransportDepartment.exe
 C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\TransportDepartment.pdb
+C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\ParametersWindow.g.cs
+C:\Users\Ларина\source\repos\Transport-Department\obj\x86\Release\net462\ParametersWindow.baml

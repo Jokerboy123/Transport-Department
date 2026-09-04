@@ -23,43 +23,23 @@ namespace TransportDepartment
         public MainWindow()
         {
             InitializeComponent();
-            HideCloseButton();
         }
 
         // Обработчик события Loaded
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            HideCloseButton();
             DataBaseInitializer.InitializeDataBase();
-            //   MessageBox.Show("База данных успешно инициализирована или уже существует!", "Успех");
-           
+          //  Parameters.HideCloseButton(this);  // теперь корректно
 
+            // MessageBox.Show("База данных успешно инициализирована или уже существует!", "Успех");
         }
-        private void HideCloseButton()
-        {
-            // Теперь Handle гарантированно существует
-            var hwnd = new WindowInteropHelper(this).Handle;
-
-            const int GWL_STYLE = -16;
-            const int WS_SYSMENU = 0x80000;
-
-            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-
-            // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
-            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
-        }
-        [DllImport("user32.dll")]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         private void GeoAccountPage_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             var newWindow = new AccountGeorgievsk();
             newWindow.Show();
-            DataBaseInitializer.GetTransportsByRegion("Георгиевск");
+       //     DataBaseInitializer.GetTransportsByRegion("Георгиевск");
         }
         private void KirovskAccountPage_Click(object sender, RoutedEventArgs e)
         {
@@ -83,7 +63,15 @@ namespace TransportDepartment
 
         private void Parameters_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Открыть новое окно с параметрами, где задать месяц и год (пока минимально)");
+            var paramWind = new ParametersWindow();
+            if (paramWind.ShowDialog() == true)
+            {
+                string chosenMonth = paramWind.SelectedMonth ?? "Не выбран";
+                string choosenYear = paramWind.SelectedYear ?? "Не выбран";
+                MessageBox.Show("Выбран месяц " + chosenMonth.ToString());
+            //    AppSettings.CurrentMonth = chosenMonth;
+
+            }
         }
     }
 }

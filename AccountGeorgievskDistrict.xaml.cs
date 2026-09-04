@@ -13,13 +13,12 @@ namespace TransportDepartment
         public AccountGeorgievskDistrict()
         {
             InitializeComponent();
-            HideCloseButton();
         }
 
         // Обработчик события Loaded
         private void AccountGeorgievskDistrict_Loaded(object sender, RoutedEventArgs e)
         {
-            HideCloseButton();
+         //   WinApiHelper.HideCloseButton(this);
 
             DataBaseInitializer.InitializeDataBase();
             string targetRegion = "Георгиевский район";
@@ -86,19 +85,7 @@ namespace TransportDepartment
 
        
 
-        private void HideCloseButton()
-        {
-            // Теперь Handle гарантированно существует
-            var hwnd = new WindowInteropHelper(this).Handle;
-
-            const int GWL_STYLE = -16;
-            const int WS_SYSMENU = 0x80000;
-
-            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-
-            // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
-            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
-        }
+      
 
         private void onMainWindow_Click(object sender, RoutedEventArgs e)
         {

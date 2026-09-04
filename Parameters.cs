@@ -1,37 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Windows;
+using System.Windows.Interop;
+using TransportDepartment;
 
 namespace TransportDepartment
 {
-    public class Parameters
+    public static class Parameters
     {
-        // ObservableCollection — таблица WPF сама обновляется при добавлении/удалении
-        public ObservableCollection<TransportProperties> GeorgievskTransport { get; set; }
-        private int _nextId;
+        public static string SelectedMonth { get; set; } = "Январь";
+        public static string SelectedYear { get; set; } = "2026";
 
-        public Parameters()
-        {
-            string month;
-        }
-
-        //// === ДОБАВИТЬ ===
-
-        //public TransportProperties AddRoute(string routeNumber)
-        //{
-        //    var route = new TransportProperties(_nextId++, routeNumber);
-        //    GeorgievskTransport.Add(route);
-        //    return route;
-        //}
-
-        //// === УДАЛИТЬ ===
-
-        //public bool DeleteRoute(TransportProperties route)
-        //{
-        //    return GeorgievskTransport.Remove(route);
-        //}
-
-        // === ПОИСК ===
-
-       
     }
 }

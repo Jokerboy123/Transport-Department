@@ -31,7 +31,6 @@ namespace TransportDepartment
         {
             InitializeComponent();
 
-            HideCloseButton();
             _transport = transport;
             this.DataContext =  _transport;
 
@@ -41,7 +40,7 @@ namespace TransportDepartment
         // Обработчик события Loaded
         private void AccountingCard_Loaded(object sender, RoutedEventArgs e)
         {
-            HideCloseButton();
+       //     WinApiHelper.HideCloseButton(this);
 
             // Пример выборки по номеру из БД, используя уже переданный номер:
             string stateNumber = _transport.StateNumber;
@@ -60,27 +59,7 @@ namespace TransportDepartment
 
 
 
-        [DllImport("user32.dll")]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
-      
-
-        private void HideCloseButton()
-        {
-            // Теперь Handle гарантированно существует
-            var hwnd = new WindowInteropHelper(this).Handle;
-
-            const int GWL_STYLE = -16;
-            const int WS_SYSMENU = 0x80000;
-
-            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-
-            // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
-            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
-        }
+       
 
         private void onMainWindow_Click(object sender, RoutedEventArgs e)
         {

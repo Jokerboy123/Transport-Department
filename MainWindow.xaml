@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:TransportDepartment"
         mc:Ignorable="d"
         Height="500" 
-        Width="599"
+        Width="600"
         Background="White"
         WindowStartupLocation="CenterScreen"
         Loaded="MainWindow_Loaded">
@@ -165,7 +165,7 @@
 
             <Button Content="Настройки программы"
                     Click="Parameters_Click"
-                    Name="Parameters"
+                    Name="ParametersButton"
                     Style="{StaticResource ModernButtonStyleGreen}"
                      Margin="0,0,0,15"
                     />

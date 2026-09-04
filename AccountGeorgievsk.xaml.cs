@@ -25,13 +25,12 @@ namespace TransportDepartment
         public AccountGeorgievsk()
         {
             InitializeComponent();
-            HideCloseButton();
         }
 
         // Обработчик события Loaded
         private void AccountGeorgievsk_Loaded(object sender, RoutedEventArgs e)
         {
-            HideCloseButton();
+          //  WinApiHelper.HideCloseButton(this);
             DataBaseInitializer.InitializeDataBase();
 
 
@@ -88,19 +87,7 @@ namespace TransportDepartment
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
-        private void HideCloseButton()
-        {
-            // Теперь Handle гарантированно существует
-            var hwnd = new WindowInteropHelper(this).Handle;
-
-            const int GWL_STYLE = -16;
-            const int WS_SYSMENU = 0x80000;
-
-            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-
-            // Убираем флаг WS_SYSMENU (системное меню), который отвечает за крестик
-            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
-        }
+        
         //public void OpenAccountingCard(object sender, RoutedEventArgs e)
         //{
         //    this.Hide();
