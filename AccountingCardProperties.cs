@@ -22,7 +22,26 @@ namespace TransportDepartment
         public double gasConsumptionStandard {  get; set; }
         public double petrolConsumptionStandard { get; set; }
         public double dieselConsumptionStandard { get; set; }
-      
+
+
+        // Поля для шапки
+        private string _month { get; set; }
+        private int _year { get; set; }
+
+        public string Month
+        {
+            get => _month;
+            set {  _month = value; }
+        }
+
+        public int Year
+        {
+            get => _year;
+            set { _year = value; }
+        }
+
+
+
 
         /*
 CREATE TABLE IF NOT EXISTS AccountingCard (

@@ -61,6 +61,8 @@ namespace TransportDepartment
 
         }
 
+
+
         private void Parameters_Click(object sender, RoutedEventArgs e)
         {
             var paramWind = new ParametersWindow();
@@ -68,8 +70,6 @@ namespace TransportDepartment
             {
                 string chosenMonth = paramWind.SelectedMonth ?? "Не выбран";
                 string choosenYear = paramWind.SelectedYear ?? "Не выбран";
-                MessageBox.Show("Выбран месяц " + chosenMonth.ToString());
-            //    AppSettings.CurrentMonth = chosenMonth;
 
             }
         }

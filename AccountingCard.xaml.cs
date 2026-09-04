@@ -25,6 +25,7 @@ namespace TransportDepartment
     {
         private readonly TransportProperties _transport; //
 
+
       //  private ObservableCollection<TransportProperties> _transportList = new ObservableCollection<TransportProperties>();
 
         public AccountingCard(TransportProperties transport)
@@ -50,16 +51,20 @@ namespace TransportDepartment
             // Тут делаешь запрос к БД, используя stateNumber
             var datagridStateNumber = DataBaseInitializer.GetTransportBrandByStateNumber(stateNumber);
             var d = DataBaseInitializer.GetTransportsByRegion(stateNumber);
-            // Дальше используешь details для заполнения полей карточки...
-        //    MessageBox.Show(datagridStateNumber);
+
+            var Month = Parameters.SelectedMonth;
+            var Year = Parameters.SelectedYear;
+
+            _transport.Month = Month;
+
+            if (int.TryParse(Year, out int yearInt))
+                _transport.Year = yearInt;
 
 
-            // Загружаем данные
+          
+
         }
 
-
-
-       
 
         private void onMainWindow_Click(object sender, RoutedEventArgs e)
         {

@@ -83,8 +83,11 @@ namespace TransportDepartment
 
         }
 
+        private void onMainWindow_Click222(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Parameters.SelectedYear);
+            MessageBox.Show(Parameters.SelectedMonth);
 
-       
-        
+        }
     }
 }

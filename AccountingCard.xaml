@@ -8,41 +8,56 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Background="#F5F7FA">
 
     <Window.Resources>
-        <!-- Палитра цветов -->
+        <!-- Базовые цвета -->
         <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
         <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
-        <SolidColorBrush x:Key="AccentCloseColor" Color="#FFFF0000"/>
-
-        <SolidColorBrush x:Key="TextColor" Color="#333333"/>
         <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
-        <SolidColorBrush x:Key="PressedColor" Color="#1C5980"/> 
+        <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="HeaderBgColor" Color="#F8F9FA"/>
 
-        <!--Cтиль для текста-->
-        <Style x:Key="ModernTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value ="20"/>
+        <!-- Стиль заголовка -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#2C3E50"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
         </Style>
-            <!-- Стиль для кнопок -->
-        <Style x:Key="ModernButtonStyle" TargetType="Button">
+
+        <!-- Стиль инфо-строк -->
+        <Style x:Key="InfoStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#555"/>
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+
+        <!-- Стиль для заголовков колонок DataGrid (чтобы были жирными и темными) -->
+        <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="{StaticResource HeaderBgColor}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,0"/>
+            <Setter Property="SeparatorVisibility" Value="Collapsed"/>
+        </Style>
+
+        <!-- Стиль кнопки -->
+        <Style x:Key="SimpleButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource AccentColor}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="Padding" Value="30,12"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                Padding="{TemplateBinding Padding}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -52,65 +67,127 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{StaticResource HoverColor}"/>
                 </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="{StaticResource PressedColor}"/>
-                </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ModernButtonCloseStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentCloseColor}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="20,12"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8" 
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-        </Style>
-
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="300*"/>
-            <RowDefinition Height="20*"/>
-
+            <RowDefinition Height="Auto"/>
+            <!-- Шапка -->
+            <RowDefinition Height="Auto"/>
+            <!-- Маленькая таблица с остатками -->
+            <RowDefinition Height="*"/>
+            <!-- Большая таблица -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопка -->
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Style="{StaticResource ModernTextStyle}">
-    <Run>Карточка учета эксплуатации автомобиля</Run>
-    <LineBreak/>
-    <Run>Государственный номер: </Run>
-    <Run FontWeight="Bold" Text="{Binding StateNumber}"/>
-    <Run> Марка:</Run>
-    <Run FontWeight="Bold" Text="{Binding TransportBrand}"/>
-    <LineBreak/>
-    <Run>период: </Run>
-                <Run FontWeight="Bold" Text="{Binding Month}"/>
 
-    <Run>Вставить год</Run>
-                            <Run FontWeight="Bold" Text="{Binding Year}"/>
+        <!-- === ШАПКА === -->
+        <Border Grid.Row="0" Background="White" CornerRadius="12" Padding="25" Margin="0,0,0,20" >
+            <StackPanel>
+                <TextBlock Text="Карточка учета эксплуатации автомобиля" Style="{StaticResource HeaderStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="0,0,25,0">
+                        <TextBlock Text="Гос. номер:" Style="{StaticResource InfoStyle}"/>
+                        <TextBlock Text="{Binding StateNumber, FallbackValue='—'}" FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,25,0">
+                        <TextBlock Text="Марка:" Style="{StaticResource InfoStyle}"/>
+                        <TextBlock Text="{Binding TransportBrand, FallbackValue='—'}" FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Период:" Style="{StaticResource InfoStyle}"/>
+                        <TextBlock FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}">
+                            <Run Text="{Binding Month, FallbackValue='—'}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding Year, FallbackValue='—'}"/>
+                            <Run Text=" года"/>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Border>
 
-        </TextBlock>
-        <DataGrid Grid.Row="1" />
-        <Button Grid.Row="2" 
+        <!-- === МАЛЕНЬКАЯ ТАБЛИЦА (ОСТАТКИ + ДАННЫЕ) === -->
+        <!-- Теперь это единый блок: сверху строка "Остаток", снизу таблица, всё в одной карточке -->
+        <Border Grid.Row="1" Background="White" CornerRadius="12" Margin="0,0,0,20" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Строка "Остаток" -->
+                    <RowDefinition Height="*"/>
+                    <!-- Сама таблица -->
+                </Grid.RowDefinitions>
+
+                <!-- Декоративная строка "Остаток на начало" -->
+                <Border Grid.Row="0" 
+                        Background="#E8F4FF" 
+                        BorderBrush="#3498DB" 
+                        BorderThickness="0,0,0,1" 
+                        Padding="15,10" 
+                        CornerRadius="12,12,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📊 Остаток на начало месяца:" 
+                                   FontWeight="Bold" 
+                                   FontSize="15" 
+                                   Foreground="#2C3E50" 
+                                   Margin="0,0,15,0"/>
+                        <!-- Сюда можно добавить привязки к данным, если нужно показать цифры -->
+                        <TextBlock Text="СУГ: — л | Бензин: — л | ДТ: — л" 
+                                   FontSize="14" 
+                                   Foreground="#555"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Таблица данных -->
+                <DataGrid x:Name="dataGridByStateNumber"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          RowHeight="35"
+                          Margin="10,0,10,10"
+                          ColumnWidth="SizeToCells"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                          BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Одометр, км" Binding="{Binding Odometer}" Width="130" />
+                        <DataGridTextColumn Header="СУГ, л" Binding="{Binding CngVolume}" Width="100" />
+                        <DataGridTextColumn Header="Бензин, л" Binding="{Binding GasolineVolume}" Width="100" />
+                        <DataGridTextColumn Header="ДТ, л" Binding="{Binding DieselVolume}" Width="90" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <!-- === БОЛЬШАЯ ТАБЛИЦА === -->
+        <Border Grid.Row="2" Background="White" CornerRadius="12" Margin="0,0,0,20" >
+            <DataGrid x:Name="dataGridByRegion"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      RowHeight="35"
+                      Margin="10"
+                      ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                      BorderThickness="0"/>
+        </Border>
+
+        <!-- === КНОПКА === -->
+        <Button Grid.Row="3"
                 x:Name="onMainWindow"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
-                Style="{StaticResource ModernButtonStyle}"
+                Style="{StaticResource SimpleButtonStyle}"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Margin="10,0,0,0" Click="onMainWindow_Click" Height="45" Width="289"
-                />
+                Click="onMainWindow_Click"
+                Padding="30,12"/>
     </Grid>
 </Window>
