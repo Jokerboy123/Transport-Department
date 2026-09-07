@@ -8,56 +8,79 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Background="#F5F7FA">
+        Background="#F3F5F7">
 
     <Window.Resources>
-        <!-- Базовые цвета -->
         <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
         <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
         <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
-        <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
-        <SolidColorBrush x:Key="HeaderBgColor" Color="#F8F9FA"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#DDE1E6"/>
+        <SolidColorBrush x:Key="HeaderBgColor" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="InfoTextColor" Color="#6C757D"/>
+        <SolidColorBrush x:Key="CellTextColor" Color="#37474F"/>
+        <SolidColorBrush x:Key="SubHeaderColor" Color="#78868F"/>
 
-        <!-- Стиль заголовка -->
-        <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="TextAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="0,0,0,20"/>
-        </Style>
+        <DropShadowEffect x:Key="CardShadow"
+                          Color="#000000"
+                          Opacity="0.06"
+                          BlurRadius="20"
+                          ShadowDepth="2"
+                          Direction="270"/>
 
-        <!-- Стиль инфо-строк -->
-        <Style x:Key="InfoStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Foreground" Value="#555"/>
-            <Setter Property="Margin" Value="0,2"/>
-        </Style>
-
-        <!-- Стиль для заголовков колонок DataGrid (чтобы были жирными и темными) -->
-        <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="{StaticResource HeaderBgColor}"/>
+        <Style x:Key="PageHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="26"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,0,0,24"/>
+        </Style>
+
+        <Style x:Key="InfoLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="{StaticResource InfoTextColor}"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+        <Style x:Key="InfoValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+        </Style>
+
+        <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{StaticResource SubHeaderColor}"/>
+            <Setter Property="Padding" Value="8,10"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
             <Setter Property="BorderThickness" Value="0,0,1,0"/>
             <Setter Property="SeparatorVisibility" Value="Collapsed"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <!-- Стиль кнопки -->
-        <Style x:Key="SimpleButtonStyle" TargetType="Button">
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource AccentColor}"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="30,12"/>
+            <Setter Property="Padding" Value="32,14"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="5">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="4">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -69,125 +92,450 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="GroupSubHeaderStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{StaticResource SubHeaderColor}"/>
+            <Setter Property="Padding" Value="4,6"/>
+        </Style>
+
+        <Style x:Key="CellTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource CellTextColor}"/>
+        </Style>
     </Window.Resources>
 
-    <Grid Margin="20">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Шапка -->
-            <RowDefinition Height="Auto"/>
-            <!-- Маленькая таблица с остатками -->
             <RowDefinition Height="*"/>
-            <!-- Большая таблица -->
             <RowDefinition Height="Auto"/>
-            <!-- Кнопка -->
         </Grid.RowDefinitions>
 
         <!-- === ШАПКА === -->
-        <Border Grid.Row="0" Background="White" CornerRadius="12" Padding="25" Margin="0,0,0,20" >
-            <StackPanel>
-                <TextBlock Text="Карточка учета эксплуатации автомобиля" Style="{StaticResource HeaderStyle}"/>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Margin="0,0,25,0">
-                        <TextBlock Text="Гос. номер:" Style="{StaticResource InfoStyle}"/>
-                        <TextBlock Text="{Binding StateNumber, FallbackValue='—'}" FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,0,25,0">
-                        <TextBlock Text="Марка:" Style="{StaticResource InfoStyle}"/>
-                        <TextBlock Text="{Binding TransportBrand, FallbackValue='—'}" FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <TextBlock Text="Период:" Style="{StaticResource InfoStyle}"/>
-                        <TextBlock FontWeight="Bold" FontSize="18" Foreground="{StaticResource PrimaryColor}">
-                            <Run Text="{Binding Month, FallbackValue='—'}"/>
-                            <Run Text=" "/>
-                            <Run Text="{Binding Year, FallbackValue='—'}"/>
-                            <Run Text=" года"/>
-                        </TextBlock>
+        <Border Grid.Row="0" Background="White" CornerRadius="16" Padding="30" Margin="0,0,0,28"
+                Effect="{StaticResource CardShadow}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Карточка учёта эксплуатации автомобиля" Style="{StaticResource PageHeaderStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="0,0,32,0">
+                            <TextBlock Text="Гос. номер:" Style="{StaticResource InfoLabelStyle}"/>
+                            <TextBlock Text="{Binding StateNumber, FallbackValue='—'}" Style="{StaticResource InfoValueStyle}" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,0,32,0">
+                            <TextBlock Text="Марка:" Style="{StaticResource InfoLabelStyle}"/>
+                            <TextBlock Text="{Binding TransportBrand, FallbackValue='—'}" Style="{StaticResource InfoValueStyle}" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Период:" Style="{StaticResource InfoLabelStyle}"/>
+                            <TextBlock Style="{StaticResource InfoValueStyle}" FontSize="18">
+                                <Run Text="{Binding Month, FallbackValue='—'}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding Year, FallbackValue='—'}"/>
+                                <Run Text=" года"/>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </Border>
 
-        <!-- === МАЛЕНЬКАЯ ТАБЛИЦА (ОСТАТКИ + ДАННЫЕ) === -->
-        <!-- Теперь это единый блок: сверху строка "Остаток", снизу таблица, всё в одной карточке -->
-        <Border Grid.Row="1" Background="White" CornerRadius="12" Margin="0,0,0,20" >
+        <!-- === ТАБЛИЦА === -->
+        <Border Grid.Row="1" Background="White" CornerRadius="16" Margin="0,0,0,28"
+                Effect="{StaticResource CardShadow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Строка "Остаток" -->
                     <RowDefinition Height="*"/>
-                    <!-- Сама таблица -->
                 </Grid.RowDefinitions>
 
-                <!-- Декоративная строка "Остаток на начало" -->
-                <Border Grid.Row="0" 
-                        Background="#E8F4FF" 
-                        BorderBrush="#3498DB" 
-                        BorderThickness="0,0,0,1" 
-                        Padding="15,10" 
-                        CornerRadius="12,12,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="📊 Остаток на начало месяца:" 
-                                   FontWeight="Bold" 
-                                   FontSize="15" 
-                                   Foreground="#2C3E50" 
-                                   Margin="0,0,15,0"/>
-                        <!-- Сюда можно добавить привязки к данным, если нужно показать цифры -->
-                        <TextBlock Text="СУГ: — л | Бензин: — л | ДТ: — л" 
-                                   FontSize="14" 
-                                   Foreground="#555"/>
-                    </StackPanel>
+                <!-- Строка "Остаток на начало" -->
+                <Border Grid.Row="0" Background="#F8FAFF" BorderBrush="#E3F2FD" BorderThickness="0,0,0,1"
+                        Padding="24,14" CornerRadius="16,16,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Остаток на начало месяца:"
+                                   FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource PrimaryColor}"
+                                   Margin="0,0,20,0"/>
+                        <TextBlock Grid.Column="1" Text="СУГ: — л | Бензин: — л | ДТ: — л"
+                                   FontSize="14" Foreground="#6C757D" TextAlignment="Left"/>
+                    </Grid>
                 </Border>
 
-                <!-- Таблица данных -->
                 <DataGrid x:Name="dataGridByStateNumber"
-                          Grid.Row="1"
-                          AutoGenerateColumns="False"
-                          CanUserAddRows="False"
-                          IsReadOnly="True"
-                          HeadersVisibility="Column"
-                          GridLinesVisibility="Horizontal"
-                          RowHeight="35"
-                          Margin="10,0,10,10"
-                          ColumnWidth="SizeToCells"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                          BorderThickness="0">
+          Grid.Row="1"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          IsReadOnly="True"
+          HeadersVisibility="Column"
+          GridLinesVisibility="Horizontal"
+          HorizontalGridLinesBrush="{StaticResource BorderColor}"
+          VerticalGridLinesBrush="Transparent"
+          RowHeight="40"
+          Margin="16"
+          ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+          BorderThickness="0"
+          SnapsToDevicePixels="True"
+          ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Одометр, км" Binding="{Binding Odometer}" Width="130" />
-                        <DataGridTextColumn Header="СУГ, л" Binding="{Binding CngVolume}" Width="100" />
-                        <DataGridTextColumn Header="Бензин, л" Binding="{Binding GasolineVolume}" Width="100" />
-                        <DataGridTextColumn Header="ДТ, л" Binding="{Binding DieselVolume}" Width="90" />
+                        <!-- Число -->
+                        <DataGridTextColumn Header="Число" Binding="{Binding MonthDay}" Width="Auto"
+                            ElementStyle="{StaticResource CellTextStyle}"/>
+
+                        <!-- № путевого листа -->
+                        <DataGridTextColumn Header="№ путевого листа" Binding="{Binding WaybillNumber}" Width="Auto"
+                            ElementStyle="{StaticResource CellTextStyle}"/>
+
+                        <!-- Водитель №1 -->
+                        <DataGridTextColumn Header="Водитель №1" Binding="{Binding FirstDriver}" Width="Auto"
+                            ElementStyle="{StaticResource CellTextStyle}"/>
+
+                        <!-- Водитель №2 -->
+                        <DataGridTextColumn Header="Водитель №2" Binding="{Binding SeondDriver}" Width="Auto"
+                            ElementStyle="{StaticResource CellTextStyle}"/>
+
+                        <!-- ГРУППА 1: ВЫДАНО -->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Заголовок группы -->
+                                        <Border Grid.Row="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1"
+                                Background="#F8FAFF">
+                                            <TextBlock Text="Выдано" FontSize="14" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Padding="0,6"/>
+                                        </Border>
+
+                                        <!-- Подзаголовки: фиксированные одинаковые ширины -->
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="СУГ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Бензин, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                                <TextBlock Text="ДТ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding CngVolume, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding GasolineVolume, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                            <TextBlock Text="{Binding DieselVolume, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- ГРУППА 2: ПРОБЕГ, НОРМАТИВЫ -->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Row="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1"
+                                Background="#F8FAFF">
+                                            <TextBlock Text="Пробег, нормативы" FontSize="14" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Padding="0,6"/>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Пробег, км" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="СУГ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                                <TextBlock Text="Бензин, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding Mileage, StringFormat={}{0:F0}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding CngNorm, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                            <TextBlock Text="{Binding GasolineNorm, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- ГРУППА 3: РАСХОД -->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Row="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1"
+                                Background="#F8FAFF">
+                                            <TextBlock Text="Расход" FontSize="14" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Padding="0,6"/>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="СУГ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Бензин, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                                <TextBlock Text="ДТ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding CngConsumption, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding GasolineConsumption, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                            <TextBlock Text="{Binding DieselConsumption, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- ГРУППА 4: ВСПОМОГАТЕЛЬНОЕ ОБОРУДОВАНИЕ -->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Row="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1"
+                                Background="#F8FAFF">
+                                            <TextBlock Text="Вспом. оборудование" FontSize="14" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Padding="0,6"/>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Марка" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="СУГ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Бензин, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                                <TextBlock Text="ДТ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding EquipmentBrand, FallbackValue='—'}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding EquipmentCng, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding EquipmentGasoline, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                            <TextBlock Text="{Binding EquipmentDiesel, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- ГРУППА 5: ОСТАТОК НА КОНЕЦ ДНЯ -->
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Row="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1"
+                                                Background="#F8FAFF">
+                                            <TextBlock Text="Остаток на конец дня" FontSize="14" FontWeight="SemiBold"
+                                                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Padding="0,6"/>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="90"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Спидометр, км" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="СУГ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                                <TextBlock Text="Бензин, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                            <Border Grid.Column="3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                                <TextBlock Text="ДТ, л" Style="{StaticResource GroupSubHeaderStyle}" TextAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding OdometerEnd, StringFormat={}{0:F0}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="1" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding CngEnd, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,1,0">
+                                            <TextBlock Text="{Binding GasolineEnd, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                        <Border Grid.Column="3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,0">
+                                            <TextBlock Text="{Binding DieselEnd, StringFormat={}{0:F1}}" Style="{StaticResource CellTextStyle}" TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Border>
 
-        <!-- === БОЛЬШАЯ ТАБЛИЦА === -->
-        <Border Grid.Row="2" Background="White" CornerRadius="12" Margin="0,0,0,20" >
-            <DataGrid x:Name="dataGridByRegion"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      IsReadOnly="True"
-                      HeadersVisibility="Column"
-                      GridLinesVisibility="Horizontal"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      RowHeight="35"
-                      Margin="10"
-                      ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
-                      BorderThickness="0"/>
-        </Border>
-
         <!-- === КНОПКА === -->
-        <Button Grid.Row="3"
+        <Button Grid.Row="2"
                 x:Name="onMainWindow"
                 Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
-                Style="{StaticResource SimpleButtonStyle}"
+                Style="{StaticResource ActionButtonStyle}"
                 HorizontalAlignment="Left"
-                Click="onMainWindow_Click"
-                Padding="30,12"/>
+                Click="onMainWindow_Click"/>
     </Grid>
 </Window>
