@@ -11,7 +11,7 @@ namespace TransportDepartment
         // объявить поля класса
         // === НЕИЗМЕНЯЕМЫЕ ПОЛЯ  ОБОЗНАЧАЮТСЯ private set ===
         // === ИЗМЕНЯЕМЫЕ ПОЛЯ ОБОЗНАЧАЮТСЯ public set ===
-        public int dayOfMonth { get; set; }
+        public int dayOfMonth { get; set; } 
         public int waySheet { get; set; }
         public string firstDriver {  get; set; }
         public string secondDriver { get; set; }

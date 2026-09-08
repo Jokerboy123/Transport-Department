@@ -72,5 +72,12 @@ namespace TransportDepartment
             var newWindow = new MainWindow();
             newWindow.Show();
         }
+
+        private void btnAddData_Click(object sender, RoutedEventArgs e)
+        {
+           AddCarProperties addCar = new AddCarProperties();
+            var newWindow = new AddCarProperties();
+            newWindow.Show();
+        }
     }
 }

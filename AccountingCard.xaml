@@ -11,6 +11,9 @@
         Background="#F3F5F7">
 
     <Window.Resources>
+        <SolidColorBrush x:Key="ButtonBaseColor" Color="#3B8ED0"/>
+        <SolidColorBrush x:Key="ButtonHoverColor" Color="#2E7ACF"/>
+        <SolidColorBrush x:Key="ButtonPressedColor" Color="#256BB8"/>
         <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
         <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
         <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
@@ -69,28 +72,52 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonBaseColor}"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="32,14"/>
+            <Setter Property="Padding" Value="20,10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ButtonHoverColor}"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#000000"
+                                                          Opacity="0.4"
+                                                          BlurRadius="15"
+                                                          ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ButtonPressedColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#000000"
+                                                          Opacity="0.2"
+                                                          BlurRadius="10"
+                                                          ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource HoverColor}"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="GroupSubHeaderStyle" TargetType="TextBlock">
@@ -529,13 +556,42 @@
                 </DataGrid>
             </Grid>
         </Border>
+        <Grid Grid.Row="2">
+            <!-- 1. Сначала задаем строки -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Для кнопки возврата -->
+                <RowDefinition Height="Auto"/>
+                <!-- Для кнопки добавления -->
+            </Grid.RowDefinitions>
+
+            <!-- 2. Задаем колонки -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Кнопка "Вернуться" -->
+            <Button Grid.Row="0" 
+            Grid.Column="0" 
+            x:Name="onMainWindow"
+            Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
+            Style="{StaticResource ModernButtonStyle}"
+            HorizontalAlignment="Left"
+            Click="onMainWindow_Click"/>
+
+            <!-- Кнопка "Добавить запись" -->
+            <Button Grid.Row="0" 
+            Grid.Column="2" 
+            x:Name="btnAddData"
+            Content="Добавить запись"
+            Style="{StaticResource ModernButtonStyle}"
+           Grid.RowSpan="2" HorizontalAlignment="Left" Width="159" Margin="124,0,0,0" Click="btnAddData_Click" Height="39" VerticalAlignment="Top"/>
+            <!-- Исправлено имя метода -->
+        </Grid>
 
         <!-- === КНОПКА === -->
-        <Button Grid.Row="2"
-                x:Name="onMainWindow"
-                Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
-                Style="{StaticResource ActionButtonStyle}"
-                HorizontalAlignment="Left"
-                Click="onMainWindow_Click"/>
+
     </Grid>
 </Window>

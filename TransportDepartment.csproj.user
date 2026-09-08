@@ -16,6 +16,9 @@
     <Compile Update="AccountKirovskDistrict.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="AddCarProperties.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ParametersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
