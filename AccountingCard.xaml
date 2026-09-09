@@ -165,9 +165,9 @@
                         <StackPanel>
                             <TextBlock Text="Период:" Style="{StaticResource InfoLabelStyle}"/>
                             <TextBlock Style="{StaticResource InfoValueStyle}" FontSize="18">
-                                <Run Text="{Binding CurrentTransport.Month, FallbackValue='—'}"/>
+                                <Run Text="{Binding SelectedMonth, Source={x:Static local:Parameters.Instance}, FallbackValue='—'}"/>
                                 <Run Text=" "/>
-                                <Run Text="{Binding CurrentTransport.Year, FallbackValue='—'}"/>
+                                <Run Text="{Binding SelectedYear, Source={x:Static local:Parameters.Instance}, FallbackValue='—'}"/>
                                 <Run Text=" года"/>
                             </TextBlock>
                         </StackPanel>

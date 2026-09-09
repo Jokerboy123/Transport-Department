@@ -25,8 +25,8 @@ namespace TransportDepartment
         {
             InitializeComponent();
             DataContext = this;
-            SelectedMonth = Parameters.SelectedMonth;
-            SelectedYear = Parameters.SelectedYear;
+            SelectedMonth = Parameters.Instance.SelectedMonth;
+            SelectedYear = Parameters.Instance.SelectedYear;
         }
 
         public bool IsConfirmed { get; private set; }
@@ -73,8 +73,8 @@ namespace TransportDepartment
         {
             if(SelectedMonth != null)
             {
-                Parameters.SelectedMonth = SelectedMonth;
-                Parameters.SelectedYear = SelectedYear;
+                Parameters.Instance.SelectedMonth = SelectedMonth;
+                Parameters.Instance.SelectedYear = SelectedYear;
 
             }
             this.Close();
@@ -83,11 +83,6 @@ namespace TransportDepartment
 
         }
 
-        private void onMainWindow_Click222(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(Parameters.SelectedYear);
-            MessageBox.Show(Parameters.SelectedMonth);
-
-        }
+    
     }
 }
