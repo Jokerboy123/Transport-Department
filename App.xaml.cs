@@ -14,9 +14,11 @@ namespace TransportDepartment
         {
             base.OnStartup(e);
 
-            DataBaseInitializer.InitializeDataBase();
+            // ЭТА СТРОКА СОЗДАЕТ БАЗУ И ТАБЛИЦЫ, ЕСЛИ ИХ НЕТ
+            DataBaseInitializer.EnsureDatabaseStructure();
+        
 
-            var mainWindow = new MainWindow();
+        var mainWindow = new MainWindow();
             mainWindow.DataContext = this;
             
         }

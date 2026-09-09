@@ -1,88 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
+using System.Windows;
 
 namespace TransportDepartment
 {
     public class AccountingCardProperties : INotifyPropertyChanged
     {
-        // объявить поля класса
-        // === НЕИЗМЕНЯЕМЫЕ ПОЛЯ  ОБОЗНАЧАЮТСЯ private set ===
-        // === ИЗМЕНЯЕМЫЕ ПОЛЯ ОБОЗНАЧАЮТСЯ public set ===
-        public int dayOfMonth { get; set; } 
-        public int waySheet { get; set; }
-        public string firstDriver {  get; set; }
-        public string secondDriver { get; set; }
-        public double getGas {  get; set; }
-        public double getPetrol { get; set; }
-        public double getDiesel {  get; set; }
-        public double monthBeginningOdometerValue {  get; set; }
-        public double gasConsumptionStandard {  get; set; }
-        public double petrolConsumptionStandard { get; set; }
-        public double dieselConsumptionStandard { get; set; }
+        // Обязательные поля (NOT NULL)
+        public int? DayNumber { get; set; }           // Число месяца
+        public int? WaySheet { get; set; }            // № путевого листа
+        public string FirstDriver { get; set; }     // Водитель №1
 
+        // Опциональные поля
+        public string SecondDriver { get; set; }    // Водитель №2
 
-        // Поля для шапки
-        private string _month { get; set; }
-        private int _year { get; set; }
+        // Выдано (литры)
+        public double? GetGas { get; set; }
+        public double? GetPetrol { get; set; }
+        public double? GetDiesel { get; set; }
 
-        public string Month
+        // Нормы расхода (копируем из карточки авто при создании)
+        public double? GasConsumptionStandard { get; set; }
+        public double? PetrolConsumptionStandard { get; set; }
+        public double? DieselConsumptionStandard { get; set; }
+
+        // Расход (фактический)
+        public double? UsedGasValue { get; set; }
+        public double? UsedPetrolValue { get; set; }
+        public double? UsedDieselValue { get; set; }
+
+        // Вспомогательное оборудование
+        public string AdditionalToolBrand { get; set; }
+        public double? AdditionalGasValue { get; set; }
+        public double? AdditionalPetrolValue { get; set; }
+        public double? AdditionalDieselValue { get; set; }
+
+        // Пробег и остатки на конец дня
+        public int? RemaindDayKilometrageValue { get; set; } // Спидометр (км)
+        public double? RemaindDayGasValue { get; set; }
+        public double? RemaindDayPetrolValue { get; set; }
+        public double? RemaindDayDieselValue { get; set; }
+
+        // Связь с машиной (ОБЯЗАТЕЛЬНО для выборки данных)
+        public string TransportStateNumber { get; set; }
+        private bool _hasValidationError;
+        public bool HasValidationError
         {
-            get => _month;
-            set {  _month = value; }
+            get => _hasValidationError;
+            set
+            {
+                if (_hasValidationError = value)
+                    return;
+                _hasValidationError = value;
+                OnPropertyChanged();
+            }
         }
 
-        public int Year
+        public bool Validate()
         {
-            get => _year;
-            set { _year = value; }
+           bool IsDayNumberEmpty = !DayNumber.HasValue || DayNumber <= 0 || DayNumber > 31;
+            bool IsFirstDriverEmpty = string.IsNullOrWhiteSpace(FirstDriver);
+
+            bool  HasValidationError = IsDayNumberEmpty || IsFirstDriverEmpty;
+
+            // Временная отладка — покажет, что именно не заполнено
+            if (HasValidationError)
+            {
+                var errors = new List<string>();
+                if (IsDayNumberEmpty) errors.Add("DayNumber пустой или невалидный");
+                if (IsFirstDriverEmpty) errors.Add("FirstDriver пустой");
+
+                MessageBox.Show(string.Join("\n", errors), "Отладка валидации");
+            }
+
+            return !HasValidationError;
         }
 
 
-
-
-        /*
-CREATE TABLE IF NOT EXISTS AccountingCard (
-                        DayOfMonth INT NOT NULL,
-                        WaySheet INT NOT NULL,
-                        FirstDriver TEXT NOT NULL,
-                        SecondDriver TEXT,
-                        GetGas REAL, 
-                        GetPetrol REAL,
-                        GetDiesel REAL,
-                        MonthBeginningOdometerValue REAL,
-                        GasConsumptionStandard REAL NOT NULL,
-                        PetrolConsumptionStandard REAL NOT NULL,
-                        UsedGasValue REAL,
-                        UsedPetrolValue REAL,
-                        UsedDieselValue REAL,
-                        AdditionalToolBrand TEXT,
-                        AdditionalGasValue REAL,
-                        AdditionalPetrolValue REAL,
-                        AdditionalDieselValue REAL,
-                        RemaindDayKilometrageValue INT,
-                        RemaindDayGasValue REAL,
-                        RemaindDayPetrolValue REAL,
-                        RemaindDayDieselValue REAL
-);";
-        пример: 
-          private string _additions { get; set; } // Вспомогательное оборудование
-
-        public string ID
-        {
-            get => _stateNumber;
-            set { _stateNumber = value; OnPropertyChanged(); }
-        }
-
-        */
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChanged([CallerMemberName] string prop = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
-    

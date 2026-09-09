@@ -1,82 +1,33 @@
-﻿using System.Data.SQLite;
-//using SQLitePCL;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static TransportDepartment.DataBaseInitializer;
+﻿using System.Windows;
 
 namespace TransportDepartment
 {
-    /// <summary>
-    /// Логика взаимодействия для AccountingCard.xaml
-    /// </summary>
     public partial class AccountingCard : Window
     {
-        private readonly TransportProperties _transport; //
-
-
-      //  private ObservableCollection<TransportProperties> _transportList = new ObservableCollection<TransportProperties>();
+        private readonly AccountingCardViewModel _viewModel;
 
         public AccountingCard(TransportProperties transport)
         {
             InitializeComponent();
 
-            _transport = transport;
-            this.DataContext =  _transport;
+            // Создаем ViewModel -> она сама загрузит данные из БД
+            _viewModel = new AccountingCardViewModel(transport);
 
-            // 2. Загружаем данные из БД
+            // Привязываем всё окно к ViewModel
+            this.DataContext = _viewModel;
         }
 
-        // Обработчик события Loaded
-        private void AccountingCard_Loaded(object sender, RoutedEventArgs e)
+        private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
-       //     WinApiHelper.HideCloseButton(this);
-
-            // Пример выборки по номеру из БД, используя уже переданный номер:
-            string stateNumber = _transport.StateNumber;
-
-            //  string  
-
-            // Тут делаешь запрос к БД, используя stateNumber
-            var datagridStateNumber = DataBaseInitializer.GetTransportBrandByStateNumber(stateNumber);
-            var d = DataBaseInitializer.GetTransportsByRegion(stateNumber);
-
-            var Month = Parameters.SelectedMonth;
-            var Year = Parameters.SelectedYear;
-
-            _transport.Month = Month;
-
-            if (int.TryParse(Year, out int yearInt))
-                _transport.Year = yearInt;
-
-
-          
-
+            // Передаем ViewModel в окно добавления, чтобы оно могло сохранить данные
+            var addWindow = new AddCarProperties(_viewModel);
+            addWindow.ShowDialog();
         }
-
 
         private void onMainWindow_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             var newWindow = new MainWindow();
-            newWindow.Show();
-        }
-
-        private void btnAddData_Click(object sender, RoutedEventArgs e)
-        {
-           AddCarProperties addCar = new AddCarProperties();
-            var newWindow = new AddCarProperties();
             newWindow.Show();
         }
     }

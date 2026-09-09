@@ -20,7 +20,7 @@ namespace TransportDepartment
         private void AccountKirovskDistrict_Loaded(object sender, RoutedEventArgs e)
         {
             // 1. Инициализируем структуру БД (создаем таблицы, если нет)
-            DataBaseInitializer.InitializeDataBase();
+            DataBaseInitializer.EnsureDatabaseStructure();
 
             // 2. Получаем данные для Кировского района
             string targetRegion = "Кировский район";
@@ -28,11 +28,15 @@ namespace TransportDepartment
             try
             {
                 // ВАЖНО: Этот метод должен возвращать List<TransportItem> (см. пояснение ниже)
-                var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
+              //  var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
 
 
                 // 3. Динамически создаем кнопки и добавляем их в WrapPanel из XAML
                 TransportButtonsPanel.Children.Clear(); // Очищаем на случай повторного открытия
+
+                var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
+
+                TransportButtonsPanel.Children.Clear();
 
                 foreach (var item in transports)
                 {
