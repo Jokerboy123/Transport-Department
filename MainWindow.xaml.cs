@@ -49,6 +49,8 @@ namespace TransportDepartment
         }
         private void GeoDistrictAccountPage_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Поля Вспомогательного оборудования не сохраняются в БД - Исправить!!!! (не бойся, это твой собственный комментарий)");
+
             this.Hide();
             var newWindow = new AccountGeorgievskDistrict();
             newWindow.Show();
