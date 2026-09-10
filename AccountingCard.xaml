@@ -207,8 +207,15 @@
                         <TextBlock Grid.Column="0" Text="Остаток на начало месяца:"
                                    FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource PrimaryColor}"
                                    Margin="0,0,20,0"/>
-                        <TextBlock Grid.Column="1" Text="СУГ: — л | Бензин: — л | ДТ: — л"
-                                   FontSize="14" Foreground="#6C757D" TextAlignment="Left"/>
+                        <TextBlock Grid.Column="1" FontSize="14" Foreground="#6C757D" TextAlignment="Left">
+                                <Run Text="СУГ: " />
+                                <Run Text="{Binding MonthGasRemaind}" />
+                                <Run Text=" л | Бензин: " />
+                                <Run Text="{Binding MonthPetrolRemaind}" />
+                                <Run Text=" л | ДТ: " />
+                                <Run Text="{Binding MonthDieselRemaind}" />
+                                <Run Text=" л" />
+                        </TextBlock>
                     </Grid>
                 </Border>
 
