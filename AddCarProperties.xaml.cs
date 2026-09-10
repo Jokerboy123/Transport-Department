@@ -1,45 +1,62 @@
 ﻿using System.Windows;
+using TransportDepartment;
 
-namespace TransportDepartment
+namespace TransportDepartment  // <-- должно совпадать с namespace в .xaml
 {
-    public partial class AddCarProperties : Window
+    public partial class AddCarProperties : Window  // <-- обязательно partial
     {
         private readonly AccountingCardViewModel _viewModel;
+        private readonly TransportProperties _transport;
 
-        // Конструктор принимает ViewModel для сохранения данных
-        public AddCarProperties(AccountingCardViewModel viewModel)
+        public AddCarProperties(AccountingCardViewModel viewModel, TransportProperties transport)
         {
-            InitializeComponent();
+            InitializeComponent();  // теперь этот метод будет найден
             _viewModel = viewModel;
+            _transport = transport;
 
-            // Создаем пустой объект для формы
-            this.DataContext = new AccountingCardProperties();
+            this.DataContext = new AddCarPropertiesViewModel(_transport);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var newRecord = this.DataContext as AccountingCardProperties;
-
-            if (newRecord == null)
+            var viewModel = this.DataContext as AddCarPropertiesViewModel;
+            if (viewModel == null)
             {
                 MessageBox.Show("Не удалось получить данные формы.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // ВАЛИДАЦИЯ
+            var newRecord = new AccountingCardProperties
+            {
+                DayNumber = viewModel.DayNumber,
+                WaySheet = viewModel.WaySheet,
+                FirstDriver = viewModel.FirstDriver,
+                SecondDriver = viewModel.SecondDriver,
+                GetGas = viewModel.GetGas,
+                GetPetrol = viewModel.GetPetrol,
+                GetDiesel = viewModel.GetDiesel,
+                RemaindDayKilometrageValue = viewModel.RemaindDayKilometrageValue,
+                GasConsumptionStandard = viewModel.GasConsumptionStandard,
+                PetrolConsumptionStandard = viewModel.PetrolConsumptionStandard,
+                UsedGasValue = viewModel.UsedGasValue,
+                UsedPetrolValue = viewModel.UsedPetrolValue,
+                UsedDieselValue = viewModel.UsedDieselValue,
+                AdditionalToolBrand = viewModel.AdditionalToolBrand,
+                AdditionalGasValue = viewModel.AdditionalGasValue,
+                AdditionalPetrolValue = viewModel.AdditionalPetrolValue,
+                AdditionalDieselValue = viewModel.AdditionalDieselValue,
+                ExpectedGasVolume = viewModel.ExpectedGasVolume,
+                ExpectedPetrolVolume = viewModel.ExpectedPetrolVolume
+            };
+
             if (!newRecord.Validate())
             {
-                MessageBox.Show("Валидация не пройдена!");
-                return; // AddNewRecord не вызывается, ничего не сохраняется
+                MessageBox.Show("Валидация не пройдена!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
-
-            // Сохраняем и добавляем в таблицу главного окна
             _viewModel.AddNewRecord(newRecord);
-
             this.Close();
         }
-
     }
-
 }

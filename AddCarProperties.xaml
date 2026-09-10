@@ -218,13 +218,14 @@
             </Grid>
 
             <!-- Пробег, нормативы -->
+            <!-- Пробег, нормативы -->
             <Grid Grid.Row="5" Margin="0,0,0,8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HorizontalAlignment="Center" Content="Пробег, нормативы" 
-                       Style="{StaticResource AddItem}" Margin="0,0,0,-5"/>
+           Style="{StaticResource AddItem}" Margin="0,0,0,-5"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -233,12 +234,18 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=PropertyChanged}"
-                             Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="2" Text="{Binding GasConsumptionStandard, UpdateSourceTrigger=PropertyChanged}"
-                             Tag="Норма СУГ" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="4" Text="{Binding PetrolConsumptionStandard, UpdateSourceTrigger=PropertyChanged}"
-                             Tag="Норма бензин" Style="{StaticResource ModernTextBoxStyle}"/>
+                    <TextBox Grid.Column="0" 
+                 Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=PropertyChanged}"
+                 Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}"/>
+                    <!-- ИСПРАВЛЕНИЕ: OneWay, чтобы нельзя было менять норму из UI -->
+                    <TextBox Grid.Column="2" 
+                 Text="{Binding GasConsumptionStandard, Mode=OneWay}"
+                 Tag="Норма СУГ" Style="{StaticResource ModernTextBoxStyle}"
+                 IsReadOnly="True"/>
+                    <TextBox Grid.Column="4" 
+                 Text="{Binding PetrolConsumptionStandard, Mode=OneWay}"
+                 Tag="Норма бензин" Style="{StaticResource ModernTextBoxStyle}"
+                 IsReadOnly="True"/>
                 </Grid>
             </Grid>
 

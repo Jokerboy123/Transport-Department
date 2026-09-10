@@ -6,22 +6,21 @@ namespace TransportDepartment
     public partial class AccountingCard : Window
     {
         private readonly AccountingCardViewModel _viewModel;
+        private readonly TransportProperties _transport; // <-- сохраняем транспорт
 
         public AccountingCard(TransportProperties transport)
         {
             InitializeComponent();
 
-            // Создаем ViewModel -> она сама загрузит данные из БД
+            _transport = transport; // <-- запоминаем
             _viewModel = new AccountingCardViewModel(transport);
-
-            // Привязываем всё окно к ViewModel
             this.DataContext = _viewModel;
         }
 
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {
-            // Передаем ViewModel в окно добавления, чтобы оно могло сохранить данные
-            var addWindow = new AddCarProperties(_viewModel);
+            // <-- передаём и ViewModel, и TransportProperties
+            var addWindow = new AddCarProperties(_viewModel, _transport);
             addWindow.ShowDialog();
         }
 
@@ -35,9 +34,8 @@ namespace TransportDepartment
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("выводить на печать нужно страницу полностью и полностью печатать таблицу");
-            PrintDialog pd = new PrintDialog();
+            var pd = new PrintDialog();
             pd.PrintTicket.PageOrientation = System.Printing.PageOrientation.Landscape;
-
             pd.PrintVisual(this, "");
         }
     }

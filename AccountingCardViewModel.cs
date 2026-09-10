@@ -62,9 +62,8 @@ namespace TransportDepartment
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string prop = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+        protected void OnPropertyChanged([CallerMemberName] string name = null) =>
+     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
     }
 }

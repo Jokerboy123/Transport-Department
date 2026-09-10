@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace TransportDepartment
 {
@@ -40,9 +41,9 @@ namespace TransportDepartment
 
         // --- Пробег (вводит пользователь) ---
 
-        private double _remaindDayKilometrageValue;
+        private int? _remaindDayKilometrageValue;
 
-        public double RemaindDayKilometrageValue
+        public int? RemaindDayKilometrageValue
         {
             get => _remaindDayKilometrageValue;
             set
@@ -89,8 +90,11 @@ namespace TransportDepartment
 
         private void RecalculateDerivedValues()
         {
-            ExpectedGasVolume = _remaindDayKilometrageValue * _transport.GasConsumptionStandard / 100.0;
-            ExpectedPetrolVolume = _remaindDayKilometrageValue * _transport.PetrolConsumptionStandard / 100.0;
+            ExpectedGasVolume = (double)(_remaindDayKilometrageValue * _transport.GasConsumptionStandard / 100.0);
+            ExpectedPetrolVolume = (double)(_remaindDayKilometrageValue * _transport.PetrolConsumptionStandard / 100.0);
+            MessageBox.Show(ExpectedGasVolume.ToString());
+            MessageBox.Show(ExpectedPetrolVolume.ToString());
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

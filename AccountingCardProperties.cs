@@ -57,6 +57,9 @@ namespace TransportDepartment
             }
         }
 
+        public double ExpectedPetrolVolume { get; internal set; }
+        public double ExpectedGasVolume { get; internal set; }
+
         public bool Validate()
         {
            bool IsDayNumberEmpty = !DayNumber.HasValue || DayNumber <= 0 || DayNumber > 31;
