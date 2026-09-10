@@ -22,4 +22,9 @@
 		
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Reference Include="ReachFramework" />
+	</ItemGroup>
+
 </Project>

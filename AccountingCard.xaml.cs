@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TransportDepartment
 {
@@ -29,6 +30,15 @@ namespace TransportDepartment
             this.Hide();
             var newWindow = new MainWindow();
             newWindow.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("выводить на печать нужно страницу полностью и полностью печатать таблицу");
+            PrintDialog pd = new PrintDialog();
+            pd.PrintTicket.PageOrientation = System.Printing.PageOrientation.Landscape;
+
+            pd.PrintVisual(this, "");
         }
     }
 }

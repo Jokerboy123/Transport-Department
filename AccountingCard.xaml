@@ -152,7 +152,18 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="Карточка учёта эксплуатации автомобиля" Style="{StaticResource PageHeaderStyle}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="806*"/>
+                            <ColumnDefinition Width="187*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Карточка учёта эксплуатации автомобиля" Style="{StaticResource PageHeaderStyle}" Margin="0,0,0,24"/>
+                        <Button Content="Печать" Style="{StaticResource ModernButtonStyle}" Margin="1612,0,0,0" Grid.ColumnSpan="2" Click="Button_Click"/>
+                    </Grid>
+
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Margin="0,0,32,0">
                             <TextBlock Text="Гос. номер:" Style="{StaticResource InfoLabelStyle}"/>
