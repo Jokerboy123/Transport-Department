@@ -205,6 +205,10 @@ namespace TransportDepartment
             int idxUsedGasValue = reader.GetOrdinal("UsedGasValue");
             int idxUsedPetrolValue = reader.GetOrdinal("UsedPetrolValue");
             int idxUsedDieselValue = reader.GetOrdinal("UsedDieselValue");
+            int idxAdditionalToolBrand = reader.GetOrdinal("AdditionalToolBrand");
+            int idxAdditionalGasValue = reader.GetOrdinal("AdditionalGasValue");
+            int idxAdditionalPetrolValue = reader.GetOrdinal("AdditionalPetrolValue");
+            int idxAdditionalDieselValue = reader.GetOrdinal("AdditionalDieselValue");
             int idxRemaindDayKilometrageValue = reader.GetOrdinal("RemaindDayKilometrageValue");
             int idxRemaindDayGasValue = reader.GetOrdinal("RemaindDayGasValue");
             int idxRemaindDayPetrolValue = reader.GetOrdinal("RemaindDayPetrolValue");
@@ -222,7 +226,8 @@ namespace TransportDepartment
                 string firstDriver = reader.IsDBNull(idxFirstDriver) ? null : reader.GetString(idxFirstDriver);
                 string secondDriver = reader.IsDBNull(idxSecondDriver) ? null : reader.GetString(idxSecondDriver);
                 string transportStateNumber = reader.IsDBNull(idxTransportStateNumber) ? null : reader.GetString(idxTransportStateNumber);
-
+                string additionalToolBrand = reader.IsDBNull(idxAdditionalToolBrand) ? null : reader.GetString(idxAdditionalToolBrand);
+                
                 // Безопасное чтение REAL/DOUBLE (возвращаем 0.0, если NULL)
                 double getGas = reader.IsDBNull(idxGetGas) ? 0.0 : reader.GetDouble(idxGetGas);
                 double getPetrol = reader.IsDBNull(idxGetPetrol) ? 0.0 : reader.GetDouble(idxGetPetrol);
@@ -235,6 +240,12 @@ namespace TransportDepartment
                 double usedGasValue = reader.IsDBNull(idxUsedGasValue) ? 0.0 : reader.GetDouble(idxUsedGasValue);
                 double usedPetrolValue = reader.IsDBNull(idxUsedPetrolValue) ? 0.0 : reader.GetDouble(idxUsedPetrolValue);
                 double usedDieselValue = reader.IsDBNull(idxUsedDieselValue) ? 0.0 : reader.GetDouble(idxUsedDieselValue);
+
+                double additionalGasValue = reader.IsDBNull(idxAdditionalGasValue) ? 0.0 : reader.GetDouble(idxAdditionalGasValue);
+                double additionalPetrolValue = reader.IsDBNull(idxAdditionalPetrolValue) ? 0.0 : reader.GetDouble(idxAdditionalPetrolValue);
+                double additionalDieselValue = reader.IsDBNull(idxAdditionalDieselValue) ? 0.0 : reader.GetDouble(idxAdditionalDieselValue);
+
+
 
                 double remaindDayGasValue = reader.IsDBNull(idxRemaindDayGasValue) ? 0.0 : reader.GetDouble(idxRemaindDayGasValue);
                 double remaindDayPetrolValue = reader.IsDBNull(idxRemaindDayPetrolValue) ? 0.0 : reader.GetDouble(idxRemaindDayPetrolValue);
@@ -255,6 +266,10 @@ namespace TransportDepartment
                     UsedGasValue = usedGasValue,
                     UsedPetrolValue = usedPetrolValue,
                     UsedDieselValue = usedDieselValue,
+                    AdditionalDieselValue = additionalDieselValue,
+                    AdditionalGasValue = additionalGasValue,
+                    AdditionalPetrolValue = additionalPetrolValue,
+                    AdditionalToolBrand = additionalToolBrand,
                     RemaindDayKilometrageValue = remaindDayKilometrageValue,
                     RemaindDayGasValue = remaindDayGasValue,
                     RemaindDayPetrolValue = remaindDayPetrolValue,
