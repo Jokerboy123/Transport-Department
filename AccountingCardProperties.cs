@@ -57,8 +57,8 @@ namespace TransportDepartment
             }
         }
 
-        public double ExpectedPetrolValue { get; internal set; }
-        public double ExpectedGasValue { get; internal set; }
+        public decimal? ExpectedPetrolValue { get; internal set; }
+        public decimal? ExpectedGasValue { get; internal set; }
 
         public bool Validate()
         {
@@ -68,14 +68,14 @@ namespace TransportDepartment
             bool  HasValidationError = IsDayNumberEmpty || IsFirstDriverEmpty;
 
             // Временная отладка — покажет, что именно не заполнено
-            if (HasValidationError)
-            {
-                var errors = new List<string>();
-                if (IsDayNumberEmpty) errors.Add("DayNumber пустой или невалидный");
-                if (IsFirstDriverEmpty) errors.Add("FirstDriver пустой");
+            //if (HasValidationError)
+            //{
+            //    var errors = new List<string>();
+            //    if (IsDayNumberEmpty) errors.Add("DayNumber пустой или невалидный");
+            //    if (IsFirstDriverEmpty) errors.Add("FirstDriver пустой");
 
-                MessageBox.Show(string.Join("\n", errors), "Отладка валидации");
-            }
+            //    MessageBox.Show(string.Join("\n", errors), "Отладка валидации");
+            //}
 
             return !HasValidationError;
         }

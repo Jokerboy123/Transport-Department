@@ -235,7 +235,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" 
-                 Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=PropertyChanged}"
+                 Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
                  Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}" Height="41" VerticalAlignment="Top" />
                     <!-- ИСПРАВЛЕНИЕ: OneWay, чтобы нельзя было менять норму из UI -->
                     <TextBox Grid.Column="2" 
