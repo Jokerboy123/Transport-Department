@@ -9,9 +9,12 @@ namespace TransportDepartment
     public class AccountingCardViewModel : INotifyPropertyChanged
     {
         private readonly TransportProperties _transport;
+        private readonly AccountingCardProperties _acp;
+
 
         // Данные для шапки (не меняются в таблице)
         public TransportProperties CurrentTransport => _transport;
+        public AccountingCardProperties AccountingCardProperties => _acp; // Временно для проверки. Потом убрать!!!!
 
         // Коллекция для DataGrid (таблица строк)
         public ObservableCollection<AccountingCardProperties> Records { get; set; }
@@ -19,15 +22,18 @@ namespace TransportDepartment
         public AccountingCardViewModel(TransportProperties transport)
         {
             _transport = transport;
+            _acp = new AccountingCardProperties();
+            _acp.RemaindMonthKilometrageValue = 10000; // Временно для проверки. Потом убрать!!!!
             Records = new ObservableCollection<AccountingCardProperties>();
             LoadData();
         }
+
 
         private void LoadData()
         {
             // Загружаем строки из БД, привязанные к этому авто
             var recordsFromDb = DataBaseInitializer.GetRecordsByCar(_transport.StateNumber);
-
+            
             foreach (var record in recordsFromDb)
             {
                 // Если в БД нет норм, подставляем из карточки авто

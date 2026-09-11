@@ -42,6 +42,13 @@ namespace TransportDepartment
         public double? RemaindDayPetrolValue { get; set; }
         public double? RemaindDayDieselValue { get; set; }
 
+        // Пробег и остатки на конец месяца
+        public int? RemaindMonthKilometrageValue { get; set; } // Спидометр (км)
+        public double? RemaindMonthGasValue { get; set; }
+        public double? RemaindMonthPetrolValue { get; set; }
+        public double? RemaindMonthDieselValue { get; set; }
+
+
         // Связь с машиной (ОБЯЗАТЕЛЬНО для выборки данных)
         public string TransportStateNumber { get; set; }
         private bool _hasValidationError;

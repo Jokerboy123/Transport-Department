@@ -233,6 +233,10 @@ namespace TransportDepartment
             int idxRemaindDayGasValue = reader.GetOrdinal("RemaindDayGasValue");
             int idxRemaindDayPetrolValue = reader.GetOrdinal("RemaindDayPetrolValue");
             int idxRemaindDayDieselValue = reader.GetOrdinal("RemaindDayDieselValue");
+            int idxRemaindMonthKilometrageValue = reader.GetOrdinal("RemaindMonthKilometrageValue");
+            int idxRemaindMonthGasValue = reader.GetOrdinal("RemaindMonthGasValue");
+            int idxRemaindMonthPetrolValue = reader.GetOrdinal("RemaindMonthPetrolValue");
+            int idxRemaindMonthDieselValue = reader.GetOrdinal("RemaindMonthDieselValue");
             int idxTransportStateNumber = reader.GetOrdinal("TransportStateNumber");
 
             while (reader.Read())
@@ -241,6 +245,7 @@ namespace TransportDepartment
                 int dayNumber = reader.IsDBNull(idxDayNumber) ? 0 : reader.GetInt32(idxDayNumber);
                 int waySheet = reader.IsDBNull(idxWaySheet) ? 0 : reader.GetInt32(idxWaySheet);
                 int remaindDayKilometrageValue = reader.IsDBNull(idxRemaindDayKilometrageValue) ? 0 : reader.GetInt32(idxRemaindDayKilometrageValue);
+                int remaindMonthKilometrageValue = reader.IsDBNull(idxRemaindDayKilometrageValue) ? 0 : reader.GetInt32(idxRemaindDayKilometrageValue);
 
                 // Безопасное чтение TEXT (возвращаем null, если NULL)
                 string firstDriver = reader.IsDBNull(idxFirstDriver) ? null : reader.GetString(idxFirstDriver);
@@ -271,6 +276,10 @@ namespace TransportDepartment
                 double remaindDayPetrolValue = reader.IsDBNull(idxRemaindDayPetrolValue) ? 0.0 : reader.GetDouble(idxRemaindDayPetrolValue);
                 double remaindDayDieselValue = reader.IsDBNull(idxRemaindDayDieselValue) ? 0.0 : reader.GetDouble(idxRemaindDayDieselValue);
 
+                double remaindMonthGasValue = reader.IsDBNull(idxRemaindMonthGasValue) ? 0.0 : reader.GetDouble(idxRemaindMonthGasValue);
+                double remaindMonthPetrolValue = reader.IsDBNull(idxRemaindMonthPetrolValue) ? 0.0 : reader.GetDouble(idxRemaindMonthPetrolValue);
+                double remaindMonthDieselValue = reader.IsDBNull(idxRemaindMonthDieselValue) ? 0.0 : reader.GetDouble(idxRemaindMonthDieselValue);
+
                 result.Add(new AccountingCardProperties
                 {
                     DayNumber = dayNumber,
@@ -294,6 +303,10 @@ namespace TransportDepartment
                     RemaindDayGasValue = remaindDayGasValue,
                     RemaindDayPetrolValue = remaindDayPetrolValue,
                     RemaindDayDieselValue = remaindDayDieselValue,
+                    RemaindMonthKilometrageValue = remaindMonthKilometrageValue,
+                    RemaindMonthGasValue = remaindMonthGasValue,
+                    RemaindMonthPetrolValue = remaindMonthPetrolValue,
+                    RemaindMonthDieselValue = remaindMonthDieselValue,
                     TransportStateNumber = transportStateNumber
                 });
             }
@@ -348,6 +361,10 @@ namespace TransportDepartment
             cmd.Parameters.AddWithValue("@RemaindDayGasValue", record.RemaindDayGasValue);
             cmd.Parameters.AddWithValue("@RemaindDayPetrolValue", record.RemaindDayPetrolValue);
             cmd.Parameters.AddWithValue("@RemaindDayDieselValue", record.RemaindDayDieselValue);
+            cmd.Parameters.AddWithValue("@RemaindMonthKilometrageValue", record.RemaindMonthKilometrageValue);
+            cmd.Parameters.AddWithValue("@RemaindMonthGasValue", record.RemaindMonthGasValue);
+            cmd.Parameters.AddWithValue("@RemaindMonthPetrolValue", record.RemaindMonthPetrolValue);
+            cmd.Parameters.AddWithValue("@RemaindMonthDieselValue", record.RemaindMonthDieselValue);
             cmd.Parameters.AddWithValue("@TransportStateNumber", record.TransportStateNumber ?? (object)DBNull.Value);
 
             cmd.ExecuteNonQuery();

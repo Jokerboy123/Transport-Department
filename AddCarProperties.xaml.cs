@@ -36,7 +36,8 @@ namespace TransportDepartment  // <-- должно совпадать с namespa
                 GetPetrol = viewModel.GetPetrol,
                 GetDiesel = viewModel.GetDiesel,
                 RemaindDayKilometrageValue = viewModel.RemaindDayKilometrageValue,
-                GasConsumptionStandard = viewModel.GasConsumptionStandard,
+             
+        GasConsumptionStandard = viewModel.GasConsumptionStandard,
                 PetrolConsumptionStandard = viewModel.PetrolConsumptionStandard,
                 UsedGasValue = viewModel.UsedGasValue,
                 UsedPetrolValue = viewModel.UsedPetrolValue,
