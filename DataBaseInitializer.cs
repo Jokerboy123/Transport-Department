@@ -130,6 +130,7 @@ namespace TransportDepartment
             using var connection = new SQLiteConnection(connStr);
             connection.Open();
 
+
             string SQL = @"SELECT TransportBrand, TransportStateNumber 
                    FROM TransportInformation 
                    WHERE Region = @region";
@@ -150,16 +151,19 @@ namespace TransportDepartment
             return result;
         }
 
-        public static string GetTransportBrandByStateNumber(string stateNumber)
+        public static TransportProperties GetTransportByStateNumber(string stateNumber)
         {
             string connStr = GetConnectionString();
-
             using var connection = new SQLiteConnection(connStr);
             connection.Open();
 
-            string SQL = @"SELECT TransportBrand 
-                    FROM TransportInformation 
-                    WHERE TransportStateNumber = @stateNumber";
+            string SQL = @"SELECT TransportBrand, TransportStateNumber, GasConsumptionStandard,
+                          PetrolConsumptionStandard, MonthBeginningOdometerValue, MonthEndingOdometerValue,
+                          MonthBeginningGasState, MonthBeginningPetrolState, MonthBeginningDieselState,
+                          MonthEndingGasState, MonthEndingPetrolState, MonthEndingDieselState,
+                          DriverFullName, Additions, Region
+                   FROM TransportInformation 
+                   WHERE TransportStateNumber = @stateNumber";
 
             using var cmd = new SQLiteCommand(SQL, connection);
             cmd.Parameters.AddWithValue("@stateNumber", stateNumber);
@@ -167,13 +171,29 @@ namespace TransportDepartment
             using var reader = cmd.ExecuteReader();
             if (reader.Read())
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("TransportBrand")))
-                    return reader.GetString(reader.GetOrdinal("TransportBrand"));
+                var transport = new TransportProperties
+                {
+                    TransportBrand = reader.GetString(reader.GetOrdinal("TransportBrand")),
+                    StateNumber = reader.GetString(reader.GetOrdinal("TransportStateNumber")),
+                    GasConsumptionStandard = reader.IsDBNull(reader.GetOrdinal("GasConsumptionStandard")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("GasConsumptionStandard")),
+                    PetrolConsumptionStandard = reader.IsDBNull(reader.GetOrdinal("PetrolConsumptionStandard")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("PetrolConsumptionStandard")),
+                    MonthBeginningOdometerValue = reader.IsDBNull(reader.GetOrdinal("MonthBeginningOdometerValue")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthBeginningOdometerValue")),
+                    MonthEndingOdometerValue = reader.IsDBNull(reader.GetOrdinal("MonthEndingOdometerValue")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthEndingOdometerValue")),
+                    MonthBeginningGasState = reader.IsDBNull(reader.GetOrdinal("MonthBeginningGasState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthBeginningGasState")),
+                    MonthBeginningPetrolState = reader.IsDBNull(reader.GetOrdinal("MonthBeginningPetrolState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthBeginningPetrolState")),
+                    MonthBeginningDieselState = reader.IsDBNull(reader.GetOrdinal("MonthBeginningDieselState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthBeginningDieselState")),
+                    MonthEndingGasState = reader.IsDBNull(reader.GetOrdinal("MonthEndingGasState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthEndingGasState")),
+                    MonthEndingPetrolState = reader.IsDBNull(reader.GetOrdinal("MonthEndingPetrolState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthEndingPetrolState")),
+                    MonthEndingDieselState = reader.IsDBNull(reader.GetOrdinal("MonthEndingDieselState")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("MonthEndingDieselState")),
+                    DriverFullName = reader.IsDBNull(reader.GetOrdinal("DriverFullName")) ? null : reader.GetString(reader.GetOrdinal("DriverFullName")),
+                    Additions = reader.IsDBNull(reader.GetOrdinal("Additions")) ? null : reader.GetString(reader.GetOrdinal("Additions")),
+                    Region = reader.IsDBNull(reader.GetOrdinal("Region")) ? null : reader.GetString(reader.GetOrdinal("Region"))
+                };
+                return transport;
             }
 
             return null;
         }
-
         // --- НОВЫЕ МЕТОДЫ ДЛЯ ЖУРНАЛА ---
 
         public static List<AccountingCardProperties> GetRecordsByCar(string stateNumber)

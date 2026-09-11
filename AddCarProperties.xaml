@@ -236,14 +236,14 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" 
                  Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=PropertyChanged}"
-                 Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}"/>
+                 Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}" Height="41" VerticalAlignment="Top" />
                     <!-- ИСПРАВЛЕНИЕ: OneWay, чтобы нельзя было менять норму из UI -->
                     <TextBox Grid.Column="2" 
-                 Text="{Binding GasConsumptionStandard, Mode=OneWay}"
+                 Text="{Binding ExpectedGasValue, Mode=OneWay}"
                  Tag="Норма СУГ" Style="{StaticResource ModernTextBoxStyle}"
                  IsReadOnly="True"/>
                     <TextBox Grid.Column="4" 
-                 Text="{Binding PetrolConsumptionStandard, Mode=OneWay}"
+                 Text="{Binding ExpectedPetrolValue, Mode=OneWay}"
                  Tag="Норма бензин" Style="{StaticResource ModernTextBoxStyle}"
                  IsReadOnly="True"/>
                 </Grid>

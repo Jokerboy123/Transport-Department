@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -10,7 +11,15 @@ namespace TransportDepartment
 
         public AddCarPropertiesViewModel(TransportProperties transport)
         {
-            _transport = transport;
+            if (transport == null)
+            {
+                throw new ArgumentNullException(nameof(transport), "Транспорт не может быть null");
+            }
+            _transport = DataBaseInitializer.GetTransportByStateNumber(transport.StateNumber);
+            MessageBox.Show($"Нормы из транспорта: Gas={_transport.GasConsumptionStandard}, Petrol={_transport.PetrolConsumptionStandard}");
+            MessageBox.Show($"Транспорт: {transport.TransportBrand} {transport.StateNumber}, " +
+                                            $"Норма СУГ: {transport.GasConsumptionStandard}, " +
+                                            $"Норма бензин: {transport.PetrolConsumptionStandard}");
         }
 
         // --- Поля формы ---
@@ -59,30 +68,30 @@ namespace TransportDepartment
 
         // --- Расчётные поля ---
 
-        private double _expectedGasVolume;
-        private double _expectedPetrolVolume;
+        private double _expectedGasValue;
+        private double _expectedPetrolValue;
 
-        public double ExpectedGasVolume
+        public double ExpectedGasValue
         {
-            get => _expectedGasVolume;
+            get => _expectedGasValue;
             set
             {
-                if (_expectedGasVolume != value)
+                if (_expectedGasValue != value)
                 {
-                    _expectedGasVolume = value;
+                    _expectedGasValue = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public double ExpectedPetrolVolume
+        public double ExpectedPetrolValue
         {
-            get => _expectedPetrolVolume;
+            get => _expectedPetrolValue;
             set
             {
-                if (_expectedPetrolVolume != value)
+                if (_expectedPetrolValue != value)
                 {
-                    _expectedPetrolVolume = value;
+                    _expectedPetrolValue = value;
                     OnPropertyChanged();
                 }
             }
@@ -90,10 +99,16 @@ namespace TransportDepartment
 
         private void RecalculateDerivedValues()
         {
-            ExpectedGasVolume = (double)(_remaindDayKilometrageValue * _transport.GasConsumptionStandard / 100.0);
-            ExpectedPetrolVolume = (double)(_remaindDayKilometrageValue * _transport.PetrolConsumptionStandard / 100.0);
-            MessageBox.Show(ExpectedGasVolume.ToString());
-            MessageBox.Show(ExpectedPetrolVolume.ToString());
+            MessageBox.Show(_remaindDayKilometrageValue.ToString());
+            MessageBox.Show(_transport.GasConsumptionStandard.ToString());
+            MessageBox.Show(_transport.PetrolConsumptionStandard.ToString());
+
+            ExpectedGasValue = (double)(_remaindDayKilometrageValue * _transport.GasConsumptionStandard / 100.0); 
+            ExpectedPetrolValue = (double)(_remaindDayKilometrageValue * _transport.PetrolConsumptionStandard / 100.0);
+     
+            // проверка корректна
+            // MessageBox.Show(ExpectedGasValue.ToString());
+            // MessageBox.Show(ExpectedPetrolValue.ToString());
 
         }
 

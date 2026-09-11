@@ -45,8 +45,8 @@ namespace TransportDepartment  // <-- должно совпадать с namespa
                 AdditionalGasValue = viewModel.AdditionalGasValue,
                 AdditionalPetrolValue = viewModel.AdditionalPetrolValue,
                 AdditionalDieselValue = viewModel.AdditionalDieselValue,
-                ExpectedGasVolume = viewModel.ExpectedGasVolume,
-                ExpectedPetrolVolume = viewModel.ExpectedPetrolVolume
+                ExpectedGasValue = viewModel.ExpectedGasValue,
+                ExpectedPetrolValue = viewModel.ExpectedPetrolValue
             };
 
             if (!newRecord.Validate())
@@ -58,5 +58,7 @@ namespace TransportDepartment  // <-- должно совпадать с namespa
             _viewModel.AddNewRecord(newRecord);
             this.Close();
         }
+
+       
     }
 }

@@ -57,8 +57,8 @@ namespace TransportDepartment
             }
         }
 
-        public double ExpectedPetrolVolume { get; internal set; }
-        public double ExpectedGasVolume { get; internal set; }
+        public double ExpectedPetrolValue { get; internal set; }
+        public double ExpectedGasValue { get; internal set; }
 
         public bool Validate()
         {

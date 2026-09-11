@@ -8,14 +8,20 @@ namespace TransportDepartment
         private readonly AccountingCardViewModel _viewModel;
         private readonly TransportProperties _transport; // <-- сохраняем транспорт
 
-        public AccountingCard(TransportProperties transport)
+       
+          public AccountingCard(TransportProperties transport)
         {
             InitializeComponent();
-
-            _transport = transport; // <-- запоминаем
-            _viewModel = new AccountingCardViewModel(transport);
+            _transport = DataBaseInitializer.GetTransportByStateNumber(transport.StateNumber);
+            _viewModel = new AccountingCardViewModel(_transport);
             this.DataContext = _viewModel;
+            //// проверка верна
+            //    MessageBox.Show($"Транспорт: {_transport.TransportBrand} {_transport.StateNumber}, " +
+            //                                  $"Норма СУГ: {_transport.GasConsumptionStandard}, " +
+            //                                  $"Норма бензин: {_transport.PetrolConsumptionStandard}");
         }
+
+        
 
         private void btnAddData_Click(object sender, RoutedEventArgs e)
         {

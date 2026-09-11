@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace TransportDepartment
 {
@@ -52,7 +53,11 @@ namespace TransportDepartment
         public double GasConsumptionStandard
         {
             get => _gasConsumptionStandard;
-            set { _gasConsumptionStandard = value; OnPropertyChanged(); }
+            set
+            {
+                _gasConsumptionStandard = value;
+                OnPropertyChanged();
+            }
         }
 
         public double PetrolConsumptionStandard
