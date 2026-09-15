@@ -1,0 +1,142 @@
+﻿<Window x:Class="TransportDepartmentMVVM.Views.MainWindow"
+        
+        x:Name="InitialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TransportDepartmentMVVM"
+        xmlns:vm="clr-namespace:TransportDepartmentMVVM.ViewModels"
+     
+        mc:Ignorable="d"
+        Height="550" 
+        Width="650"
+        Background="White"
+        WindowStartupLocation="CenterScreen"
+        Title="Учет ГСМ">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext> 
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>
+        <SolidColorBrush x:Key="CloseColor" Color="Red"/>
+        <SolidColorBrush x:Key="ParamsColor" Color="#48bf1d"/>
+        <SolidColorBrush x:Key="TextColor" Color="#333333"/>
+        <SolidColorBrush x:Key="HoverColor" Color="#2980B9"/>
+        <SolidColorBrush x:Key="HoverCloseColor" Color="OrangeRed"/>
+        <SolidColorBrush x:Key="HoverParamsColors" Color="#FF29A05B"/>
+
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverColor}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ModernButtonStyleRed" TargetType="Button" BasedOn="{StaticResource ModernButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource CloseColor}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverCloseColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ModernButtonStyleGreen" TargetType="Button" BasedOn="{StaticResource ModernButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource ParamsColor}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HoverParamsColors}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Учет ГСМ ГУП СК «КРАЙТЕПЛОЭНЕРГО»"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource PrimaryColor}"
+                   TextAlignment="Center"
+                   Margin="0,0,0,30"
+                   TextWrapping="Wrap"/>
+
+        <TextBlock Grid.Row="1" 
+                   Text="Выберите район для работы" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   Foreground="{StaticResource TextColor}" 
+                   Margin="0,0,0,30"
+                   HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="2" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Orientation="Vertical">
+
+            <Button Content="Георгиевск" 
+                    Command="{Binding OpenGeorgievskCommand}"
+                    CommandParameter ="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource ModernButtonStyle}" 
+                    Margin="0,0,0,15" 
+                    MinWidth="250"/>
+
+            <Button Content="Георгиевский район" 
+                    Command="{Binding OpenGeorgievskDistrictCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource ModernButtonStyle}" 
+                    Margin="0,0,0,15"
+                    MinWidth="250"/>
+
+            <Button Content="Кировский район" 
+                    Command="{Binding OpenKirovskCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Margin="0,0,0,15"
+                    MinWidth="250"/>
+
+            <Button Content="Настройки программы"
+                    Command="{Binding OpenParametersCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Style="{StaticResource ModernButtonStyleGreen}"
+                    Margin="0,0,0,15"
+                    MinWidth="250"/>
+
+            <Button Content="Закрыть программу" 
+                    Command="{Binding CloseApplicationCommand}"
+                    Style="{StaticResource ModernButtonStyleRed}"
+                    MinWidth="250"/>
+        </StackPanel>
+    </Grid>
+</Window>
