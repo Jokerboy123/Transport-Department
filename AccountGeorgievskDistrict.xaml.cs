@@ -4,14 +4,18 @@ using System.Windows.Controls;
 using TransportDepartmentMVVM.Data;
 using TransportDepartmentMVVM.Models;
 using TransportDepartmentMVVM.Services;
+using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM
 {
     public partial class AccountGeorgievskDistrict : Window
     {
-        public AccountGeorgievskDistrict()
+        private readonly Window _mainWindow;
+
+        public AccountGeorgievskDistrict(Window mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
         }
 
         // Обработчик события Loaded

@@ -13,12 +13,21 @@ namespace TransportDepartmentMVVM
 {
     public partial class AccountKirovskDistrict : Window
     {
-        public AccountKirovskDistrict()
-        {
-            InitializeComponent();
-            // HideCloseButton вызываем здесь, так как Handle уже существует после InitializeComponent
-            HideCloseButton();
-        }
+        
+            private readonly Window _mainWindow;
+
+            public AccountKirovskDistrict(Window mainWindow)
+            {
+                InitializeComponent();
+                _mainWindow = mainWindow;
+
+                var vm = new AccountKirovskDistrictViewModel(); // подставь свой VM
+                DataContext = vm;
+
+                // Аналогично подпишись на события, если нужна навигация
+            }
+        
+
 
         private void AccountKirovskDistrict_Loaded(object sender, RoutedEventArgs e)
         {

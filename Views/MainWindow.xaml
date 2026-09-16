@@ -15,10 +15,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Учет ГСМ">
 
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext> 
-
+   
     <Window.Resources>
         <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
         <SolidColorBrush x:Key="AccentColor" Color="#3498DB"/>

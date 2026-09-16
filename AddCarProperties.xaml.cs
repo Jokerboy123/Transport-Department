@@ -8,7 +8,8 @@ namespace TransportDepartmentMVVM
         {
             InitializeComponent();
             DataContext = viewModel;
-            viewModel.CloseRequested += (s, e) => this.Close();
+            viewModel.OnCloseRequested += () => this.Close();
+
         }
     }
 }

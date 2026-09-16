@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         Title="AccountGeorgievsk"
         Height="450"
-        Loaded="AccountGeorgievsk_Loaded"
         Width="599"
         Background="#F5F7FA"
         WindowState="Maximized"

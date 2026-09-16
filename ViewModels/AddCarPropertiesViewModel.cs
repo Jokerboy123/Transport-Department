@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using TransportDepartmentMVVM.Models;
+using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM.ViewModels
 {
@@ -130,6 +131,8 @@ namespace TransportDepartmentMVVM.ViewModels
             set { _additionalDieselValue = value; OnPropertyChanged(); }
         }
 
+        public event Action OnCloseRequested;
+
         // --- Конструктор ---
 
         public AddCarPropertiesViewModel(
@@ -194,7 +197,12 @@ namespace TransportDepartmentMVVM.ViewModels
         {
             CloseRequested?.Invoke(this, EventArgs.Empty);
         }
-
+        public void GoToMain()
+        {
+            var main = new MainWindow();
+            main.Show();
+            OnCloseRequested?.Invoke();
+        }
         // --- INotifyPropertyChanged ---
 
         public event PropertyChangedEventHandler PropertyChanged;

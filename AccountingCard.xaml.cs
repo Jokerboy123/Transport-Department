@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TransportDepartmentMVVM.ViewModels;
 
 namespace TransportDepartmentMVVM
 {
@@ -23,7 +24,8 @@ namespace TransportDepartmentMVVM
 
             var viewModel = new ViewModels.AccountingCardViewModel(transport);
             this.DataContext = viewModel;
-
+            viewModel.OnCloseRequested += () => this.Close();
+            //vm.OnCloseRequested += () => this.Close();
         }
     }
 }

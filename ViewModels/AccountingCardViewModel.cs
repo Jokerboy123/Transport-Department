@@ -29,6 +29,7 @@ namespace TransportDepartmentMVVM.ViewModels
 
         public ObservableCollection<AccountingCardProperties> Records { get; set; }
 
+        public event Action OnCloseRequested;
         public AccountingCardViewModel(TransportProperties transport)
         {
             _transport = transport;
@@ -39,11 +40,13 @@ namespace TransportDepartmentMVVM.ViewModels
 
             Records = new ObservableCollection<AccountingCardProperties>();
 
+            GoToMainCommand = new RelayCommand(GoToMain);
+
             // Команды
             AddRecordCommand = new RelayCommand(() => AddRecord());
             GoToMainCommand = new RelayCommand(() => GoToMain());
             PrintCommand = new RelayCommand(() => { /* пока пусто */ });
-
+            OnCloseRequested?.Invoke();
             LoadData();
         }
 
@@ -53,6 +56,8 @@ namespace TransportDepartmentMVVM.ViewModels
         {
             var main = new MainWindow();
             main.Show();
+            OnCloseRequested?.Invoke();
+
             // Закрыть текущее окно — через событие или через View
         }
 

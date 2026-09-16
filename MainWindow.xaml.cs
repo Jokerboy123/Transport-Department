@@ -21,14 +21,8 @@ namespace TransportDepartmentMVVM.Views
         public MainWindow()
         {
             InitializeComponent();
-         
-        }
-
-      
-        private void HideThisWindow(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-
+            DataContext = new MainWindowViewModel(this);
         }
     }
+
 }
