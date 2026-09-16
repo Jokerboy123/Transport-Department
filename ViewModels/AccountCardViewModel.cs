@@ -9,7 +9,7 @@ using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM.ViewModels
 {
-    public class AccountingCardViewModel : INotifyPropertyChanged
+    public class AccountCardViewModel : INotifyPropertyChanged
     {
         private readonly TransportProperties _transport;
         private readonly AccountingCardProperties _acp;
@@ -30,7 +30,7 @@ namespace TransportDepartmentMVVM.ViewModels
         public ObservableCollection<AccountingCardProperties> Records { get; set; }
 
         public event Action OnCloseRequested;
-        public AccountingCardViewModel(TransportProperties transport)
+        public AccountCardViewModel(TransportProperties transport)
         {
             _transport = transport;
             _acp = new AccountingCardProperties();

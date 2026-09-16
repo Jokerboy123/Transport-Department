@@ -7,6 +7,7 @@ using System.Windows.Interop;
 using TransportDepartmentMVVM.Data;
 using TransportDepartmentMVVM.Models;
 using TransportDepartmentMVVM.Services;
+using TransportDepartmentMVVM.ViewModels;
 using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM
@@ -21,7 +22,7 @@ namespace TransportDepartmentMVVM
                 InitializeComponent();
                 _mainWindow = mainWindow;
 
-                var vm = new AccountKirovskDistrictViewModel(); // подставь свой VM
+                var vm = new AccountKirovskDistrictViewModel();
                 DataContext = vm;
 
                 // Аналогично подпишись на события, если нужна навигация

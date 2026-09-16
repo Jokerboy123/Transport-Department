@@ -22,7 +22,7 @@ namespace TransportDepartmentMVVM
         {
             InitializeComponent();
 
-            var viewModel = new ViewModels.AccountingCardViewModel(transport);
+            var viewModel = new ViewModels.AccountCardViewModel(transport);
             this.DataContext = viewModel;
             viewModel.OnCloseRequested += () => this.Close();
             //vm.OnCloseRequested += () => this.Close();

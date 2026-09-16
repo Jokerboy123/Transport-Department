@@ -16,7 +16,7 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
     public ObservableCollection<TransportProperties> Transports { get; set; }
 
     public ICommand OpenAccountingCardCommand { get; }
-    public ICommand GoToMainCommand { get; }
+    public RelayCommand GoToMainCommand { get; }
 
     public event Action OnCloseRequested;
     public event Action OnHideRequested;
