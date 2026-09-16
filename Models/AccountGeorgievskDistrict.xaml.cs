@@ -1,9 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using TransportDepartmentMVVM.Data;
 using TransportDepartmentMVVM.Models;
 using TransportDepartmentMVVM.Services;
@@ -12,36 +9,38 @@ using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM
 {
-    public partial class AccountKirovskDistrict : Window
+    public partial class AccountGeorgievskDistrict : Window
     {
+        private readonly Window _mainWindow;
+
+        public AccountGeorgievskDistrict(Window mainWindow, string regionIndex)
+        {
         
-            private readonly Window _mainWindow;
+            InitializeComponent();
 
-            public AccountKirovskDistrict(Window mainWindow, string regionIndex)
-            {
-                InitializeComponent();
-                _mainWindow = mainWindow;
+            var vm = new AccountGeorgievskViewModel(mainWindow, regionIndex);
+            DataContext = vm;
 
-                var vm = new AccountKirovskDistrictViewModel();
-                DataContext = vm;
-
-                // Аналогично подпишись на события, если нужна навигация
-            }
+            vm.OnHideRequested += () => this.Hide();
+            vm.OnShowRequested += () => this.Show();
+            vm.OnCloseRequested += () => this.Close();
         
+        }
 
+        // Обработчик события Loaded
+        public void AccountGeorgievskDistrict_Loaded(object sender, RoutedEventArgs e)
 
-        private void AccountKirovskDistrict_Loaded(object sender, RoutedEventArgs e)
         {
             // 1. Инициализируем структуру БД (создаем таблицы, если нет)
             DataBaseInitializer.EnsureDataBaseStructure();
 
-            // 2. Получаем данные для Кировского района
-            string targetRegion = "Кировский район";
+            // 2. Получаем данные 
+            string targetRegion = "Георгиевский район";
 
             try
             {
                 // ВАЖНО: Этот метод должен возвращать List<TransportItem> (см. пояснение ниже)
-              //  var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
+                //  var transports = DataBaseInitializer.GetTransportsByRegion(targetRegion);
 
 
                 // 3. Динамически создаем кнопки и добавляем их в WrapPanel из XAML
@@ -76,7 +75,7 @@ namespace TransportDepartmentMVVM
                 {
                     var infoLabel = new TextBlock
                     {
-                        Text = "Транспорт для Кировского района не найден.",
+                        Text = "Транспорт для Георгиевского района не найден.",
                         Foreground = System.Windows.Media.Brushes.Gray,
                         FontSize = 14,
                         Margin = new Thickness(10)
@@ -94,20 +93,25 @@ namespace TransportDepartmentMVVM
         {
             if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
-                this.Hide(); // скрываем главное окно
+                this.Hide();
+
+                // Создаем окно карточки. 
+                // Если в DemonstrationCard есть конструктор, принимающий номер, используй его:
 
                 var vm = new DemonstrationCardViewModel(transport);
                 var win = new DemonstrationCard(vm);
                 win.Show();
+
             }
         }
 
         //public void OpenDemonstrationCard(object sender, RoutedEventArgs e)
         //{
         //    this.Hide();
-        //    var newWindow = new DemonstrationCard(TransportProperties transport);
+        //    var newWindow = new DemonstrationCard(transport);
         //    newWindow.Show();
         //}
+
 
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
@@ -115,21 +119,12 @@ namespace TransportDepartmentMVVM
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
-        private void HideCloseButton()
-        {
-            var hwnd = new WindowInteropHelper(this).Handle;
-            const int GWL_STYLE = -16;
-            const int WS_SYSMENU = 0x80000;
+       
 
-            int currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-            SetWindowLong(hwnd, GWL_STYLE, currentStyle & ~WS_SYSMENU);
-        }
+      
 
-        private void onMainWindow_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            var newWindow = new MainWindow();
-            newWindow.Show();
-        }
+       
+
+      
     }
 }

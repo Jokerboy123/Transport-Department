@@ -25,6 +25,9 @@ namespace TransportDepartmentMVVM.Data
         public static void EnsureDataBaseStructure()
         {
             using var connection = new SQLiteConnection(GetConnectionString());
+            // при ошибке "System.DllNotFoundException: "Unable to load DLL 'e_sqlite3'
+            // or one of its dependencies: Не найден указанный модуль. (0x8007007E)""
+            // скопировать e_sqlite3.dll в папку рядом с .exe и пересобрать
             connection.Open();
 
             // 1. Таблица транспорта

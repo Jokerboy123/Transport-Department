@@ -10,7 +10,7 @@ using TransportDepartmentMVVM.Services;
 using TransportDepartmentMVVM.ViewModels;
 using TransportDepartmentMVVM.Views;
 
-public class AccountGeorgievskViewModel : INotifyPropertyChanged
+public class AccountGeorgievskDistrictViewModel : INotifyPropertyChanged
 {
     private readonly TransportRepository _repo;
     private readonly string _regionIndex;
@@ -25,7 +25,7 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
     public event Action OnHideRequested;
     public event Action OnShowRequested;
     public Window _mainWindow;
-    public AccountGeorgievskViewModel(Window mainWindow, string regionIndex)
+    public AccountGeorgievskDistrictViewModel(Window mainWindow, string regionIndex)
     {
         _mainWindow = mainWindow;
         _repo = new TransportRepository();
@@ -42,7 +42,7 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
         try
         {
             DataBaseInitializer.EnsureDataBaseStructure();
-            string targetRegion = "Георгиевск";
+            string targetRegion = "Георгиевский район";
 
             var list = _repo.GetTransportsByRegion(targetRegion);
             Transports = new ObservableCollection<TransportProperties>(list);

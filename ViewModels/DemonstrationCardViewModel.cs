@@ -62,7 +62,7 @@ namespace TransportDepartmentMVVM.ViewModels
 
         private void GoToPrevious()
         {
-            OnCloseRequested?.Invoke();
+            OnCloseRequested?.Invoke(); 
             MessageBox.Show("Вызвать предыдущее окно");
         }
 
