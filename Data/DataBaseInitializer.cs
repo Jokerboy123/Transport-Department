@@ -130,26 +130,7 @@ namespace TransportDepartmentMVVM.Data
                 }
             }
 
-            // 5. Тестовые данные (удали после проверки!)
-            using var checkData = new SQLiteCommand(
-                "SELECT COUNT(*) FROM TransportInformation", connection);
-            long rows = (long)checkData.ExecuteScalar();
-            if (rows == 0)
-            {
-                string[] inserts = new[]
-                {
-                    "INSERT INTO TransportInformation (TransportBrand, TransportStateNumber, GasConsumptionStandard, PetrolConsumptionStandard, Region) VALUES ('ГАЗ-3307', 'А123ВС26', 25.0, 18.0, 'Георгиевск')",
-                    "INSERT INTO TransportInformation (TransportBrand, TransportStateNumber, GasConsumptionStandard, PetrolConsumptionStandard, Region) VALUES ('УАЗ-3909', 'В456ОР26', 20.0, 15.0, 'Георгиевск')",
-                    "INSERT INTO TransportInformation (TransportBrand, TransportStateNumber, GasConsumptionStandard, PetrolConsumptionStandard, Region) VALUES ('ГАЗ-53', 'Е787КХ26', 30.0, 22.0, 'Георгиевский район')",
-                    "INSERT INTO TransportInformation (TransportBrand, TransportStateNumber, GasConsumptionStandard, PetrolConsumptionStandard, Region) VALUES ('ЗИЛ-130', 'Р999ТТ26', 35.0, 28.0, 'Кировский район')"
-                };
-
-                foreach (var sql in inserts)
-                {
-                    using var insertCmd = new SQLiteCommand(sql, connection);
-                    insertCmd.ExecuteNonQuery();
-                }
-            }
+           
         }
     }
 }
