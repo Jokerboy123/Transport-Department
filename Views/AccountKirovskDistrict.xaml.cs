@@ -17,7 +17,7 @@ namespace TransportDepartmentMVVM
         
             private readonly Window _mainWindow;
 
-            public AccountKirovskDistrict(Window mainWindow)
+            public AccountKirovskDistrict(Window mainWindow, string regionIndex)
             {
                 InitializeComponent();
                 _mainWindow = mainWindow;
@@ -96,23 +96,16 @@ namespace TransportDepartmentMVVM
             {
                 this.Hide(); // скрываем главное окно
 
-                var newWindow = new AccountingCard(transport);
-
-                // Подписываемся на событие закрытия ПЕРЕД тем, как показать окно
-                //newWindow.Closed += (s, args) =>
-                //{
-                //    this.Show(); // возвращаем главное окно
-                //                 // newWindow здесь уже закрыт, больше с ним ничего не делаем
-                //};
-
-                newWindow.Show();
+                var vm = new DemonstrationCardViewModel(transport);
+                var win = new DemonstrationCard(vm);
+                win.Show();
             }
         }
 
-        //public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        //public void OpenDemonstrationCard(object sender, RoutedEventArgs e)
         //{
         //    this.Hide();
-        //    var newWindow = new AccountingCard(TransportProperties transport);
+        //    var newWindow = new DemonstrationCard(TransportProperties transport);
         //    newWindow.Show();
         //}
 

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using TransportDepartmentMVVM.Data;
 using TransportDepartmentMVVM.Models;
 using TransportDepartmentMVVM.Services;
+using TransportDepartmentMVVM.ViewModels;
 using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM
@@ -12,7 +13,7 @@ namespace TransportDepartmentMVVM
     {
         private readonly Window _mainWindow;
 
-        public AccountGeorgievskDistrict(Window mainWindow)
+        public AccountGeorgievskDistrict(Window mainWindow, string regionIndex)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
@@ -61,21 +62,19 @@ namespace TransportDepartmentMVVM
                 this.Hide();
 
                 // Создаем окно карточки. 
-                // Если в AccountingCard есть конструктор, принимающий номер, используй его:
+                // Если в DemonstrationCard есть конструктор, принимающий номер, используй его:
 
-                var newWindow = new AccountingCard(transport);
-
-                // Если нужно передать номер внутрь окна, сделай это через публичное свойство:
-               // newWindow.Closed += (s, args) => this.Show();
-                newWindow.Show();
+                var vm = new DemonstrationCardViewModel(transport);
+                var win = new DemonstrationCard(vm);
+                win.Show();
 
             }
         }
 
-        //public void OpenAccountingCard(object sender, RoutedEventArgs e)
+        //public void OpenDemonstrationCard(object sender, RoutedEventArgs e)
         //{
         //    this.Hide();
-        //    var newWindow = new AccountingCard(transport);
+        //    var newWindow = new DemonstrationCard(transport);
         //    newWindow.Show();
         //}
 

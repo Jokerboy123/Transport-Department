@@ -2,7 +2,7 @@
 
 namespace TransportDepartmentMVVM.Models
 {
-    public class AccountingCardProperties
+    public class DemonstrationCardProperties
     {
         public int DayNumber { get; set; }
         public int WaySheet { get; set; }

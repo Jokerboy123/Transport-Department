@@ -10,10 +10,10 @@ namespace TransportDepartmentMVVM.ViewModels
     public class AddCarPropertiesViewModel : INotifyPropertyChanged
     {
         private readonly TransportProperties _transport;
-        private readonly Action<AccountingCardProperties> _onSave;
+        private readonly Action<DemonstrationCardProperties> _onSave;
 
         public event EventHandler CloseRequested;
-
+        public RelayCommand GoToPreviousCommand { get; }
         public RelayCommand SaveCommand { get; }
         public RelayCommand CancelCommand { get; }
 
@@ -137,7 +137,7 @@ namespace TransportDepartmentMVVM.ViewModels
 
         public AddCarPropertiesViewModel(
             TransportProperties transport,
-            Action<AccountingCardProperties> onSave)
+            Action<DemonstrationCardProperties> onSave)
         {
             _transport = transport;
             _onSave = onSave;
@@ -145,7 +145,6 @@ namespace TransportDepartmentMVVM.ViewModels
             // Заполняем значения по умолчанию из транспорта
             FirstDriver = transport.FirstDriverFullName ?? "";
             SecondDriver = transport.SecondDriverFullName ?? "";
-
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
         }
@@ -154,7 +153,7 @@ namespace TransportDepartmentMVVM.ViewModels
 
         private void Save()
         {
-            var newRecord = new AccountingCardProperties
+            var newRecord = new DemonstrationCardProperties
             {
                 DayNumber = DayNumber,
                 WaySheet = WaySheet,
@@ -197,6 +196,8 @@ namespace TransportDepartmentMVVM.ViewModels
         {
             CloseRequested?.Invoke(this, EventArgs.Empty);
         }
+
+      
         public void GoToMain()
         {
             var main = new MainWindow();

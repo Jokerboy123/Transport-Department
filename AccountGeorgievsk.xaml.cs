@@ -24,13 +24,13 @@ namespace TransportDepartmentMVVM
     /// </summary>
     public partial class AccountGeorgievsk : Window
     {
-        private Window mainWindow;
+        private readonly Window _mainWindow;
 
-        public AccountGeorgievsk(MainWindow main)
+        public AccountGeorgievsk(Window mainWindow, string regionIndex)
         {
             InitializeComponent();
 
-            var vm = new AccountGeorgievskViewModel(main);
+            var vm = new AccountGeorgievskViewModel(mainWindow, regionIndex);
             DataContext = vm;
 
             vm.OnHideRequested += () => this.Hide();
@@ -38,10 +38,6 @@ namespace TransportDepartmentMVVM
             vm.OnCloseRequested += () => this.Close();
         }
 
-        public AccountGeorgievsk(Window mainWindow)
-        {
-            this.mainWindow = mainWindow;
-        }
     }
 
 }

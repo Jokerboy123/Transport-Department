@@ -7,28 +7,31 @@ using TransportDepartmentMVVM;
 using TransportDepartmentMVVM.Data;
 using TransportDepartmentMVVM.Models;
 using TransportDepartmentMVVM.Services;
+using TransportDepartmentMVVM.ViewModels;
 using TransportDepartmentMVVM.Views;
 
 public class AccountGeorgievskViewModel : INotifyPropertyChanged
 {
     private readonly TransportRepository _repo;
+    private readonly string _regionIndex;
+
 
     public ObservableCollection<TransportProperties> Transports { get; set; }
 
-    public ICommand OpenAccountingCardCommand { get; }
+    public ICommand OpenDemonstrationCardCommand { get; }
     public RelayCommand GoToMainCommand { get; }
 
     public event Action OnCloseRequested;
     public event Action OnHideRequested;
     public event Action OnShowRequested;
-    public MainWindow _mainWindow;
-    public AccountGeorgievskViewModel(MainWindow mainWindow)
+    public Window _mainWindow;
+    public AccountGeorgievskViewModel(Window mainWindow, string regionIndex)
     {
         _mainWindow = mainWindow;
         _repo = new TransportRepository();
-
+        _regionIndex = regionIndex; // теперь регион доступен в этой VM
         // Команда БЕЗ <T> — просто передаём метод
-        OpenAccountingCardCommand = new RelayCommand(OpenAccountingCard);
+        OpenDemonstrationCardCommand = new RelayCommand(OpenDemonstrationCard);
         GoToMainCommand = new RelayCommand(GoToMain);
 
         LoadTransports();
@@ -51,15 +54,15 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
     }
 
     // Метод принимает object — RelayCommand передаст параметр из XAML
-    private void OpenAccountingCard(object parameter)
+    private void OpenDemonstrationCard(object parameter)
     {
         if (parameter is TransportProperties transport)
         {
             OnHideRequested?.Invoke();
 
-            var card = new AccountingCard(transport);
-            card.Closed += (s, e) => OnShowRequested?.Invoke();
-            card.Show();
+            var vm = new DemonstrationCardViewModel(transport);
+            var win = new DemonstrationCard(vm);
+            win.Show();
         }
     }
 

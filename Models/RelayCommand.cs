@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace TransportDepartmentMVVM.Models
@@ -22,12 +23,15 @@ namespace TransportDepartmentMVVM.Models
             _canExecute = canExecute;
         }
 
+       
+
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+     
         public bool CanExecute(object parameter) => _canExecute?.Invoke() ?? true;
         public void Execute(object parameter) => _execute(parameter);
     }

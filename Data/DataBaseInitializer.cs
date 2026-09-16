@@ -55,7 +55,7 @@ namespace TransportDepartmentMVVM.Data
 
             // 2. Таблица журнала
             const string createAccountingTable = @"
-                CREATE TABLE IF NOT EXISTS AccountingCard (
+                CREATE TABLE IF NOT EXISTS DemonstrationCard (
                     DayNumber INT NOT NULL,
                     WaySheet INT NOT NULL,
                     FirstDriver TEXT NOT NULL,
@@ -102,7 +102,7 @@ namespace TransportDepartmentMVVM.Data
                 }
             }
 
-            // 4. Миграция AccountingCard
+            // 4. Миграция DemonstrationCard
             string[] accountingColumnsToAdd = new[]
             {
                 "DieselConsumptionStandard REAL",
@@ -115,14 +115,14 @@ namespace TransportDepartmentMVVM.Data
             foreach (var colDef in accountingColumnsToAdd)
             {
                 string colName = colDef.Split(' ')[0];
-                string checkSql = $"SELECT count(*) FROM pragma_table_info('AccountingCard') WHERE name='{colName}';";
+                string checkSql = $"SELECT count(*) FROM pragma_table_info('DemonstrationCard') WHERE name='{colName}';";
 
                 using var checkCmd = new SQLiteCommand(checkSql, connection);
                 long count = (long)checkCmd.ExecuteScalar();
                 if (count == 0)
                 {
                     using var alterCmd = new SQLiteCommand(
-                        $"ALTER TABLE AccountingCard ADD COLUMN {colDef};", connection);
+                        $"ALTER TABLE DemonstrationCard ADD COLUMN {colDef};", connection);
                     alterCmd.ExecuteNonQuery();
                 }
             }

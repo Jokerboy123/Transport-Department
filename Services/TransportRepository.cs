@@ -38,9 +38,9 @@ namespace TransportDepartmentMVVM.Services
         }
 
         // Список записей журнала авто
-        public List<AccountingCardProperties> GetRecordsByCar(string stateNumber)
+        public List<DemonstrationCardProperties> GetRecordsByCar(string stateNumber)
         {
-            var result = new List<AccountingCardProperties>();
+            var result = new List<DemonstrationCardProperties>();
 
             // Сначала получаем базовые данные авто (нормы, остатки), чтобы считать логику
             var transport = GetTransportByStateNumber(stateNumber);
@@ -49,7 +49,7 @@ namespace TransportDepartmentMVVM.Services
             using var connection = new SQLiteConnection(_connectionString);
             connection.Open();
 
-            string sql = @"SELECT * FROM AccountingCard 
+            string sql = @"SELECT * FROM DemonstrationCard 
                            WHERE TransportStateNumber = @stateNumber";
 
             using var cmd = new SQLiteCommand(sql, connection);
@@ -63,7 +63,7 @@ namespace TransportDepartmentMVVM.Services
                 double GetDbl(string col) => reader.IsDBNull(reader.GetOrdinal(col)) ? 0.0 : Convert.ToDouble(reader.GetValue(reader.GetOrdinal(col)));
                 string GetStr(string col) => reader.IsDBNull(reader.GetOrdinal(col)) ? null : reader.GetString(reader.GetOrdinal(col));
 
-                var record = new AccountingCardProperties
+                var record = new DemonstrationCardProperties
                 {
                     DayNumber = GetInt("DayNumber"),
                     WaySheet = GetInt("WaySheet"),
@@ -110,13 +110,13 @@ namespace TransportDepartmentMVVM.Services
         }
 
         // 3. Сохраняем запись журнала
-        public void InsertRecord(AccountingCardProperties record)
+        public void InsertRecord(DemonstrationCardProperties record)
         {
             using var connection = new SQLiteConnection(_connectionString);
             connection.Open();
             using var transaction = connection.BeginTransaction();
 
-            string sql = @"INSERT INTO AccountingCard (
+            string sql = @"INSERT INTO DemonstrationCard (
                 DayNumber, WaySheet, FirstDriver, SecondDriver, GetGas, GetPetrol, GetDiesel,
                 GasConsumptionStandard, PetrolConsumptionStandard, DieselConsumptionStandard,
                 UsedGasValue, UsedPetrolValue, UsedDieselValue,

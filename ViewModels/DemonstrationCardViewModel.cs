@@ -9,58 +9,65 @@ using TransportDepartmentMVVM.Views;
 
 namespace TransportDepartmentMVVM.ViewModels
 {
-    public class AccountCardViewModel : INotifyPropertyChanged
+    public class DemonstrationCardViewModel : INotifyPropertyChanged
     {
         private readonly TransportProperties _transport;
-        private readonly AccountingCardProperties _acp;
+        private readonly DemonstrationCardProperties _acp;
         private readonly TransportRepository _repo;  // <-- добавили
                                                      // Команда "Добавить запись"
         public RelayCommand AddRecordCommand { get; }
 
         // Команда "Вернуться на главный"
         public RelayCommand GoToMainCommand { get; }
+        public RelayCommand GoToPreviousCommand { get; }
 
         // Команда "Печать"
         public RelayCommand PrintCommand { get; }
 
 
         public TransportProperties CurrentTransport => _transport;
-        public AccountingCardProperties AccountingCardProperties => _acp;
+        public DemonstrationCardProperties DemonstrationCardProperties => _acp;
 
-        public ObservableCollection<AccountingCardProperties> Records { get; set; }
+        public ObservableCollection<DemonstrationCardProperties> Records { get; set; }
 
         public event Action OnCloseRequested;
-        public AccountCardViewModel(TransportProperties transport)
+        public DemonstrationCardViewModel(TransportProperties transport)
         {
             _transport = transport;
-            _acp = new AccountingCardProperties();
+            _acp = new DemonstrationCardProperties();
             _repo = new TransportRepository();
 
             _transport.MonthBeginningOdometerValue = 10000;
 
-            Records = new ObservableCollection<AccountingCardProperties>();
+            Records = new ObservableCollection<DemonstrationCardProperties>();
 
-            GoToMainCommand = new RelayCommand(GoToMain);
 
             // Команды
             AddRecordCommand = new RelayCommand(() => AddRecord());
             GoToMainCommand = new RelayCommand(() => GoToMain());
+            GoToPreviousCommand = new RelayCommand(() => GoToPrevious());
             PrintCommand = new RelayCommand(() => { /* пока пусто */ });
-            OnCloseRequested?.Invoke();
+        
             LoadData();
         }
-
-     
-
         private void GoToMain()
         {
             var main = new MainWindow();
             main.Show();
-            OnCloseRequested?.Invoke();
+            main.Activate();
+            OnCloseRequested?.Invoke(); // закрывает текущее окно
 
-            // Закрыть текущее окно — через событие или через View
         }
 
+
+        private void GoToPrevious()
+        {
+            OnCloseRequested?.Invoke();
+            MessageBox.Show("Вызвать предыдущее окно");
+        }
+
+      
+      
         private void LoadData()
         {
             // Было: DataBaseInitializer.GetRecordsByCar(...)
@@ -95,7 +102,7 @@ namespace TransportDepartmentMVVM.ViewModels
         }
 
         // Этот метод должен быть приватным и принимать тот тип, который возвращает окно
-        private void AddNewRecord(AccountingCardProperties record)
+        private void AddNewRecord(DemonstrationCardProperties record)
         {
             if (record == null) return;
 
