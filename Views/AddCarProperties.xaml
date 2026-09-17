@@ -4,6 +4,7 @@
         Title="Добавить данные"
         Height="670" Width="460"
         Background="#F5F7FA"
+        Loaded="AddCarPropertiesLoaded"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -236,7 +237,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" 
                  Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
-                 Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}" Height="41" VerticalAlignment="Top" />
+                 Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}"  Height="41" VerticalAlignment="Top" />
                     <!-- ИСПРАВЛЕНИЕ: OneWay, чтобы нельзя было менять норму из UI -->
                     <TextBox Grid.Column="2" 
                  Text="{Binding ExpectedGasValue, Mode=OneWay}"

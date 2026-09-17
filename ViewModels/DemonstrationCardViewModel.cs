@@ -148,12 +148,12 @@ namespace TransportDepartmentMVVM.ViewModels
             record.TransportStateNumber = _transport.StateNumber;
 
             // Сначала добавляем в коллекцию UI
-            Records.Add(record);
+            Records.Add(record); // сохранение в бд работает ок
 
             try
             {
                 // Потом сохраняем в БД
-                _repo.InsertRecord(record);
+                _repo.InsertRecord(record);   // сохранение в бд работает ок
             }
             catch (Exception ex)
             {
