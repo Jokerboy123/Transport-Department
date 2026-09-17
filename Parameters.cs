@@ -80,5 +80,10 @@ namespace TransportDepartmentMVVM
             cardWindow.Show();
 
         }
+
+        public static double RoundUpTwoDecimals(double value)
+        {
+            return Math.Ceiling(value * 100) / 100;
+        }
     }
 }

@@ -14,9 +14,9 @@ namespace TransportDepartmentMVVM.Models
         public double GetDiesel { get; set; }
 
         public double MonthBeginningOdometerValue { get; set; }
-        public double GasConsumptionStandard { get; set; }
-        public double PetrolConsumptionStandard { get; set; }
-        public double DieselConsumptionStandard { get; set; }
+        public double GasConsumptionStandard { get; set; } // нормативы для формул, не  рассчитываются
+        public double PetrolConsumptionStandard { get; set; } // нормативы для формул, не  рассчитываются
+        public double DieselConsumptionStandard { get; set; } // нормативы для формул, не  рассчитываются
 
         public double UsedGasValue { get; set; }
         public double UsedPetrolValue { get; set; }
@@ -28,12 +28,12 @@ namespace TransportDepartmentMVVM.Models
         public double AdditionalDieselValue { get; set; }
 
         public int RemaindDayKilometrageValue { get; set; }
-        public double RemaindDayGasValue { get; set; }
-        public double RemaindDayPetrolValue { get; set; }
-        public double RemaindDayDieselValue { get; set; }
-        public double ExpectedGasValue { get; set; }
-        public double ExpectedPetrolValue { get; set; }
-        public double ExpectedDieselValue { get; set; }
+        public double RemaindDayGasValue { get; set; } // остаток на конец дня
+        public double RemaindDayPetrolValue { get; set; } // остаток на конец дня
+        public double RemaindDayDieselValue { get; set; } // остаток на конец дня
+        public double ExpectedGasValue { get; set; } // рассчитываемые поля по пробегу
+        public double ExpectedPetrolValue { get; set; } // рассчитываемые поля по пробегу
+        public double ExpectedDieselValue { get; set; } // рассчитываемые поля по пробегу
 
         public string? Region { get; set; }
         public string? TransportStateNumber { get; set; }

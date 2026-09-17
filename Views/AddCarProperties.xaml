@@ -4,7 +4,6 @@
         Title="Добавить данные"
         Height="670" Width="460"
         Background="#F5F7FA"
-        Loaded="AddCarPropertiesLoaded"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -179,7 +178,7 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Text="{Binding DayNumber, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Grid.Column="0" Text="{Binding DayNumber,  TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                          Tag="Число месяца" Style="{StaticResource ModernTextBoxStyle}"/>
                 <TextBox Grid.Column="2" Text="{Binding WaySheet, UpdateSourceTrigger=PropertyChanged}"
                          Tag="№ путевого листа" Style="{StaticResource ModernTextBoxStyle}"/>
@@ -209,11 +208,11 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{Binding GetGas, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="0" Text="{Binding GetGas, TargetNullValue='',  UpdateSourceTrigger=PropertyChanged}"
                              Tag="СУГ, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="2" Text="{Binding GetPetrol, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="2" Text="{Binding GetPetrol, TargetNullValue='',  UpdateSourceTrigger=PropertyChanged}"
                              Tag="Бензин, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="4" Text="{Binding GetDiesel, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="4" Text="{Binding GetDiesel, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                              Tag="ДТ, л" Style="{StaticResource ModernTextBoxStyle}"/>
                 </Grid>
             </Grid>
@@ -236,17 +235,18 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" 
-                 Text="{Binding RemaindDayKilometrageValue, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"
+                 Text="{Binding RemaindDayKilometrageValue,  UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}"
                  Tag="Пробег, км" Style="{StaticResource ModernTextBoxStyle}"  Height="41" VerticalAlignment="Top" />
                     <!-- ИСПРАВЛЕНИЕ: OneWay, чтобы нельзя было менять норму из UI -->
                     <TextBox Grid.Column="2" 
-                 Text="{Binding ExpectedGasValue, Mode=OneWay}"
-                 Tag="Норма СУГ" Style="{StaticResource ModernTextBoxStyle}"
-                 IsReadOnly="True"/>
+                 Text="{Binding ExpectedGasValue, TargetNullValue='',  Mode=OneWay}"
+                 Tag="Норма СУГ"
+                             Style="{StaticResource ModernTextBoxStyle}"
+                 IsHitTestVisible="False"/>
                     <TextBox Grid.Column="4" 
-                 Text="{Binding ExpectedPetrolValue, Mode=OneWay}"
+                 Text="{Binding ExpectedPetrolValue, TargetNullValue='',  Mode=OneWay}"
                  Tag="Норма бензин" Style="{StaticResource ModernTextBoxStyle}"
-                 IsReadOnly="True"/>
+                 IsHitTestVisible="False"/>
                 </Grid>
             </Grid>
 
@@ -266,11 +266,11 @@
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{Binding UsedGasValue, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="0" Text="{Binding UsedGasValue, TargetNullValue='',  UpdateSourceTrigger=PropertyChanged}"
                              Tag="СУГ, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="2" Text="{Binding UsedPetrolValue, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="2" Text="{Binding UsedPetrolValue, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                              Tag="Бензин, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                    <TextBox Grid.Column="4" Text="{Binding UsedDieselValue, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Grid.Column="4" Text="{Binding UsedDieselValue, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                              Tag="ДТ, л" Style="{StaticResource ModernTextBoxStyle}"/>
                 </Grid>
             </Grid>
@@ -288,11 +288,11 @@
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0" Text="{Binding AdditionalGasValue, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Grid.Column="0" Text="{Binding AdditionalGasValue, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                                  Tag="СУГ, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                        <TextBox Grid.Column="2" Text="{Binding AdditionalPetrolValue, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Grid.Column="2" Text="{Binding AdditionalPetrolValue, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                                  Tag="Бензин, л" Style="{StaticResource ModernTextBoxStyle}"/>
-                        <TextBox Grid.Column="4" Text="{Binding AdditionalDieselValue, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox Grid.Column="4" Text="{Binding AdditionalDieselValue, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
                                  Tag="ДТ, л" Style="{StaticResource ModernTextBoxStyle}"/>
                     </Grid>
                 </StackPanel>

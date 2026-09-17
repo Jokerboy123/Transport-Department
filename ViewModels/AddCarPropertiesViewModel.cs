@@ -20,15 +20,15 @@ namespace TransportDepartmentMVVM.ViewModels
 
         // --- Поля формы ---
 
-        private int _dayNumber;
-        public int DayNumber
+        private int? _dayNumber;
+        public int? DayNumber
         {
             get => _dayNumber;
             set { _dayNumber = value; OnPropertyChanged(); }
         }
 
-        private int _waySheet;
-        public int WaySheet
+        private int? _waySheet;
+        public int? WaySheet
         {
             get => _waySheet;
             set { _waySheet = value; OnPropertyChanged(); }
@@ -48,57 +48,82 @@ namespace TransportDepartmentMVVM.ViewModels
             set { _secondDriver = value; OnPropertyChanged(); }
         }
 
-        private double _getGas;
-        public double GetGas
+        private double? _getGas;
+        public double? GetGas
         {
             get => _getGas;
             set { _getGas = value; OnPropertyChanged(); }
         }
 
-        private double _getPetrol;
-        public double GetPetrol
+        private double? _getPetrol;
+        public double? GetPetrol
         {
             get => _getPetrol;
             set { _getPetrol = value; OnPropertyChanged(); }
         }
 
-        private double _getDiesel;
-        public double GetDiesel
+        private double? _getDiesel;
+        public double? GetDiesel
         {
             get => _getDiesel;
             set { _getDiesel = value; OnPropertyChanged(); }
         }
 
-        private int _remaindDayKilometrageValue;
-        public int RemaindDayKilometrageValue
+        private int? _remaindDayKilometrageValue;
+        public int? RemaindDayKilometrageValue
         {
             get => _remaindDayKilometrageValue;
-            set { _remaindDayKilometrageValue = value; OnPropertyChanged(); }
+            set
+            {
+                if (_remaindDayKilometrageValue == value) return;
+                _remaindDayKilometrageValue = value;
+                OnPropertyChanged(nameof(RemaindDayKilometrageValue));
+                RecalculateDependentValues();
+
+            }
         }
 
-        public double GasConsumptionStandard => _transport.GasConsumptionStandard;
-        public double PetrolConsumptionStandard => _transport.PetrolConsumptionStandard;
+        public double? GasConsumptionStandard => _transport.GasConsumptionStandard;
+        public double? PetrolConsumptionStandard => _transport.PetrolConsumptionStandard;
 
         // Нормативные значения (read-only, берутся из транспорта)
-        public double ExpectedGasValue => _transport.GasConsumptionStandard;
-        public double ExpectedPetrolValue => _transport.PetrolConsumptionStandard;
+        // рассчитываются по формуле
+        //public double? ExpectedGasValue => _transport.GasConsumptionStandard;
+        //public double? ExpectedPetrolValue => _transport.PetrolConsumptionStandard;
 
-        private double _usedGasValue;
-        public double UsedGasValue
+        private double? _expectedGasValue;
+        private double? _expectedPetrolValue;
+
+        public double? ExpectedPetrolValue
+        {
+            get => _expectedPetrolValue;
+            set { _expectedPetrolValue = value; OnPropertyChanged(); } 
+        
+        }
+
+        public double? ExpectedGasValue
+        {
+            get => _expectedGasValue;
+            set { _expectedGasValue = value; OnPropertyChanged(); }
+
+        }
+
+        private double? _usedGasValue;
+        public double? UsedGasValue
         {
             get => _usedGasValue;
             set { _usedGasValue = value; OnPropertyChanged(); }
         }
 
-        private double _usedPetrolValue;
-        public double UsedPetrolValue
+        private double? _usedPetrolValue;
+        public double? UsedPetrolValue
         {
             get => _usedPetrolValue;
             set { _usedPetrolValue = value; OnPropertyChanged(); }
         }
 
-        private double _usedDieselValue;
-        public double UsedDieselValue
+        private double? _usedDieselValue;
+        public double? UsedDieselValue
         {
             get => _usedDieselValue;
             set { _usedDieselValue = value; OnPropertyChanged(); }
@@ -111,22 +136,22 @@ namespace TransportDepartmentMVVM.ViewModels
             set { _additionalToolBrand = value; OnPropertyChanged(); }
         }
 
-        private double _additionalGasValue;
-        public double AdditionalGasValue
+        private double? _additionalGasValue;
+        public double? AdditionalGasValue
         {
             get => _additionalGasValue;
             set { _additionalGasValue = value; OnPropertyChanged(); }
         }
 
-        private double _additionalPetrolValue;
-        public double AdditionalPetrolValue
+        private double? _additionalPetrolValue;
+        public double? AdditionalPetrolValue
         {
             get => _additionalPetrolValue;
             set { _additionalPetrolValue = value; OnPropertyChanged(); }
         }
 
-        private double _additionalDieselValue;
-        public double AdditionalDieselValue
+        private double? _additionalDieselValue;
+        public double? AdditionalDieselValue
         {
             get => _additionalDieselValue;
             set { _additionalDieselValue = value; OnPropertyChanged(); }
@@ -156,25 +181,25 @@ namespace TransportDepartmentMVVM.ViewModels
         {
             var newRecord = new DemonstrationCardProperties
             {
-                DayNumber = DayNumber,
-                WaySheet = WaySheet,
+                DayNumber = DayNumber ?? 0,
+                WaySheet = WaySheet ?? 0,
                 FirstDriver = FirstDriver,
                 SecondDriver = SecondDriver,
-                GetGas = GetGas,
-                GetPetrol = GetPetrol,
-                GetDiesel = GetDiesel,
-                RemaindDayKilometrageValue = RemaindDayKilometrageValue,
-                GasConsumptionStandard = GasConsumptionStandard,
-                PetrolConsumptionStandard = PetrolConsumptionStandard,
-                UsedGasValue = UsedGasValue,
-                UsedPetrolValue = UsedPetrolValue,
-                UsedDieselValue = UsedDieselValue,
+                GetGas = GetGas ?? 0,
+                GetPetrol = GetPetrol ?? 0,
+                GetDiesel = GetDiesel ??0,
+                RemaindDayKilometrageValue = (int?)RemaindDayKilometrageValue??0,
+                GasConsumptionStandard = GasConsumptionStandard??0,
+                PetrolConsumptionStandard = PetrolConsumptionStandard??0,
+                UsedGasValue = UsedGasValue??0,
+                UsedPetrolValue = UsedPetrolValue ?? 0,
+                UsedDieselValue = UsedDieselValue ?? 0,
                 AdditionalToolBrand = AdditionalToolBrand,
-                AdditionalGasValue = AdditionalGasValue,
-                AdditionalPetrolValue = AdditionalPetrolValue,
-                AdditionalDieselValue = AdditionalDieselValue,
-                ExpectedGasValue = ExpectedGasValue,
-                ExpectedPetrolValue = ExpectedPetrolValue,
+                AdditionalGasValue = AdditionalGasValue ?? 0,
+                AdditionalPetrolValue = AdditionalPetrolValue ?? 0,
+                AdditionalDieselValue = AdditionalDieselValue ?? 0,
+                ExpectedGasValue = ExpectedGasValue ?? 0, 
+                ExpectedPetrolValue = ExpectedPetrolValue ?? 0, 
                 Region = _transport.Region,
                 TransportStateNumber = _transport.StateNumber
             };
@@ -198,7 +223,27 @@ namespace TransportDepartmentMVVM.ViewModels
             CloseRequested?.Invoke(this, EventArgs.Empty);
         }
 
-      
+      private void RecalculateDependentValues()
+        {
+            //MessageBox.Show(GasConsumptionStandard.ToString()); // стандарт бензина для транспорта. На основе его производить расчет
+
+            //MessageBox.Show(PetrolConsumptionStandard.ToString()); // стандарт бензина для транспорта. На основе его производить расчет
+
+            if (RemaindDayKilometrageValue.HasValue && RemaindDayKilometrageValue.Value > 0)
+            {
+               ExpectedGasValue = Parameters.RoundUpTwoDecimals((double)(RemaindDayKilometrageValue.Value * GasConsumptionStandard / 100.0));
+               ExpectedPetrolValue = Parameters.RoundUpTwoDecimals((double)(RemaindDayKilometrageValue.Value * PetrolConsumptionStandard / 100.0));
+            }
+            else
+            {
+                ExpectedGasValue = null;
+                ExpectedPetrolValue = null;
+            }
+
+            //Расчеты верны !!!
+            //MessageBox.Show("ExpectedPetrolValue: " + RemaindDayKilometrageValue.ToString() + " * " + PetrolConsumptionStandard + " / 100 = " + ExpectedPetrolValue.ToString());
+            //MessageBox.Show("ExpectedGasValue: " + RemaindDayKilometrageValue.ToString() + " * " + GasConsumptionStandard + " / 100 = " + ExpectedGasValue.ToString());
+        }
 
 
         public void GoToMain()
