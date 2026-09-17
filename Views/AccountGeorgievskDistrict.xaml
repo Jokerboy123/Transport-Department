@@ -185,6 +185,7 @@ WindowStartupLocation="CenterScreen">
              Grid.Row="2"
              Content="ВЕРНУТЬСЯ НА ГЛАВНЫЙ ЭКРАН"
              Style="{StaticResource ModernButtonStyle}"
+             Command="{Binding GoToMainCommand}"
              HorizontalAlignment="Left" 
              VerticalAlignment="Bottom" 
              Margin="10" />
