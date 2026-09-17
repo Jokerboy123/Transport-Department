@@ -14,7 +14,8 @@ namespace TransportDepartmentMVVM.ViewModels
 
         public event EventHandler CloseRequested;
         public RelayCommand GoToPreviousCommand { get; }
-        public RelayCommand SaveCommand { get; }
+
+        public RelayCommand AddRecordCommand { get; }
         public RelayCommand CancelCommand { get; }
 
         // --- Поля формы ---
@@ -145,13 +146,13 @@ namespace TransportDepartmentMVVM.ViewModels
             // Заполняем значения по умолчанию из транспорта
             FirstDriver = transport.FirstDriverFullName ?? "";
             SecondDriver = transport.SecondDriverFullName ?? "";
-            SaveCommand = new RelayCommand(Save);
+            AddRecordCommand = new RelayCommand(AddRecocd);
             CancelCommand = new RelayCommand(Cancel);
         }
 
         // --- Команды ---
 
-        private void Save()
+        private void AddRecocd()
         {
             var newRecord = new DemonstrationCardProperties
             {

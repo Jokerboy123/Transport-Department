@@ -25,8 +25,8 @@ namespace TransportDepartmentMVVM
     /// </summary>
     public partial class AccountGeorgievsk : Window
     {
-        private readonly Window _mainWindow;
-
+        private readonly string _regionIndex;
+        public Window _mainWindow;
         public AccountGeorgievsk(Window mainWindow, string regionIndex)
         {
             InitializeComponent();
@@ -102,11 +102,7 @@ namespace TransportDepartmentMVVM
         {
             if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
-                this.Hide(); // скрываем главное окно
-
-                var vm = new DemonstrationCardViewModel(transport);
-                var win = new DemonstrationCard(vm);
-                win.Show();
+                Parameters.Instance.OpenDemonstrationCard(this, transport);
             }
         }
 

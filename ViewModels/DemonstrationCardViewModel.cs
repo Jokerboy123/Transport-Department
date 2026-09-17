@@ -11,10 +11,14 @@ namespace TransportDepartmentMVVM.ViewModels
 {
     public class DemonstrationCardViewModel : INotifyPropertyChanged
     {
+        private readonly string _regionIndex;
         private readonly TransportProperties _transport;
         private readonly DemonstrationCardProperties _acp;
-        private readonly TransportRepository _repo;  // <-- добавили
-                                                     // Команда "Добавить запись"
+        private readonly TransportRepository _repo;
+
+        // ДОБАВИТЬ ЭТО:
+        public object PreviousViewModel { get; private set; }
+
         public RelayCommand AddRecordCommand { get; }
 
         // Команда "Вернуться на главный"
@@ -31,11 +35,17 @@ namespace TransportDepartmentMVVM.ViewModels
         public ObservableCollection<DemonstrationCardProperties> Records { get; set; }
 
         public event Action OnCloseRequested;
-        public DemonstrationCardViewModel(TransportProperties transport)
+
+        public DemonstrationCardViewModel(TransportProperties transport, string regionIndex, object previousViewModel)
         {
             _transport = transport;
+            _regionIndex = regionIndex;
             _acp = new DemonstrationCardProperties();
             _repo = new TransportRepository();
+
+            // ДОБАВИТЬ ЭТО:
+            PreviousViewModel = previousViewModel;
+
 
             _transport.MonthBeginningOdometerValue = 10000;
 
@@ -62,12 +72,41 @@ namespace TransportDepartmentMVVM.ViewModels
 
         private void GoToPrevious()
         {
-            OnCloseRequested?.Invoke(); 
-            MessageBox.Show("Вызвать предыдущее окно");
+            OnCloseRequested?.Invoke();
+
+            var type = PreviousViewModel?.GetType().Name ?? "NULL";
+            MessageBox.Show($"PreviousViewModel = {type}");
+
+            Window win = null;
+            switch (PreviousViewModel)
+            {
+                case AccountGeorgievskViewModel geoVM:
+                    win = new AccountGeorgievsk(geoVM.MainWindow, geoVM.RegionIndex);
+                    win.DataContext = geoVM;
+                    break;
+
+                case AccountGeorgievskDistrictViewModel geoDistVM:
+                    win = new AccountGeorgievskDistrict(geoDistVM.MainWindow, geoDistVM.RegionIndex);
+                    win.DataContext = geoDistVM;
+                    break;
+
+                case AccountKirovskDistrictViewModel kirVM:
+                    win = new AccountKirovskDistrict(kirVM.MainWindow, kirVM.RegionIndex);
+                    win.DataContext = kirVM;
+                    break;
+
+                default:
+                    // Если тип не распознан — ничего не делаем или можно показать ошибку
+                    return;
+            }
+
+            if (win != null)
+                win.Show();
         }
 
-      
-      
+
+
+
         private void LoadData()
         {
             // Было: DataBaseInitializer.GetRecordsByCar(...)

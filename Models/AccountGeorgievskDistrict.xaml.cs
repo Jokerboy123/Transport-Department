@@ -11,14 +11,14 @@ namespace TransportDepartmentMVVM
 {
     public partial class AccountGeorgievskDistrict : Window
     {
-        private readonly Window _mainWindow;
-
+        private readonly string _regionIndex;
+        public Window _mainWindow;
         public AccountGeorgievskDistrict(Window mainWindow, string regionIndex)
         {
         
             InitializeComponent();
 
-            var vm = new AccountGeorgievskViewModel(mainWindow, regionIndex);
+            var vm = new AccountGeorgievskDistrictViewModel(mainWindow, regionIndex);
             DataContext = vm;
 
             vm.OnHideRequested += () => this.Hide();
@@ -93,24 +93,9 @@ namespace TransportDepartmentMVVM
         {
             if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
-                this.Hide();
-
-                // Создаем окно карточки. 
-                // Если в DemonstrationCard есть конструктор, принимающий номер, используй его:
-
-                var vm = new DemonstrationCardViewModel(transport);
-                var win = new DemonstrationCard(vm);
-                win.Show();
-
+                Parameters.Instance.OpenDemonstrationCard(this, transport);
             }
         }
-
-        //public void OpenDemonstrationCard(object sender, RoutedEventArgs e)
-        //{
-        //    this.Hide();
-        //    var newWindow = new DemonstrationCard(transport);
-        //    newWindow.Show();
-        //}
 
 
         [DllImport("user32.dll")]

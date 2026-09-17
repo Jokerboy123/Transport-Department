@@ -14,24 +14,27 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
 {
     private readonly TransportRepository _repo;
     private readonly string _regionIndex;
+    public Window _mainWindow;
+
+    public string RegionIndex => _regionIndex;     
+    public Window MainWindow => _mainWindow;        
 
 
     public ObservableCollection<TransportProperties> Transports { get; set; }
 
-    public ICommand OpenDemonstrationCardCommand { get; }
+   // public ICommand OpenDemonstrationCardCommand { get; }
     public RelayCommand GoToMainCommand { get; }
 
     public event Action OnCloseRequested;
     public event Action OnHideRequested;
     public event Action OnShowRequested;
-    public Window _mainWindow;
     public AccountGeorgievskViewModel(Window mainWindow, string regionIndex)
     {
         _mainWindow = mainWindow;
         _repo = new TransportRepository();
         _regionIndex = regionIndex; // теперь регион доступен в этой VM
         // Команда БЕЗ <T> — просто передаём метод
-        OpenDemonstrationCardCommand = new RelayCommand(OpenDemonstrationCard);
+      //  OpenDemonstrationCardCommand = new RelayCommand(OpenDemonstrationCard);
         GoToMainCommand = new RelayCommand(GoToMain);
 
         LoadTransports();
@@ -56,17 +59,7 @@ public class AccountGeorgievskViewModel : INotifyPropertyChanged
     }
 
     // Метод принимает object — RelayCommand передаст параметр из XAML
-    private void OpenDemonstrationCard(object parameter)
-    {
-        if (parameter is TransportProperties transport)
-        {
-            OnHideRequested?.Invoke();
-
-            var vm = new DemonstrationCardViewModel(transport);
-            var win = new DemonstrationCard(vm);
-            win.Show();
-        }
-    }
+ 
 
     private void GoToMain()
     {

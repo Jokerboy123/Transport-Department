@@ -10,7 +10,7 @@ namespace TransportDepartmentMVVM.ViewModels
 
         public RelayCommand OpenGeorgievskCommand { get; }
         public RelayCommand OpenGeorgievskDistrictCommand { get; }
-        public RelayCommand OpenKirovskCommand { get; }
+        public RelayCommand OpenKirovskDistrictCommand { get; }
         public RelayCommand OpenParametersCommand { get; }
         public RelayCommand CloseApplicationCommand { get; }
 
@@ -32,9 +32,9 @@ namespace TransportDepartmentMVVM.ViewModels
                 w.Show();
             });
 
-            OpenKirovskCommand = new RelayCommand(() =>
+            OpenKirovskDistrictCommand = new RelayCommand(() =>
             {
-                var w = new AccountKirovskDistrict(_mainWindow, "KIR");
+                var w = new AccountKirovskDistrict(_mainWindow, "KIRDSTRCT");
                 _mainWindow.Hide();
                 w.Show();
             });

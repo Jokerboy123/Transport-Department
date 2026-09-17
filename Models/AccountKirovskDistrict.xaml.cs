@@ -14,10 +14,10 @@ namespace TransportDepartmentMVVM
 {
     public partial class AccountKirovskDistrict : Window
     {
-        
-            private readonly Window _mainWindow;
 
-            public AccountKirovskDistrict(Window mainWindow, string regionIndex)
+        private readonly string _regionIndex;
+        public Window _mainWindow;
+        public AccountKirovskDistrict(Window mainWindow, string regionIndex)
             {
                 InitializeComponent();
                 _mainWindow = mainWindow;
@@ -67,6 +67,7 @@ namespace TransportDepartmentMVVM
 
                     // Подписываемся на клик
                     btn.Click += OnTransportButtonClick;
+                   
 
                     // Добавляем кнопку на форму
                     TransportButtonsPanel.Children.Add(btn);
@@ -94,11 +95,7 @@ namespace TransportDepartmentMVVM
         {
             if (sender is Button btn && btn.Tag is TransportProperties transport)
             {
-                this.Hide(); // скрываем главное окно
-
-                var vm = new DemonstrationCardViewModel(transport);
-                var win = new DemonstrationCard(vm);
-                win.Show();
+                Parameters.Instance.OpenDemonstrationCard(this, transport);
             }
         }
 
